@@ -34,24 +34,52 @@
                 $errorSubject=$conn->error;
             }
         }
-
-        if(isset($_POST['view']))
+        if(isset($_POST['unblock']))
         {
-            $id=$_POST['view'];
-            header("Location: refer.php");
+            $id=$_POST['unblock'];
+            $sql="update companies set status=1 where id=$id";
+            if($conn->query($sql))
+            {
+                $resSubject = "true";
+            }
+            else
+            {
+                $errorSubject=$conn->error;
+            }
         }
- 
+    }
+
+    if(isset($_GET['token'])&&!empty($_GET['token']))
+    {
+        $token = $_GET['token'];
+        switch ($token) {
+            case '1':
+                $sql="select * from companies where status = 1";
+                $title ="Unblocked Companies";
+                break;
+            case  "2":
+                $sql="select * from companies where status = 0";
+                $title ="Blocked Companies";
+                break; 
+            default:
+                $title="INVALID REQUEST";
+                break;
+        }
+        
+        $result =  $conn->query($sql);
+        if($result->num_rows)
+        {
+            while($row = $result->fetch_assoc())
+            {
+                $companies[] = $row;
+            }
+        }
+
+    }
+    else{
+        $title="INVALID REQUEST";
     }
         
-    $sql="select * from companies";
-    $result =  $conn->query($sql);
-    if($result->num_rows)
-    {
-        while($row = $result->fetch_assoc())
-        {
-            $companies[] = $row;
-        }
-    }
  
 ?>
 
@@ -65,7 +93,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Companies
+           <?=$title?>  
         </h1>
         <ol class="breadcrumb">
             <li>
@@ -139,15 +167,27 @@
                                         <td>
                                            
                                             <form method="post">
-                                                <button name="view" type="submit" class="btn btn-success"  value="<?=$detail['id'] ?>">
-                                                            <i class="fa fa-edit">View</i>
-                                                </button>
                                                 <button  class="btn btn-danger" type="submit" name="delete" value="<?=$detail['id']?>">
                                                             <i class="fa fa-trash-o"></i> Delete
                                                 </button>
-                                                <button  class="btn btn-danger" type="submit" name="block" value="<?=$detail['id']?>">
-                                                            <i class="fa fa-trash-o">Block</i>
-                                                </button>
+                                                <?php
+                                                    if(isset($token)&& $token==1)
+                                                    {
+                                                ?>
+                                                    <button  class="btn btn-warning" type="submit" name="block" value="<?=$detail['id']?>">
+                                                                <i class="fa fa-ban ">Block</i>
+                                                    </button>
+                                                <?php
+                                                    }else if(isset($token) && $token==2)
+                                                    {
+                                                ?>
+                                                        <button  class="btn btn-success" type="submit" name="unblock" value="<?=$detail['id']?>">
+                                                                    <i class="fa fa-check">Unblock</i>
+                                                        </button>
+                                                <?php
+                                                    }
+                                                ?>
+                                                <a href="viewadmin?token=<?=$detail['id']?>" class="btn btn-primary"><i class="fa fa-eye">View</i></a>
                                             </form>
                                         </td>
                                 </tr>
