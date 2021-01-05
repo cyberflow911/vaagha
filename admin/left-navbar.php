@@ -48,33 +48,24 @@
             </a>
          </li>
            
-<!--
+
            <li class="treeview">
             <a href="#">
             <i class="fa fa-shopping-cart fw"></i>
-            <span>Stock Record</span>
+            <span>Companies</span>
             <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
             </span>
             </a>
             
             <ul class="treeview-menu">
-               <li><a href="stock"><i class="fa fa-circle-o"></i>View / Edit Stock</a></li>
-               <li><a href="add_stock_products"><i class="fa fa-circle-o"></i>Add Stock Product</a></li>
+               <li><a href="companies?token=1"><i class="fa fa-circle-o"></i>Unblocked </a></li>
+               <li><a href="companies?token=2"><i class="fa fa-circle-o"></i>Blocked</a></li>
             </ul>
          </li>
--->
+
           
-          <li>
-           <a href="members">
-                <i class="fa fa-user"></i>Members
-            </a>
-         </li>
-          <li>
-           <a href="companies">
-                <i class="fa fa-user"></i>Companies
-            </a>
-         </li>
+           
           
          <li>
            <a href="logout">
