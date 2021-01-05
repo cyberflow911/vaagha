@@ -32,14 +32,14 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Login</title>
+		<title>Company Login</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<!-- LINEARICONS -->
 		<link rel="stylesheet" href="fonts/linearicons/style.css">
 		
 		<!-- STYLE CSS -->
-        <link rel="stylesheet" href="css/style_login.css">
+        <link rel="stylesheet" href="css/style_login.css?token=232">
         <style> 
 		.alert-danger {
 			color: #721c24;
@@ -86,7 +86,8 @@
                     <?php
                     }
                     ?>
-					<h3>Login</h3>
+					<center><img src="images/logo.jpg" height="100px" width="100px"/></center>
+					<h3>Company Login</h3>
 					<div class="form-holder">
 						<span class="lnr lnr-user"></span>
 						<input type="text" name="email" class="form-control" placeholder="Email">
@@ -96,8 +97,10 @@
 						<input type="password" name="password" class="form-control" placeholder="Password">
 					</div> 
 					<button>
-						<span>Register</span>
+						<span>Login</span>
 					</button>
+					<br>
+					<p>Not Registered Yet <a href="register" style="color:red">Click Here</a> </p>
 				</form>
 				<img src="images/image-2.png" alt="" class="image-2">
 			</div>

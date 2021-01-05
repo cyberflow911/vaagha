@@ -33,7 +33,7 @@ a {
 
 :focus {
   outline: none; }
-
+/* #2a62a7 */
 .wrapper {
   min-height: 100vh;
   display: flex;

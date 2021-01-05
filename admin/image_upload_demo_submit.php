@@ -1,7 +1,7 @@
 <?php
 require_once '../lib/core.php';
-$id=$_SESSION['vendor_signed_in'];
-if(!vendor_auth())
+$id=$_SESSION['master_admin_signed_in'];
+if(!master_admin_auth())
 {
     header("location: logout");
 }
@@ -11,9 +11,9 @@ if(!vendor_auth())
 ini_set("memory_limit", "99M");
 ini_set('post_max_size', '20M');
 ini_set('max_execution_time', 600);
-define('IMAGE_SMALL_DIR', './uploades/small/');
+define('IMAGE_SMALL_DIR', './uploads/small/');
 define('IMAGE_SMALL_SIZE', 50);
-define('IMAGE_MEDIUM_DIR', './uploades/medium/');
+define('IMAGE_MEDIUM_DIR', './uploads/medium/');
 define('IMAGE_MEDIUM_SIZE', 250);
 /*defined settings - end*/
 
@@ -46,7 +46,7 @@ if(isset($_FILES['image_upload_file'])){
 		if (createThumb($path[0], $path[1], $fileType, IMAGE_MEDIUM_SIZE, IMAGE_MEDIUM_SIZE,IMAGE_MEDIUM_SIZE)) {
 			
 			if (createThumb($path[1], $path[2],"$desiredExt", IMAGE_SMALL_SIZE, IMAGE_SMALL_SIZE,IMAGE_SMALL_SIZE)) {
-                $sql="update users_profile set user_pic='$path[1]' where id =(select id from users where email='$id')";
+               $sql="update master_admin set user_pic='$path[1]' where email='$id'";
                 if($conn->query($sql)===true)
                 {
                     $output['status']=TRUE;
