@@ -76,9 +76,9 @@ input:checked + .slider:before {
     <!-- Logo -->
     <a href="dashboard" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>D</b>U</span>
+      <span class="logo-mini"><b>P</b>W</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>DuBuddy</b></span>
+      <span class="logo-lg"><b>Project Wise</b></span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->

@@ -16,8 +16,10 @@ if($res->num_rows > 0)
     $row=$res->fetch_assoc();
     $MASTER_DATA=$row;
 }
+
  
-$MASTER_ID=$MASTER_DATA|['id']; 
+$MASTER_ID=$MASTER_DATA['id']; 
+
 //user_auth($type,$subadmin);
 
 ?>
@@ -26,7 +28,7 @@ $MASTER_ID=$MASTER_DATA|['id'];
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Admin Panel | PF</title>
+  <title>Admin Panel | PW</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
@@ -77,5 +79,5 @@ $MASTER_ID=$MASTER_DATA|['id'];
 ._3qzZ9{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-flex-align:start;align-items:flex-start}
 </style>
 </head>
-    <body class="hold-transition fixed skin-red sidebar-mini">
+    <body class="hold-transition fixed skin-blue-light sidebar-mini">
 <div class="wrapper">

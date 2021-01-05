@@ -33,13 +33,13 @@ a {
 
 :focus {
   outline: none; }
-
+/* #2a62a7     */
 .wrapper {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #accffe; }
+  background: #0073cf; }
 
 .inner {
   position: relative;

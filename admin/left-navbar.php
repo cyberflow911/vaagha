@@ -1,18 +1,4 @@
-<?php 
-   $id=$_SESSION['id'];
-   if(isset($_GET['status']) && !empty($_GET['status']))
-    {
-        $status = $_GET['status'];
-    }
-   $sql = "select * from vendors where id='$id'";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) 
-    {
-        while ($row = $result->fetch_assoc()) 
-        {
-            $details[] = $row;
-        }
-    } ?>
+ 
 <!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar">
    <!-- sidebar: style can be found in sidebar.less -->
@@ -22,7 +8,7 @@
          <div class="image">
             <form enctype="multipart/form-data" action="image_upload_demo_submit.php" method="post" name="image_upload_form" id="image_upload_form">
                <div id="imgArea" class="pull-left image">
-                  <img src="<?=$data[0]['user_pic'];?>" width="48" height="48" >
+                  <img src="<?=$MASTER_DATA['user_pic']?>" width="48" height="48" >
                   <div class="progressBar">
                      <div class="bar"></div>
                      <div class="percent">0%</div>
@@ -34,8 +20,8 @@
             </form>
          </div>
          <div class="pull-left info">
-            <p><?=$data[0]['garage_name'];?></p>
-             <p><?=$data[0]['owner_name'];?></p>
+            <p>Master Admin</p>
+             <p><?=ucfirst($MASTER_DATA['name']);?></p>
          </div>
       </div>
       <!-- /.search form -->
@@ -44,14 +30,14 @@
          <li class="header">MAIN NAVIGATION</li>
          <li>
             <a href="dashboard">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                  <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
          </li>
            
 
            <li class="treeview">
             <a href="#">
-            <i class="fa fa-shopping-cart fw"></i>
+            <i class="fa fa-building fw"></i>
             <span>Companies</span>
             <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
@@ -69,7 +55,7 @@
           
          <li>
            <a href="logout">
-                <i class="fa fa-sign-out"></i>Log Out
+                <i class="fa fa-sign-out"></i><span>Logout</span>
             </a>
          </li>
       </ul>
