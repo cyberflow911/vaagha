@@ -61,6 +61,10 @@
                 $sql="select * from companies where status = 0";
                 $title ="Blocked Companies";
                 break; 
+            case "3": 
+                $sql="select * from companies";
+                $title="Companies";
+                break;
             default:
                 $title="INVALID REQUEST";
                 break;
@@ -165,9 +169,10 @@
                                                 echo date_format($date,"M d Y");
                                             ?></td>    
                                            
-                                        <td>
+                                        <td style="width:30%">
                                            
                                             <form method="post">
+                                            <a href="viewadmin?token=<?=$detail['id']?>" class="btn btn-primary"><i class="fa fa-eye">View</i></a>
                                                 <button  class="btn btn-danger" type="submit" name="delete" value="<?=$detail['id']?>">
                                                             <i class="fa fa-trash-o"></i> Delete
                                                 </button>
@@ -188,7 +193,7 @@
                                                 <?php
                                                     }
                                                 ?>
-                                                <a href="viewadmin?token=<?=$detail['id']?>" class="btn btn-primary"><i class="fa fa-eye">View</i></a>
+                                                
                                             </form>
                                         </td>
                                 </tr>

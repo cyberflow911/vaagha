@@ -3,6 +3,51 @@
     require_once 'navbar.php';
     require_once 'left-navbar.php';
  
+    
+    $id=$_SESSION['id'];
+    if($_SERVER["REQUEST_METHOD"] == "POST")
+    {
+        if(isset($_POST['delete']))
+        {
+            $id=$_POST['delete'];
+            $sql="delete from com_admins where id=$id";
+            if($conn->query($sql))
+            {
+                $resSubject=true;   
+            }
+            else
+            {
+                $errorSubject=$conn->error;
+            }
+        }
+
+        if(isset($_POST['block']))
+        {
+            $id=$_POST['block'];
+            $sql="update com_admins set status=0 where id=$id";
+            if($conn->query($sql))
+            {
+                $resSubject = "true";
+            }
+            else
+            {
+                $errorSubject=$conn->error;
+            }
+        }
+        if(isset($_POST['unblock']))
+        {
+            $id=$_POST['unblock'];
+            $sql="update com_admins set status=1 where id=$id";
+            if($conn->query($sql))
+            {
+                $resSubject = "true";
+            }
+            else
+            {
+                $errorSubject=$conn->error;
+            }
+        }
+    }
     if(isset($_GET['token']))
     {   
         $token=$_GET['token'];
@@ -23,37 +68,6 @@
             $row=$result->fetch_assoc();
             $comdata=$row;
         }
-    }
-    $id=$_SESSION['id'];
-    if($_SERVER["REQUEST_METHOD"] == "POST")
-    {
-        if(isset($_POST['delete']))
-        {
-            $id=$_POST['delete'];
-            $sql="delete from com_admins where id=$id";
-            if($conn->query($sql))
-            {
-                $resSubject=true;   
-            }
-            else
-            {
-                $errorSubject=$conn->error;
-            }
-        }
-
-        // if(isset($_POST['block']))
-        // {
-        //     $id=$_POST['block'];
-        //     $sql="update com_admins set status=0 where id=$id";
-        //     if($conn->query($sql))
-        //     {
-        //         $resSubject = "true";
-        //     }
-        //     else
-        //     {
-        //         $errorSubject=$conn->error;
-        //     }
-        // }
     }
         
     
@@ -104,55 +118,57 @@
             if(isset($comdata))
             {
         ?>
- 
-            <div> 
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Company Name</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <?=$comdata['com_name']?>
-                                     </div>
+            <div>
+            <div class="row">
+                    <div class="col-md-4 "  >
+                    <!-- Widget: user widget style 2 -->
+                        <div class="card card-widget widget-user-2 shadow-sm">
+              <!-- Add the bg color to the header using any of the bg-* classes -->
+                            <div class="widget-user-header bg-yellow">
+                                <div class="widget-user-image">
+                                    <img class="img-circle elevation-2" src=".\uploades\medium\4421609810300.jpg" alt="User Avatar">
                                 </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Registration Number</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                       <?=$comdata['reg_num']?>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Address</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <?=$comdata['address']?>
-                                    </div>
-                                </div>
+                <!-- /.widget-user-image -->
+                                <h3 class="widget-user-username"><?=$comdata['com_name']?></h3>
+                                <h5 class="widget-user-desc"><?=$comdata['address']?>-<?=$comdata['post']?></h5>
+                            </div>
+                            <div class="card-footer p-0" style="background-color: white; ">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            Registration Number <span class="float-right badge bg-blue"><?=$comdata['reg_num']?></span>
+                                     </a>
+                                    </li>
+                                    <!-- <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                        Zip Code <span class="float-right badge bg-DeepSkyBlue"></span>
+                                        </a>
+                                    </li> -->
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                        Vat <span class="float-right badge bg-green"><?=$comdata['vat']?></span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                        Registration Date <span class="float-right badge bg-red">
+                                            <?php $date=date_create($detail['time_stamp']);
+                                                echo date_format($date,"M d Y"); ?></span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                    </div>
-                </div> 
+            <!-- /.widget-user -->
+          </div>
             <?php
             }
             ?>
             </div>
+            </div>
+                
             <br>
             <h2>Admin Details</h2>
-        
-           
-
-
-
-
-
             <div class="box">
               <div class="box-body">
                 <table id="example1" class="table table-bordered table-hover">
@@ -162,9 +178,7 @@
                              <th>First Name</th>
                              <th>Last Name</th>
                              <th>Email</th>
-                             <th>Company Name</th>
-                             <th>Time Stamp</th>
-                             <th>Status</th>
+                             <th>Registration Date</th>
                              <th>Action</th>
                         </tr>
                     </thead>
@@ -181,18 +195,32 @@
                         <td style=" text-align: center; " id="serialNo<?=$i?>"><?=$i?></td> 
                         <td style=" text-align: center; " id="f_name<?=$i?>"><?=$detail['f_name'];?></td> 
                         <td style=" text-align: center; " id="l_name<?=$i?>"><?=$detail['l_name'];?></td>  
-                        <td style=" text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td>
-                        <td style=" text-align: center; " id="com_name<?=$i?>"><?=$detail['com_name'];?></td>   
-                        <td style=" text-align: center; " id="time_stamp<?=$i?>"><?=$detail['time_stamp'];?></td>
-                        <td style=" text-align: center; " id="status<?=$i?>"><?=$detail['status'];?></td>     
+                        <td style=" text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td>  
+                        <td style=" text-align: center; " id="time_stamp<?=$i?>"><?php $date=date_create($detail['time_stamp']);
+                        echo date_format($date,"M d Y");?></td>   
                         <td>
                             <form method="post">
                                 <button  class="btn btn-danger" type="submit" name="delete" value="<?=$detail['id']?>">
                                     <i class="fa fa-trash-o"></i> Delete
                                 </button>
-                                <button  class="btn btn-danger" type="submit" name="block" value="<?=$detail['id']?>">
-                                    <i class="fa fa-trash-o">Block</i>
-                                </button>
+                                <?php
+                                if($detail['status']==1)
+                                {
+                                    ?>
+                                    <button  class="btn btn-warning" type="submit" name="block" value="<?=$detail['id']?>">
+                                        <i class="fa fa-ban">Block</i>
+                                    </button>
+                                    <?php
+                                }
+                                else if($detail['status']==0)
+                                {
+                                    ?>
+                                    <button  class="btn btn-success" type="submit" name="unblock" value="<?=$detail['id']?>">
+                                        <i class="fa fa-check">Unblock</i>
+                                    </button>
+                                    <?php
+                                }
+                                ?>
                             </form>
                         </td>
                     </tr>

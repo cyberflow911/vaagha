@@ -71,6 +71,12 @@ $MASTER_ID=$MASTER_DATA['id'];
   background-color: #fff; 
   border-bottom: 1px solid #d4d4d4; 
 }
+.card .nav.flex-column>li {
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    margin: 0;}
+.float-right {
+    float: right!important;
+}
 .autocomplete-items div:hover {
   /*when hovering an item:*/
   background-color: #e9e9e9; 

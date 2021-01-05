@@ -70,7 +70,7 @@ require_once 'left-navbar.php';
                         <div class="icon">
                             <i class="fa fa-building"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-o-right"></i></a>
+                        <a href="companies?token=3" class="small-box-footer">More info <i class="fa fa-arrow-circle-o-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
