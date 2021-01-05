@@ -27,21 +27,19 @@
     $id=$_SESSION['id'];
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
-        
-
-        // if(isset($_POST['delete']))
-        // {
-        //     $id=$_POST['delete'];
-        //     $sql="delete from com_admins where id=$id";
-        //     if($conn->query($sql))
-        //     {
-        //         $resSubject=true;   
-        //     }
-        //     else
-        //     {
-        //         $errorSubject=$conn->error;
-        //     }
-        // }
+        if(isset($_POST['delete']))
+        {
+            $id=$_POST['delete'];
+            $sql="delete from com_admins where id=$id";
+            if($conn->query($sql))
+            {
+                $resSubject=true;   
+            }
+            else
+            {
+                $errorSubject=$conn->error;
+            }
+        }
 
         // if(isset($_POST['block']))
         // {
@@ -72,7 +70,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Admins
+            Company Details
         </h1>
         <ol class="breadcrumb">
             <li>
@@ -116,8 +114,7 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Company Name</h6>
                                     </div>
-                                    <div class="col-md-auto">
-                                    hello
+                                    <div class="col-sm-9 text-secondary">
                                         <?=$comdata['com_name']?>
                                      </div>
                                 </div>
@@ -127,7 +124,7 @@
                                         <h6 class="mb-0">Registration Number</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                       <h2><?=$comdata['reg_num']?></h2> 
+                                       <?=$comdata['reg_num']?>
                                     </div>
                                 </div>
                                 <hr>
@@ -147,7 +144,8 @@
             }
             ?>
             </div>
-
+            <br>
+            <h2>Admin Details</h2>
         
            
 
