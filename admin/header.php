@@ -16,8 +16,10 @@ if($res->num_rows > 0)
     $row=$res->fetch_assoc();
     $MASTER_DATA=$row;
 }
+
  
 $MASTER_ID=$MASTER_DATA['id']; 
+
 //user_auth($type,$subadmin);
 
 ?>
@@ -77,5 +79,5 @@ $MASTER_ID=$MASTER_DATA['id'];
 ._3qzZ9{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-flex-align:start;align-items:flex-start}
 </style>
 </head>
-    <body class="hold-transition fixed skin-red sidebar-mini">
+    <body class="hold-transition fixed skin-blue-light sidebar-mini">
 <div class="wrapper">

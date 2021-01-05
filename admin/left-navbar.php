@@ -8,7 +8,7 @@
          <div class="image">
             <form enctype="multipart/form-data" action="image_upload_demo_submit.php" method="post" name="image_upload_form" id="image_upload_form">
                <div id="imgArea" class="pull-left image">
-                  <img src="<?=$MASTER_DATA['user_pic'];?>" width="48" height="48" >
+                  <img src="<?=$MASTER_DATA['user_pic']?>" width="48" height="48" >
                   <div class="progressBar">
                      <div class="bar"></div>
                      <div class="percent">0%</div>
@@ -37,7 +37,7 @@
 
            <li class="treeview">
             <a href="#">
-            <i class="fa fa-shopping-cart fw"></i>
+            <i class="fa fa-building fw"></i>
             <span>Companies</span>
             <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>

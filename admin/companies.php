@@ -126,7 +126,7 @@
       
             <div class="box">
               <div class="box-body">
-                <table id="example1" class="table table-bordered table-hover">
+                <table id="example2" class="table table-bordered table-hover">
                     <thead>
                         <tr>
                              <th>Serial Number</th>
@@ -135,8 +135,7 @@
                              <th>Address</th>
                              <th>Post</th>
                              <th>Vat</th>
-                             <th>Time Stamp</th>
-                             <th>Status</th>
+                             <th>Registeration Date</th> 
                              <th>Action</th>
                         </tr>
                     </thead>
@@ -155,14 +154,16 @@
                         
                                      <tr> 
                                      
-                                        <td style="  text-align: center; " id="serialNo<?=$i?>"><?=$i?></td> 
-                                        <td style="  text-align: center; " id="reg_num<?=$i?>"><?=$detail['reg_num'];?></td> 
-                                         <td style="  text-align: center; " id="com_name<?=$i?>"><?=$detail['com_name'];?></td>  
-                                         <td style="  text-align: center; " id="address<?=$i?>"><?=$detail['address'];?></td>
-                                         <td style="  text-align: center; " id="post<?=$i?>"><?=$detail['post'];?></td>
-                                         <td style="  text-align: center; " id="vat<?=$i?>"><?=$detail['vat'];?></td>
-                                        <td style="  text-align: center; " id="time_stamp<?=$i?>"><?=$detail['time_stamp'];?></td>
-                                        <td style="  text-align: center; " id="status<?=$i?>"><?=$detail['status'];?></td>  
+                                        <td  id="serialNo<?=$i?>"><?=$i?></td> 
+                                        <td  id="reg_num<?=$i?>"><?=$detail['reg_num'];?></td> 
+                                         <td  id="com_name<?=$i?>"><?=$detail['com_name'];?></td>  
+                                         <td  id="address<?=$i?>"><?=$detail['address'];?></td>
+                                         <td  id="post<?=$i?>"><?=$detail['post'];?></td>
+                                         <td  id="vat<?=$i?>"><?=$detail['vat'];?></td>
+                                        <td  id="time_stamp<?=$i?>"><?php
+                                                $date=date_create($detail['time_stamp']);
+                                                echo date_format($date,"M d Y");
+                                            ?></td>    
                                            
                                         <td>
                                            
@@ -171,14 +172,14 @@
                                                             <i class="fa fa-trash-o"></i> Delete
                                                 </button>
                                                 <?php
-                                                    if(isset($token)&& $token==1)
+                                                    if($detail['status']==1)
                                                     {
                                                 ?>
                                                     <button  class="btn btn-warning" type="submit" name="block" value="<?=$detail['id']?>">
                                                                 <i class="fa fa-ban ">Block</i>
                                                     </button>
                                                 <?php
-                                                    }else if(isset($token) && $token==2)
+                                                    }else if($detail['status']==0)
                                                     {
                                                 ?>
                                                         <button  class="btn btn-success" type="submit" name="unblock" value="<?=$detail['id']?>">

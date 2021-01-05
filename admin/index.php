@@ -39,10 +39,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background:#3c8dbc;overflow:hidden">
 <div class="login-box">
   <div class="login-logo">
-    <a href="index2.html"><b>Project Wise</b> <br>Master Admin Login</a>
+    <a href="index2.html" style="color:#fff"><b>Project Wise</b> <br>Master Admin Login</a>
   </div>
     <?php
     if(isset($error))

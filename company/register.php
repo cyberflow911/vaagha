@@ -48,7 +48,7 @@
 	<link rel="stylesheet" type="text/css" href="css/opensans-font.css">
 	<link rel="stylesheet" type="text/css" href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
 	<!-- Main Style Css -->
-	<link rel="stylesheet" href="css/style.css"/>
+	<link rel="stylesheet" href="css/style.css?token=1"/>
 	<!-- bootstrap -->
 	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 	<style>
