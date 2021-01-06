@@ -34,12 +34,13 @@ a {
 :focus {
   outline: none; }
 /* #2a62a7     */
+/* 0073cf */
 .wrapper {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #0073cf; }
+  background: #2c61a9; }
 
 .inner {
   position: relative;

@@ -61,7 +61,7 @@
 	</style>
 	</head>
 
-	<body>
+	<body style="overflow:hidden">
 
 		<div class="wrapper">
 			<div class="inner">
@@ -86,7 +86,7 @@
                     <?php
                     }
                     ?>
-					<center><img src="images/logo.jpg" height="100px" width="100px"/></center>
+					<center><a href="../"><img src="../img/logo/logo.png" height="150px"  /></a></center>
 					<h3>Company Login</h3>
 					<div class="form-holder">
 						<span class="lnr lnr-user"></span>
