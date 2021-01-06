@@ -33,7 +33,7 @@ function user_auth($page,$type)
 //login method
     function login($email,$password,$conn,$path)
     {
-        $sql="select id from com_admins where email='$email' and password='$password'";
+        $sql="select c_id,id from com_admins where email='$email' and password='$password'";
         $res=$conn->query($sql);
         if($res->num_rows > 0)
         {
@@ -42,6 +42,7 @@ function user_auth($page,$type)
             header("location: $path");
             $_SESSION['com_admin_signed_in']=$email;
             $_SESSION['id']=$id; 
+            $_SESSION['c_id']=$row['c_id'];
         }
         else
         {
