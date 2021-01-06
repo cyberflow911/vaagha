@@ -42,13 +42,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 <body class="hold-transition login-page" style="background:#3c8dbc;overflow:hidden">
 <div class="login-box">
   <div class="login-logo">
-    <a href="index2.html" style="color:#fff"><b>Project Wise</b> <br>Master Admin Login</a>
+  <center><a href="../"><img src="../img/logo/logo_white.png" height="70px"  /></a></center>
+    <a href="index2.html" style="color:#fff">Master Admin Login</a>
   </div>
     <?php
     if(isset($error))
             {
                 ?>
-    <div class="alert alert-danger"><strong>Error! </strong>invalid user & Password</div> 
+    <div class="alert alert-danger"><strong>Error! </strong>Invalid user & Password</div> 
         <?php
                 
             }
