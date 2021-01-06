@@ -7,6 +7,28 @@
     $id=$_SESSION['id'];
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
+
+        if(isset($_POST['add']))
+        {
+            $f_name = $_POST['fn'];
+            $l_name = $_POST['ln'];
+            $email = $_POST['em'];
+            $password = md5($_POST['pss']);
+            if(isset($_GET['token']))
+            {   
+                $token=$_GET['token'];
+            }
+            $sql="insert into com_admins(c_id, f_name, l_name, email, password, status) values('$token', '$f_name', '$l_name', '$email', '$password', '1')";
+            if($conn->query($sql))
+            {
+                $resSubject=true;
+            }
+            else
+            {
+                $errorSubject=$conn->error;
+            }
+        }
+
         if(isset($_POST['delete']))
         {
             $id=$_POST['delete'];
@@ -168,12 +190,24 @@
             </div>
                 
             <br>
-            <h2>Admin Details</h2>
+            <section class="content-header">
+                <h1>
+                Admin Details
+                </h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <div class="pull-right">
+                            <button title="" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-plus"></i></button> 
+                        </div>
+                    </li>
+                </ol>
+            </section>
+            <br>
             <div class="box">
               <div class="box-body">
                 <table id="example1" class="table table-bordered table-hover">
                     <thead>
-                        <tr>
+                        <tr style="background-color: #212529; color: white;">
                              <th>Serial Number</th>
                              <th>First Name</th>
                              <th>Last Name</th>
@@ -238,10 +272,59 @@
     </section>
     <!-- /.content -->
 </div>
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">Add Admin</q></h4>
+        </div>
+        <form method="post">
+           <div class="modal-body">
+               <div class="row">
+                  <div class="col-md-6"> 
+                       <div class="form-group">
+                            <label>First Name</label><br>   
+                            <input type="text"  id="fn" name="fn" class="form-control" required>  
+                        </div> 
+                   </div>
+                   <div class="col-md-6"> 
+                       <div class="form-group">
+                            <label>Last Name</label><br>   
+                            <input type="text"  id="ln" name="ln" class="form-control"  required>  
+                        </div> 
+                   </div>
+                </div>  
+               <div class="row">
+                  <div class="col-md-6"> 
+                       <div class="form-group">
+                            <label>Email</label><br>   
+                            <input type="text"  id="em" name="em" class="form-control"  required>  
+                        </div> 
+                   </div>
+                   <div class="col-md-6"> 
+                       <div class="form-group">
+                            <label>Password</label><br>   
+                            <input type="text"  id="pss" name="pss" class="form-control"  required>  
+                        </div> 
+                   </div>
+                </div>
+                </div> 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="submit" name="add" class="btn btn-primary" value="">Add</button>
+            </div>
+        </form>
+    </div>          
+</div>
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->       
     <div class="control-sidebar-bg"></div>
- 
+    
 <?php
     require_once 'js-links.php';
 ?> 
