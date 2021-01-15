@@ -37,6 +37,80 @@ require_once 'left-navbar.php';
  
     }
 
+    $sql="SELECT count(id) as count from projectmanager";
+    if($result=$conn->query($sql))
+    {
+        if($result->num_rows>0)
+        {
+            $row=$result->fetch_assoc(); 
+            $pm_count=$row['count']; 
+        }
+    }
+    $sql="SELECT count(id) as count from projects";
+    if($result=$conn->query($sql))
+    {
+        if($result->num_rows>0)
+        {
+            $row=$result->fetch_assoc(); 
+            $p_count=$row['count']; 
+        }
+    }
+    $sql="SELECT count(id) as count from users";
+    if($result=$conn->query($sql))
+    {
+        if($result->num_rows>0)
+        {
+            $row=$result->fetch_assoc(); 
+            $u_count=$row['count']; 
+        }
+    }
+    $sql="SELECT count(id) as count from com_admins";
+    if($result=$conn->query($sql))
+    {
+        if($result->num_rows>0)
+        {
+            $row=$result->fetch_assoc(); 
+            $ca_count=$row['count']; 
+        }
+    }
+    
+
+    $sql="select user_pic, name, m_num from users where status=1 limit 8;";
+    if($result =  $conn->query($sql));
+    {
+        if($result->num_rows)
+        {
+            while($row = $result->fetch_assoc())
+            {
+                $users[] = $row;
+            }
+        }
+    }
+    $sql="select logo, com_name from companies where status=1 limit 8;";
+    if($result =  $conn->query($sql));
+    {
+        if($result->num_rows)
+        {
+            while($row = $result->fetch_assoc())
+            {
+                $companies[] = $row;
+            }
+        }
+    }
+    $sql="select pm.name, p.*, c.com_name from companies c, projectmanager pm, projects p where p.pm_id=pm.id and p.cm_id=c.id order by p.id desc limit 5;";
+    if($result =  $conn->query($sql));
+    {
+        if($result->num_rows)
+        {
+            while($row = $result->fetch_assoc())
+            {
+                $pdetails[] = $row;
+            }
+        }
+    }
+
+
+
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -59,7 +133,7 @@ require_once 'left-navbar.php';
         <!-- Small boxes (Stat box) -->
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-4 col-6">
                     <!-- small box -->
                     <div class="small-box bg-primary">
                         <div class="inner">
@@ -74,7 +148,7 @@ require_once 'left-navbar.php';
                     </div>
                 </div>
                 <!-- ./col -->
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-4 col-6">
                     <!-- small box -->
                     <div class="small-box bg-green">
                         <div class="inner">
@@ -89,7 +163,7 @@ require_once 'left-navbar.php';
                     </div>
                 </div>
                 <!-- ./col -->
-                <div class="col-lg-3   col-6">
+                <div class="col-lg-4   col-6">
                     <!-- small box -->
                     <div class="small-box bg-red">
                         <div class="inner">
@@ -108,11 +182,219 @@ require_once 'left-navbar.php';
                 <!-- ./col -->
             </div>
             
-        </div>
-        <!-- /.row -->
 
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-md-5" style="margin-left:70px;">
+                    <!-- USERS LIST -->
+                    <div class="card">
+                        <div class="card-header" style="background-color: #17a2b8!important;">
+                            <h3 class="card-title" style="color: white;">Companies
+                                <div class="pull-right">
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                            <i style="color: black;" class="fa fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                            <i style="color: black;" class="fa fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body p-0">
+                            <ul class="users-list clearfix">
+                            <?php
+                                if(isset($companies))
+                                {
+                                    foreach($companies as $data)
+                                    {
+                            ?>
+                                        <li>
+                                            <img src="dist/img/user1-128x128.jpg" alt="User Image">
+                                            <a class="users-list-name" href="#"><?=$data['com_name']?></a>
+                                            <span class="users-list-date"><?=$data['reg_num']?></span>
+                                        </li>
+                            <?php
+                                    }
+                                }
+                            ?>
+                            </ul>
+                            <!-- /.users-list -->
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer text-center">
+                            <a href="users?token=3">View All Companies</a>
+                        </div>
+                        <!-- /.card-footer -->
+                    </div>
+                    <!--/.card -->
+                </div>
+                <div class="col-md-5" style="margin-left:50px;">
+                    <!-- USERS LIST -->
+                    <div class="card">
+                        <div class="card-header" style="background-color: #17a2b8!important;">
+                            <h3 class="card-title" style="color: white;">Users
+                                <div class="pull-right">
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                            <i style="color: black;" class="fa fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                            <i style="color: black;" class="fa fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body p-0">
+                            <ul class="users-list clearfix">
+                            <?php
+                                if(isset($users))
+                                {
+                                    foreach($users as $data)
+                                    {
+                            ?>
+                                        <li>
+                                            <img src="dist/img/user4-128x128.jpg" alt="User Image">
+                                            <a class="users-list-name" href="#"><?=$data['name']?></a>
+                                            <span class="users-list-date"><?=$data['m_num']?></span>
+                                        </li>
+                            <?php
+                                    }
+                                }
+                            ?>
+                            </ul>
+                            <!-- /.users-list -->
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer text-center">
+                            <a href="users?token=3">View All Users</a>
+                        </div>
+                        <!-- /.card-footer -->
+                    </div>
+                    <!--/.card -->
+                </div>
+
+                
+            </div>
+
+
+            <!-- users -->
+            <div class="row" style="margin-top: 40px;">
+                <div class="col-md-4" >
+                    <!-- Info Boxes Style 2 -->
+                    <div class="info-box mb-3 bg-yellow">
+                        <span class="info-box-icon"><i class="fa fa-building"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Company Admins</span>
+                            <span class="info-box-number"><?=$ca_count?></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                    <div class="info-box mb-3 bg-green">
+                        <span class="info-box-icon"><i class="fa fa-tasks"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Projects</span>
+                            <span class="info-box-number"><?=$p_count?></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                    <div class="info-box mb-3 bg-red">
+                        <span class="info-box-icon"><i class="fa fa-user-plus"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Project Managers</span>
+                            <span class="info-box-number"><?=$pm_count?></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                    <div class="info-box mb-3 bg-blue">
+                        <span class="info-box-icon"><i class="fa fa-user-circle"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Users</span>
+                            <span class="info-box-number"><?=$u_count?></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header border-transparent" style="background-color: #343a40;">
+                            <h3 class="card-title" style="color: white;">Latest Projects</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table m-0" style="border-spacing: 2px;  font-size: 16px;">
+                                    <thead style="font-weight: 800; background-color: #6c757d; color: white;">
+                                        <tr>
+                                            <th style="text-align: center;">S.no.</th>
+                                            <th style="text-align: center;">Title</th>
+                                            <th style="text-align: center;">Status</th>
+                                            <th style="text-align: center;">Project Manager</th>
+                                            <th style="text-align: center;">Company Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="text-align: center;">
+                                        <tr>
+                                        <?php
+                                            if(isset($pdetails))
+                                            {
+                                                $i=1;
+                                                foreach($pdetails as $data)
+                                                {
+                                        ?>
+                                                    <tr>
+                                                        <td style="padding: 12px; color: #17a2b8;"><?=$i?></td>
+                                                        <td style="padding: 12px;"><?=$data['title']?></td>
+                                                        <td style="padding: 12px;">
+                                                        <?php
+                                                            if($data['status']==0)
+                                                            {
+                                                                ?>
+                                                                <span class="badge badge-warning">Hold</span>
+                                                                <?php
+                                                            }
+                                                            else if($data['status']==1)
+                                                            {
+                                                                ?>
+                                                                <span class="badge badge-success">Active</span>
+                                                                <?php
+                                                            }
+                                                        ?>
+                                                        </td>
+                                                        <td style="padding: 12px;">
+                                                           <?=$data['name']?>
+                                                        </td>
+                                                        <td style="padding: 12px;"> <div class="sparkbar" data-color="#f39c12" data-height="20">
+                                                           <?=$data['com_name']?></div>
+                                                        </td>
+                                                    </tr>
+                                        <?php
+                                                    $i++;
+                                                }
+                                            }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer clearfix">
+                            <a href="projects?token=3" class="btn btn-sm btn-info float-right">View All Projects</a>
+                        </div>
+                        <!-- /.card-footer -->
+                    </div>
+                </div>
+            </div> 
+        </div>
     </section>
-   
 </div>
 
 <div class="control-sidebar-bg"></div>

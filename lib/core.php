@@ -51,6 +51,28 @@ function user_auth($page,$type)
         }
         return true;
     }
+
+    //projectmanager login
+    function projectmanager_login($email,$password,$conn,$path)
+    {
+        $sql="select id from projectmanager where email='$email' and password='$password'";
+        $res=$conn->query($sql);
+        if($res->num_rows > 0)
+        {
+            $row=$res->fetch_assoc();  
+            $id=$row['id']; 
+            header("location: $path");
+            $_SESSION['projectmanager_signed_in']=$email;
+            $_SESSION['id']=$id; 
+        }
+        else
+        {
+            return false;
+    
+        }
+        return true;
+    }
+
 //login method
 function master_admin_login($email,$password,$conn,$path)
 {
@@ -154,10 +176,26 @@ function master_admin_login($email,$password,$conn,$path)
         }
     }
 
+    function projectmanager_auth()
+    {
+        if (!isset($_SESSION['projectmanager_signed_in']))
+        {
+            if($_SERVER['REQUEST_URI']!='/login')
+            {
+                $_SESSION['page']=$_SERVER['REQUEST_URI'];   
+            }
+            return false; // IMPORTANT: Be sure to exit here!
+        }
+        else
+        {
+            session_regenerate_id(true);
+            return true;
+        }
+    }
  
 
   
-//if user already login
+//if admin already login
     function auto_redirect($conn)
     {
         if(isset($_SESSION['com_admin_signed_in']))
@@ -172,8 +210,24 @@ function master_admin_login($email,$password,$conn,$path)
             }
         }
     }
+
+//if projectmanager already login
+    function projectmanager_auto_redirect($conn)
+    {
+        if(isset($_SESSION['projectmanager_signed_in']))
+        {
+            $email=$_SESSION['projectmanager_signed_in'];
+            $sql="select * from projectmanager where email='$email'";
+            $res=$conn->query($sql);
+            if($res->num_rows > 0)
+            {
+                $row=$res->fetch_assoc(); 
+                header("location: dashboard"); 
+            }
+        }
+    }
     
-    
+//if masteradmin already login
     function master_auto_redirect($conn)
     {
         if(isset($_SESSION['master_admin_signed_in']))
