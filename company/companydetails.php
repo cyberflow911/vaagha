@@ -329,7 +329,7 @@
                         <div class="info-box mb-3 bg-yellow">
                             <span class="info-box-icon"><i class="fa fa-building"></i></span>
                             <div class="info-box-content">
-                                <span class="info-box-text">Other Company Admins</span>
+                                <span class="info-box-text">Company Admins</span>
                                 <span class="info-box-number"><?=$ca_count?></span>
                             </div>
                             <!-- /.info-box-content -->

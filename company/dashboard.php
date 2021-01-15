@@ -149,7 +149,7 @@
                                         <th style="text-align: center;">Title</th>
                                         <th style="text-align: center;">Status</th>
                                         <th style="text-align: center;">Project Manager</th>
-                                        <th style="text-align: center;">Company Name</th>
+                                        <th style="text-align: center;">Incentive</th>
                                     </tr>
                                 </thead>
                                 <tbody style="text-align: center;">
@@ -168,13 +168,19 @@
                                                         if($data['status']==0)
                                                         {
                                                             ?>
-                                                            <span class="badge badge-warning">Hold</span>
+                                                            <span class="badge badge-danger">Hold</span>
                                                             <?php
                                                         }
                                                         else if($data['status']==1)
                                                         {
                                                             ?>
-                                                            <span class="badge badge-success">Active</span>
+                                                            <span class="badge badge-warning">Active</span>
+                                                            <?php
+                                                        }
+                                                        else if($data['status']==2)
+                                                        {
+                                                            ?>
+                                                            <span class="badge badge-success">Completed</span>
                                                             <?php
                                                         }
                                                     ?>
@@ -182,9 +188,10 @@
                                                     <td style="padding: 12px;">
                                                     <?=$data['name']?>
                                                     </td>
-                                                    <td style="padding: 12px;"> <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                                    <?=$data['com_name']?></div>
+                                                    <td style="padding: 12px;">
+                                                    <?=$data['incentive']?>
                                                     </td>
+                                                    
                                                 </tr>
                                     <?php
                                                 $i++;

@@ -81,9 +81,17 @@ $COMPANY_ID=$COMPANY_DATA['id'];
   background-color: #17a2b8;
   color: white;
 }
+.btn-secondary{
+    background-color: #343a40;
+    color: white;
+}
 .badge-warning {
     color: #1f2d3d;
-    background-color: #ffc107;
+    background-color: #17a2b8; 
+}
+.badge-danger {
+    color: #1f2d3d;
+    background-color: red;
 }
 
 .badge-success {

@@ -46,6 +46,7 @@
             
             <ul class="treeview-menu">
                <li><a href="project?token=3"><i class="fa fa-circle-o"></i>All Projects</a></li>
+               <li><a href="project?token=4"><i class="fa fa-circle-o"></i>Completed</a></li>
                <li><a href="project?token=2"><i class="fa fa-circle-o"></i>Hold</a></li>
                <li><a href="project?token=1"><i class="fa fa-circle-o"></i>Active</a></li>
             </ul>
@@ -64,6 +65,7 @@
                <li><a href="users?token=3"><i class="fa fa-circle-o"></i>All Users</a></li>
                <li><a href="users?token=2"><i class="fa fa-circle-o"></i>Blocked</a></li>
                <li><a href="users?token=1"><i class="fa fa-circle-o"></i>Unblocked </a></li>
+               <li><a href="invitedusers"><i class="fa fa-circle-o"></i>Invited Users</a></li>
             </ul>
          </li>
 

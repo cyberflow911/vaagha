@@ -46,6 +46,19 @@
                 $errorMember=$conn->error;
             }
         }  
+        if(isset($_POST['completed']))
+        {
+            $id=$_POST['completed'];
+            $sql="update projects set status=2 where id=$id";
+            if($conn->query($sql))
+            {
+                $resMember = "true";
+            }
+            else
+            {
+                $errorMember=$conn->error;
+            }
+        }  
     }
 
     if(isset($_GET['token'])&&!empty($_GET['token']))
@@ -63,6 +76,11 @@
             case "3": 
                 $sql="select p.*, pm.name from projects p, projectmanager pm where pm.id=p.pm_id ";
                 $title="Projects";
+                break;
+                break; 
+            case "4": 
+                $sql="select p.*, pm.name from projects p, projectmanager pm where pm.id=p.pm_id and p.status='2'";
+                $title="Completed Projects";
                 break;
             default:
                 $title="INVALID REQUEST";
@@ -165,12 +183,16 @@
                                                 <button  class="btn btn-primary" type="submit" name="review" value="<?=$detail['id']?>">
                                                             <i class="fa fa-eye"></i> Review
                                                 </button>
+                                                
                                             <?php
                                                 if($detail['status']==1)
                                                 {
                                             ?>
                                                     <button  class="btn btn-warning" type="submit" name="hold" value="<?=$detail['id']?>">
                                                         <i class="fa fa-ban ">Hold</i>
+                                                    </button>
+                                                    <button  class="btn btn-secondary" type="submit" name="completed" value="<?=$detail['id']?>">
+                                                        <i class="fa fa-check-square ">Complete</i>
                                                     </button>
                                             <?php
                                                 }
@@ -179,6 +201,20 @@
                                             ?>
                                                     <button  class="btn btn-success" type="submit" name="active" value="<?=$detail['id']?>">
                                                         <i class="fa fa-check">Active</i>
+                                                    </button>
+                                                    <button  class="btn btn-secondary" type="submit" name="completed" value="<?=$detail['id']?>">
+                                                        <i class="fa fa-check-square ">Complete</i>
+                                                    </button>
+                                            <?php
+                                                }
+                                                else if($detail['status']==2)
+                                                {
+                                            ?>
+                                                    <button  class="btn btn-success" type="submit" name="active" value="<?=$detail['id']?>">
+                                                        <i class="fa fa-check">Active</i>
+                                                    </button>
+                                                    <button  class="btn btn-warning" type="submit" name="hold" value="<?=$detail['id']?>">
+                                                        <i class="fa fa-ban ">Hold</i>
                                                     </button>
                                             <?php
                                                 }

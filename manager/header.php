@@ -84,6 +84,14 @@ $MANAGER_ID=$MANAGER_DATA['id'];
     color: #1f2d3d;
     background-color: #ffc107;
 }
+.badge-danger {
+    color: #1f2d3d;
+    background-color: red;
+}
+.btn-secondary{
+    background-color: #343a40;
+    color: white;
+}
 
 .badge-success {
     color: #fff;

@@ -37,13 +37,22 @@ require_once 'left-navbar.php';
  
     }
 
-    $sql="SELECT count(id) as count from projectmanager";
+    $sql="SELECT count(id) as count from projects where status='0'";
     if($result=$conn->query($sql))
     {
         if($result->num_rows>0)
         {
             $row=$result->fetch_assoc(); 
-            $pm_count=$row['count']; 
+            $hp_count=$row['count']; 
+        }
+    }
+    $sql="SELECT count(id) as count from projects where status='1'";
+    if($result=$conn->query($sql))
+    {
+        if($result->num_rows>0)
+        {
+            $row=$result->fetch_assoc(); 
+            $ap_count=$row['count']; 
         }
     }
     $sql="SELECT count(id) as count from projects";
@@ -52,25 +61,16 @@ require_once 'left-navbar.php';
         if($result->num_rows>0)
         {
             $row=$result->fetch_assoc(); 
-            $p_count=$row['count']; 
+            $p_total=$row['count']; 
         }
     }
-    $sql="SELECT count(id) as count from users";
+    $sql="SELECT count(id) as count from projects where status='2'";
     if($result=$conn->query($sql))
     {
         if($result->num_rows>0)
         {
             $row=$result->fetch_assoc(); 
-            $u_count=$row['count']; 
-        }
-    }
-    $sql="SELECT count(id) as count from com_admins";
-    if($result=$conn->query($sql))
-    {
-        if($result->num_rows>0)
-        {
-            $row=$result->fetch_assoc(); 
-            $ca_count=$row['count']; 
+            $cp_total=$row['count']; 
         }
     }
     
@@ -150,6 +150,7 @@ require_once 'left-navbar.php';
                 <!-- ./col -->
                 <div class="col-lg-4 col-6">
                     <!-- small box -->
+
                     <div class="small-box bg-green">
                         <div class="inner">
                             <h3><?=$unblocked_companies?></h3>
@@ -161,10 +162,12 @@ require_once 'left-navbar.php';
                         </div>
                         <a href="companies?token=1" class="small-box-footer">More info <i class="fa fa-arrow-circle-o-right"></i></a>
                     </div>
+    
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-4   col-6">
                     <!-- small box -->
+                
                     <div class="small-box bg-red">
                         <div class="inner">
                             <h3><?=$blocked_companies?></h3>
@@ -176,6 +179,7 @@ require_once 'left-navbar.php';
                         </div>
                         <a href="companies?token=2" class="small-box-footer">More info <i class="fa fa-arrow-circle-o-right"></i></a>
                     </div>
+            
                 </div>
                 <!-- ./col -->
 
@@ -187,18 +191,9 @@ require_once 'left-navbar.php';
                 <div class="col-md-5" style="margin-left:70px;">
                     <!-- USERS LIST -->
                     <div class="card">
-                        <div class="card-header" style="background-color: #17a2b8!important;">
+                        <div class="card-header" style="background-color: #343a40;">
                             <h3 class="card-title" style="color: white;">Companies
-                                <div class="pull-right">
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                            <i style="color: black;" class="fa fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                            <i style="color: black;" class="fa fa-times"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                                
                             </h3>
                         </div>
                         <!-- /.card-header -->
@@ -233,18 +228,9 @@ require_once 'left-navbar.php';
                 <div class="col-md-5" style="margin-left:50px;">
                     <!-- USERS LIST -->
                     <div class="card">
-                        <div class="card-header" style="background-color: #17a2b8!important;">
+                        <div class="card-header" style="background-color:  #343a40;">
                             <h3 class="card-title" style="color: white;">Users
-                                <div class="pull-right">
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                            <i style="color: black;" class="fa fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                            <i style="color: black;" class="fa fa-times"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                                
                             </h3>
                         </div>
                         <!-- /.card-header -->
@@ -285,41 +271,49 @@ require_once 'left-navbar.php';
             <div class="row" style="margin-top: 40px;">
                 <div class="col-md-4" >
                     <!-- Info Boxes Style 2 -->
+                    <a href="projects?token=3">
                     <div class="info-box mb-3 bg-yellow">
-                        <span class="info-box-icon"><i class="fa fa-building"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Company Admins</span>
-                            <span class="info-box-number"><?=$ca_count?></span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                    <div class="info-box mb-3 bg-green">
                         <span class="info-box-icon"><i class="fa fa-tasks"></i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">Projects</span>
-                            <span class="info-box-number"><?=$p_count?></span>
+                            <span class="info-box-text">Total Projects</span>
+                            <span class="info-box-number"><?=$p_total?></span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
+                    </a>
                     <!-- /.info-box -->
-                    <div class="info-box mb-3 bg-red">
-                        <span class="info-box-icon"><i class="fa fa-user-plus"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Project Managers</span>
-                            <span class="info-box-number"><?=$pm_count?></span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
+                    <a href="projects?token=4">
                     <div class="info-box mb-3 bg-blue">
-                        <span class="info-box-icon"><i class="fa fa-user-circle"></i></span>
+                        <span class="info-box-icon"><i class="fa fa-check-square"></i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">Users</span>
-                            <span class="info-box-number"><?=$u_count?></span>
+                            <span class="info-box-text">Completed Projects</span>
+                            <span class="info-box-number"><?=$cp_count?></span>
+                        </div>
+                    </div>
+                    </a>
+                    <a href="projects?token=1">
+                    <div class="info-box mb-3 bg-green">
+                        <span class="info-box-icon"><i class="fa fa-check"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Active Projects</span>
+                            <span class="info-box-number"><?=$ap_count?></span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
+                    </a>
+                    <!-- /.info-box -->
+                    <a href="projects?token=2">
+                    <div class="info-box mb-3 bg-red">
+                        <span class="info-box-icon"><i class="fa fa-ban"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Projects on Hold</span>
+                            <span class="info-box-number"><?=$hp_count?></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    </a>
+                    <!-- /.info-box -->
+                    
                     <!-- /.info-box -->
                 </div>
                 <div class="col-md-8">
@@ -338,6 +332,7 @@ require_once 'left-navbar.php';
                                             <th style="text-align: center;">Status</th>
                                             <th style="text-align: center;">Project Manager</th>
                                             <th style="text-align: center;">Company Name</th>
+                                            <th style="text-align: center;">Incentive</th>
                                         </tr>
                                     </thead>
                                     <tbody style="text-align: center;">
@@ -357,13 +352,19 @@ require_once 'left-navbar.php';
                                                             if($data['status']==0)
                                                             {
                                                                 ?>
-                                                                <span class="badge badge-warning">Hold</span>
+                                                                <span class="badge badge-danger">Hold</span>
                                                                 <?php
                                                             }
                                                             else if($data['status']==1)
                                                             {
                                                                 ?>
-                                                                <span class="badge badge-success">Active</span>
+                                                                <span class="badge badge-warning">Active</span>
+                                                                <?php
+                                                            }
+                                                            else if($data['status']==2)
+                                                            {
+                                                                ?>
+                                                                <span class="badge badge-success">Completed</span>
                                                                 <?php
                                                             }
                                                         ?>
@@ -373,6 +374,9 @@ require_once 'left-navbar.php';
                                                         </td>
                                                         <td style="padding: 12px;"> <div class="sparkbar" data-color="#f39c12" data-height="20">
                                                            <?=$data['com_name']?></div>
+                                                        </td>
+                                                        <td style="padding: 12px;"> <div class="sparkbar" data-color="#f39c12" data-height="20">
+                                                           <?=$data['incentive']?></div>
                                                         </td>
                                                     </tr>
                                         <?php

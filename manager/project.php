@@ -48,6 +48,19 @@
                 $errorMember=$conn->error;
             }
         }  
+        if(isset($_POST['completed']))
+        {
+            $id=$_POST['completed'];
+            $sql="update projects set status=2 where id=$id";
+            if($conn->query($sql))
+            {
+                $resMember = "true";
+            }
+            else
+            {
+                $errorMember=$conn->error;
+            }
+        }  
     }
     if(isset($_GET['token'])&&!empty($_GET['token']))
     {
@@ -63,6 +76,10 @@
                 break; 
             case "3": 
                 $sql="select p.*  from projects p where p.pm_id='$MANAGER_ID'";
+                $title="Projects";
+                break;
+            case "4": 
+                $sql="select p.*  from projects p where p.pm_id='$MANAGER_ID' and p.status='2'";
                 $title="Projects";
                 break;
             default:
@@ -164,10 +181,13 @@
                                             <button  class="btn btn-danger" type="submit" name="delete" value="<?=$detail['id']?>">
                                                 <i class="fa fa-trash-o"></i> Delete
                                             </button>
-                                        <?php
+                                            <?php
                                             if($detail['status']==1)
-                                            {
+                                            { 
                                         ?>
+                                                <button  class="btn btn-secondary" type="submit" name="completed" value="<?=$detail['id']?>">
+                                                        <i class="fa fa-check-square ">Complete</i>
+                                                    </button>
                                                 <button  class="btn btn-warning" type="submit" name="hold" value="<?=$detail['id']?>">
                                                     <i class="fa fa-ban"></i> Hold
                                                 </button>  
@@ -176,6 +196,20 @@
                                             else if($detail['status']==0)
                                             {
                                         ?>
+                                                <button  class="btn btn-secondary" type="submit" name="completed" value="<?=$detail['id']?>">
+                                                        <i class="fa fa-check-square ">Complete</i>
+                                                    </button>
+                                                <button  class="btn btn-info" type="submit" name="active" value="<?=$detail['id']?>">
+                                                    <i class="fa fa-check"></i> Active
+                                                </button>
+                                        <?php
+                                            }
+                                            else if($detail['status']==2)
+                                            {
+                                        ?>
+                                                <button  class="btn btn-warning" type="submit" name="hold" value="<?=$detail['id']?>">
+                                                    <i class="fa fa-ban"></i> Hold
+                                                </button>    
                                                 <button  class="btn btn-info" type="submit" name="active" value="<?=$detail['id']?>">
                                                     <i class="fa fa-check"></i> Active
                                                 </button>

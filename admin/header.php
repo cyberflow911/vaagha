@@ -124,6 +124,14 @@ $MASTER_ID=$MASTER_DATA['id'];
     color: #fff;
     background-color: #28a745;
 }
+.badge-danger {
+    color: #fff;
+    background-color: red;
+}
+.btn-secondary{
+    background-color: #343a40;
+    color: white;
+}
 
 .card-footer:last-child {
     border-radius: 0 0 calc(.25rem - 0) calc(.25rem - 0);
