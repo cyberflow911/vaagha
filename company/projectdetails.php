@@ -140,7 +140,7 @@
                         <div class="col-md-5"> 
                             <div class="form-group">
                                 <label>Start Date</label><br> 
-                                <input type="text"  id="start_date" name="start_date" class="form-control" value="<?=$project_details['start_date']?>" required>  
+                                <input type="date"  id="start_date" name="start_date" class="form-control" value="<?=$project_details['start_date']?>" required>  
                             </div> 
                         </div>
 
