@@ -72,6 +72,32 @@
 			background-color: #d4edda;
 			border-color: #c3e6cb;
 		}
+		
+ 
+
+.btn-info {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+	margin:10px;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	}
 	</style>
 </head>
 <body>
@@ -120,13 +146,16 @@
 										<fieldset>
 											<legend>Company Reg. Number</legend>
 											<input type="text" class="form-control" id="reg-num" name="reg-num" placeholder="Company Reg. Number" required>
+											
 										</fieldset>
+										<button  class="btn btn-info" type="button">Search</button>
 									</div>
 									<div class="form-holder">
 										<fieldset>
 											<legend>Company Name</legend>
 											<input type="text" class="form-control" id="com-name" name="com-name" placeholder="Company Name" required>
 										</fieldset>
+										<button  class="btn btn-info" type="button">Search</button>
 									</div>
 								</div>
 								<div class="form-row">

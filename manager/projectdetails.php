@@ -25,7 +25,14 @@
             $sql="insert into projects(pm_id, cm_id,  title, description, start_date, incentive, status) values('$MANAGER_ID', '$comid', '$title', '$description', 'start_date', '$incentive', '1')";
             if($conn->query($sql))
             {
-                $resMember = "true"; 
+                $insert_id = $conn->insert_id;
+                if(upload_images($_FILES,$conn,"project_files","p_id","file",$insert_id,"projectFile"))
+                {
+                    $resMember = "all_true";
+                }else
+                {
+                    $resMember = "files_left";
+                }
             }
             else
             {
@@ -46,7 +53,14 @@
             $sql="update projects set start_date='$start_date', pm_id='$MANAGER_ID', title='$title', description='$description', incentive='$incentive'  where id='$token'";
             if($conn->query($sql))
             {
-                $resMember  = "true";
+                $insert_id = $token;
+                if(upload_images($_FILES,$conn,"project_files","p_id","file",$insert_id,"projectFile"))
+                {
+                    $resMember = "all_true";
+                }else
+                {
+                    $resMember = "files_left";
+                }
             }
             else
             {
@@ -69,6 +83,21 @@
         else
         {
             $errorMember=$conn->error;
+        }
+
+
+        $sql = "SELECT * from project_files where p_id=$token";
+        if($result = $conn->query($sql))
+        {
+            if($result->num_rows)
+            {
+                while($row = $result->fetch_assoc())
+                {
+                    $project_files[]=$row;
+                }
+                 
+            }
+             
         }
     }
 ?>
@@ -104,7 +133,7 @@
             }
         ?>
         
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     <div class="row">
                         
                         <div class="col-md-5"> 
@@ -116,7 +145,7 @@
                         <div class="col-md-5"> 
                             <div class="form-group">
                                 <label>Start Date</label><br> 
-                                <input type="text"  id="start_date" name="start_date" class="form-control" value="<?=$project_details['start_date']?>" required>  
+                                <input type="date"  id="start_date" name="start_date" class="form-control" value="<?=$project_details['start_date']?>" required>  
                             </div> 
                         </div>
 
@@ -137,6 +166,65 @@
                             </div> 
                         </div>
                     </div>
+                    <div class="row" style="margin-bottom:20px">    
+                        <div class="col-md-12"> 
+                            <div class="form-group">
+                                <label>Project Files</label><br>  
+                                <button type="button" class="btn btn-success" onclick="addFilesField()"><i class="fa fa-plus"></i></button>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom:20px"> 
+                        
+                            <?php
+                                if(isset($project_files)) 
+                                {
+                                    $counter=0;
+                                    foreach($project_files as $file)
+                                    {
+
+                                        $ext=pathinfo($file['file'],PATHINFO_EXTENSION);
+                                        if(strtolower($ext)=="pdf")
+                                        {
+                                            
+                                        ?>
+                                        <div class="col-md-2" id="file<?=$counter?>">
+                                            <div class="col-md-8">
+                                                <a href="<?=$file['file']?>" target="_blank"><img src="../img/extras/PDF.svg" width="100px" height="100px"/></a>            
+                                            </div>
+                                            <div class="col-md-1">
+                                                <button type="button" class="btn btn-danger" onclick="deleteFile(<?=$file['id']?>,'file<?=$counter?>')"><i class="fa fa-trash"></i></button>
+                                            </div>
+                                        </div> 
+                                        <?php
+                                        }
+                                        else
+                                        {
+                                        ?>
+                                        <div class="col-md-2" id="file<?=$counter?>">
+                                            <div class="col-md-8">
+                                                <a href="<?=$file['file']?>" target="_blank"><img src="<?=$file['file']?>" width="100px" height="100px"/></a>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <button type="button" class="btn btn-danger" onclick="deleteFile(<?=$file['id']?>,'file<?=$counter?>')"><i class="fa fa-trash"></i></button>
+                                            </div>
+                                        </div>
+                                        <?php
+                                        }
+                                    }
+                                }
+                            
+                            ?>
+                                  
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4" id="filesDiv"> 
+                                 
+                                
+                        </div>
+                    </div>
+        
         
                         <?php
                                 if(isset($project_details))
@@ -169,3 +257,53 @@
 ?>
 
 
+<script>
+    var counter=1;
+    function addFilesField()
+    {
+        var inhtml  = `<div class="row" style="margin-top:20px">    
+                            <div class="col-md-10">
+                                <input   type="file" id='projectfile${counter}' name="projectFile[]" class="form-control"/>
+                            </div> 
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-danger" onclick="removeField('projectfile${counter}')"><i class="fa fa-trash"></i></button>
+                            </div> 
+                        </div>`;
+        $("#filesDiv").append(inhtml);
+        counter++;
+
+    }
+
+    function removeField(id)
+    {
+            $("#"+id).parent().parent().remove();
+            
+    }
+
+    function deleteFile(id,divId)
+    {
+        $.ajax({
+            url:"files_ajax.php",
+            type:"POST",
+            data:{
+                deleteFile:id
+            },
+            success:function(data)
+            {
+            
+                if(data.trim()=="ok")
+                {
+                    $("#"+divId).remove();  
+                }else
+                {
+                    console.log(data);
+                }
+            },
+            error:function()
+            {
+
+            }
+        
+        })
+    }
+</script>

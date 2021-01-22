@@ -209,6 +209,8 @@
                                     </div>
                                         
                                         <button type="submit" name="add" class="btn btn-primary" value="">Add</button>
+
+                                        
                         <?php
                                 }
                         ?>
@@ -219,6 +221,10 @@
 
     </section>
 </div>
+
+<?php
+require_once 'js-links.php';
+?>
 
 
 
