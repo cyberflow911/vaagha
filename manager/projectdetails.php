@@ -26,7 +26,7 @@
             if($conn->query($sql))
             {
                 $insert_id = $conn->insert_id;
-                if(upload_images($_FILES,$conn,"project_files","p_id","file",$insert_id,"projectFile"))
+                if(upload_images($_FILES,$conn,"project_files","p_id","file",$insert_id,"projectFile",$website_link."/manager/uploads"))
                 {
                     $resMember = "all_true";
                 }else
@@ -54,7 +54,7 @@
             if($conn->query($sql))
             {
                 $insert_id = $token;
-                if(upload_images($_FILES,$conn,"project_files","p_id","file",$insert_id,"projectFile"))
+                if(upload_images($_FILES,$conn,"project_files","p_id","file",$insert_id,"projectFile",$website_link."/manager/uploads"))
                 {
                     $resMember = "all_true";
                 }else

@@ -771,7 +771,7 @@ function image_category()
  
 
 //Upload multiple images 23/04/20
-function upload_images($files,$conn,$table,$id_col,$column,$id,$images)
+function upload_images($files,$conn,$table,$id_col,$column,$id,$images,$url)
 {
 	if(isset($_FILES[$images]))
     {
@@ -787,7 +787,7 @@ function upload_images($files,$conn,$table,$id_col,$column,$id,$images)
                 $newFileName=$filename.time().".".$ext;
                 if(move_uploaded_file($file_tmp=$_FILES[$images]["tmp_name"][$key],"uploads/".$newFileName))
                 {
-                    $sql="insert into $table($id_col, $column) values($id,'uploads/$newFileName')";
+                    $sql="insert into $table($id_col, $column) values($id,$url.'/$newFileName')";
                     if($conn->query($sql)===true)
                     {
                         $status=true;

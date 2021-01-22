@@ -25,7 +25,7 @@ if($conn->connect_error)
     die("Connection failed: " . $conn->connect_error);
 }
 //website link
-$website_link="http://localhost/DuBuddy"; 
+$website_link="http://localhost/vaagha"; 
 //page value;
 $admin=1;
 $subadmin=2;
