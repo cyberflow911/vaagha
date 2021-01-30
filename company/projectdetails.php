@@ -8,8 +8,7 @@
     {
         if(isset($_POST['add']))
         {
-             
-            
+              
             $start_date=$_POST['start_date'];
             $incentive=$_POST['incentive'];
             $title=$_POST['title'];
@@ -316,8 +315,7 @@
 
     function removeField(id)
     {
-            $("#"+id).parent().parent().remove();
-            
+            $("#"+id).parent().parent().remove(); 
     }
 
 function deleteFile(id,divId)
