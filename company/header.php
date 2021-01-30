@@ -20,6 +20,9 @@ if($res->num_rows > 0)
  
 $COMPANY_ID=$COMPANY_DATA['id']; 
 
+$NAME=explode(' ',$COMPANY_DATA['com_name']);
+ $FNAME=$NAME[0];
+ $LNAME=$NAME[1];
 //user_auth($type,$subadmin);
 
 ?>
@@ -70,6 +73,30 @@ $COMPANY_ID=$COMPANY_DATA['id'];
   cursor: pointer;
   background-color: #fff; 
   border-bottom: 1px solid #d4d4d4; 
+}
+.profileImage {
+  width: 60px;
+  height: 48;
+  background: #25383C;
+  font-size: 35px;
+  color: #fff;
+  text-align: center;
+  line-height: 60px;
+  border-radius: 50%;
+}
+.profileImageUser {
+  width: 60px;
+  height: 48;
+  background: #25383C;
+  font-size: 35px;
+  color: #fff;
+  text-align: center;
+  line-height: 60px;
+  border-radius: 50%; 
+}
+.name{
+   margin-top: 6px;
+   margin-left: 4px;
 }
 .btn-pink
 {

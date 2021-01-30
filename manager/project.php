@@ -162,13 +162,13 @@
                      <tbody> 
  
                     
-                     <?php 
+                    <?php 
                             if (isset($projects)) 
                             {
                                 $i = 1;
                                 foreach ($projects as $detail) 
                                 {     
-                     ?> 
+                    ?> 
                                      <tr> 
                                          <td style="  text-align: center; " id="serialNo<?=$i?>"><?=$i?></td> 
                                          <td style="  text-align: center; " id="title<?=$i?>"><?=$detail['title'];?></td> 

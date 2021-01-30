@@ -1,4 +1,24 @@
- 
+ <?php
+ $name=explode(' ',$COMPANY_DATA['com_name']);
+ $fname=$name[0];
+ $lname=$name[1];
+ ?>
+ <style>
+   #profileImage {
+  width: 60px;
+  height: 48;
+  background: #25383C;
+  font-size: 35px;
+  color: #fff;
+  text-align: center;
+  line-height: 60px;
+  border-radius: 50%;
+}
+#name{
+   margin-top: 6px;
+   margin-left: 4px;
+}
+ </style>
 <!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar">
    <!-- sidebar: style can be found in sidebar.less -->
@@ -7,8 +27,8 @@
       <div class="user-panel">
          <div class="image">
             <form enctype="multipart/form-data" action="image_upload_demo_submit.php" method="post" name="image_upload_form" id="image_upload_form">
-               <div id="imgArea" class="pull-left image">
-                  <img src="<?=$COMPANY_DATA['logo']?>" width="48" height="48" >
+               <div id="imgArea" class="pull-left image"> 
+                  <div class="profileImage"><?=ucfirst($FNAME[0]).ucfirst($LNAME[0])?></div>
                   <div class="progressBar">
                      <div class="bar"></div>
                      <div class="percent">0%</div>
@@ -19,7 +39,7 @@
                </div>
             </form>
          </div>
-         <div class="pull-left info">
+         <div class="pull-left info" id="name">
             <p><?=ucfirst($COMPANY_DATA['f_name']);?> <?=ucfirst($COMPANY_DATA['l_name']);?></p>
              <p><?=ucfirst($COMPANY_DATA['com_name']);?></p>
          </div>
@@ -100,3 +120,5 @@
    </section>
    <!-- /.sidebar -->
 </aside>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+   
