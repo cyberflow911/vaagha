@@ -22,28 +22,28 @@
             }
         }
             
-        if(isset($_POST['edit']))
-        {  
-            $email=$_POST['email'];
-            $pmanager=$_POST['pmanager'];
-            $project=$_POST['project'];
-            $name=$_POST['name'];
-            $address=$_POST['address'];
-            $m_num=$_POST['m_num'];
-            if(isset($_GET['token'])&& !empty($_GET['token']))
-            {
-                $token=$_GET['token'];
+        if(isset($_GET['token'])&& !empty($_GET['token']))
+        {
+            $token=$_GET['token'];
+            if(isset($_POST['edit']))
+            {  
+                $email=$_POST['email'];
+                $pmanager=$_POST['pmanager'];
+                $project=$_POST['project'];
+                $name=$_POST['name'];
+                $address=$_POST['address'];
+                $m_num=$_POST['m_num'];
+                $sql="update users set pm_id='$pmanager', name='$name', email='$email', p_id='$project', m_num='$m_num', address='$address'  where id='$token'";
+                if($conn->query($sql))
+                {
+                    $resMember  = "true";
+                }
+                else
+                {
+                    $errorMember=$conn->error;
+                }
             }
-            $sql="update users set pm_id='$pmanager', name='$name', email='$email', p_id='$project', m_num='$m_num', address='$address'  where id='$token'";
-            if($conn->query($sql))
-            {
-                $resMember  = "true";
-            }
-            else
-            {
-                $errorMember=$conn->error;
-            }
-        }     
+        }
     }
 
     if(isset($_GET['token'])&&!empty($_GET['token']))
@@ -135,13 +135,14 @@
                                     {
                                         foreach($pm_name as $data)
                                         {          
-                                            if($data['name']!=$user_details['pmname'])
+                                            if($data['name']==$user_details['pmname'])
                                             {
+                                                $select="selected";
+                                            }
                                                 
                                 ?>
-                                                <option value="<?=$data['id']?>"><?=$data['name']?></option>
+                                                <option value="<?=$data['id']?>" <?=$selected?>><?=$data['name']?></option>
                                 <?php
-                                            }
                                         }
                                     }
                                 ?>  
@@ -160,13 +161,15 @@
                                     {
                                         foreach($p_name as $data)
                                         {          
-                                            if($data['title']!=$user_details['title'])
+                                            if($data['title']==$user_details['title'])
                                             {
+                                                $select="selected";
+                                            }
                                                 
                                 ?>
-                                                <option value="<?=$data['id']?>"><?=$data['title']?></option>
+                                                <option value="<?=$data['id']?>" <?=$selected?>><?=$data['title']?></option>
                                 <?php
-                                            }
+                                            
                                         }
                                     }
                                 ?>  

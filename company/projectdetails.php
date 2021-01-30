@@ -15,15 +15,9 @@
             $description=$_POST['description'];
             $name=$_POST['pmanager'];
             $sql="select id from projectmanager where name='$name'";
-            if($result = $conn->query($sql))
-            {
-                if($result->num_rows)
-                {
-                    $pm = $result->fetch_assoc();  
-                }
-            }
-            $pid=$pm['id'];
-            $sql="insert into projects(pm_id, cm_id, title, description, start_date, incentive, status) values('$pid', '$COMPANY_ID', '$title', '$description', '$start_date', $incentive ,'1')";
+            
+            $pmid=$_POST['pmanager'];
+            $sql="insert into projects(pm_id, cm_id, title, description, start_date, incentive, status) values('$pmid', '$COMPANY_ID', '$title', '$description', '$start_date', $incentive ,'1')";
             if($conn->query($sql))
             {
                 $insert_id = $conn->insert_id;
@@ -49,20 +43,12 @@
             $start_date=$_POST['start_date'];
             $incentive=$_POST['incentive'];
             $name=$_POST['name'];
-            $sql="select id from projectmanager where name='$name'";
-            if($result = $conn->query($sql))
-            {
-                if($result->num_rows)
-                {
-                    $pm  = $result->fetch_assoc();  
-                }
-            }
-            $pmid=$pm['id'];
+            $pmid=$_POST['pmanager'];
             if(isset($_GET['token'])&& !empty($_GET['token']))
             {
                 $token=$_GET['token'];
             }
-            $sql="update projects set start_date='$start_date', pm_id='pmid', title='$title', description='$description', incentive='$incentive'  where id='$token'";
+            $sql="update projects set start_date='$start_date', pm_id='$pmid', title='$title', description='$description', incentive='$incentive'  where id='$token'";
             if($conn->query($sql))
             {
                 $insert_id = $token;
@@ -84,7 +70,7 @@
     if(isset($_GET['token'])&&!empty($_GET['token']))
     {
         $token=$_GET['token'];
-        $sql = "select p.*, pm.name from projects p, projectmanager pm where p.id=$token and pm.id=p.pm_id";
+        $sql = "select p.*, pm.name, pm.id as pmid from projects p, projectmanager pm where p.id=$token and pm.id=p.pm_id";
         if($result = $conn->query($sql))
         {
             if($result->num_rows)
@@ -193,19 +179,21 @@
                             <div class="form-group">
                                 <label>Project Manager</label><br> 
                                 <select name="pmanager" id="pmanager" class="form-control">
-                                <option value="<?=$project_details['name']?>"><?=$project_details['name']?></option>
                                 <?php
                                     if(isset($pm_name))
                                     {
                                         foreach($pm_name as $data)
-                                        {          
-                                            if($data['name']!=$project_details['name'])
+                                        {   
+                                            $selected="";
+                                            if($data['id']==$project_details['pmid'])
                                             {
+                                             $selected="selected";   
+                                            }
                                                 
                                 ?>
-                                                <option value="<?=$data['name']?>"><?=$data['name']?></option>
+                                                <option value="<?=$data['id']?>" <?=$selected?>><?=$data['name']?></option>
                                 <?php
-                                            }
+                                            
                                         }
                                     }
                                 ?>  

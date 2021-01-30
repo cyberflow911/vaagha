@@ -67,10 +67,13 @@
                $users = $result->fetch_assoc();
             }
         }
+        $name=explode(' ', $users['name']);
+        $uf_name=$name[0];
+        $ul_name=$name[1];
     }
 
 ?>
-    
+ 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -115,13 +118,22 @@
                     <!-- Widget: user widget style 2 -->
                         <div class="card card-widget widget-user-2 shadow-sm">
               <!-- Add the bg color to the header using any of the bg-* classes -->
-                            <div class="widget-user-header bg-yellow">
-                                <div class="widget-user-image">
-                                    <img class="img-circle elevation-2" src=".\uploads\medium\7061609903739.jpg" alt="User Avatar">
+                            <div class="widget-user-header bg-yellow" style="display:flex;flex:1;flex-direction:'row'">
+                                <div class="widget-user-image " style="flex:0.2"> 
+                                <div class="profileImage">
+                                    <?php
+                                        $uname=explode(' ',$users['name']);
+                                        $fname=$uname[0];
+                                        $lname=$uname[1];
+                                        echo ucfirst($fname[0]).ucfirst($lname[0]);
+                                    ?>
+                                </div>
                                 </div>
                 <!-- /.widget-user-image -->
-                                <h3 class="widget-user-username"><?=$users['name']?></h3>
-                                <h5 class="widget-user-desc"><?=$users['email']?></h5>
+                                <div>
+                                <h3 class="widget-user-username" style="margin-left:10px !important"><?=$users['name']?></h3>
+                                <h5 class="widget-user-desc"  style="margin-left:10px !important"><?=$users['email']?></h5>
+                                </div>
                             </div>
                             <div class="card-footer p-0" style="background-color: white; ">
                                 <ul class="nav flex-column">
@@ -251,4 +263,12 @@
 <?php
     require_once 'js-links.php';
 ?>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  var firstName = $('#firstName').text();
+  var lastName = $('#lastName').text();
+  var intials = $('#firstName').text().charAt(0) + $('#lastName').text().charAt(0);
+  var profileImage = $('#profileImage').text(intials);
+});
+</script>
