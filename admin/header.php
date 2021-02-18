@@ -128,8 +128,8 @@ $MASTER_ID=$MASTER_DATA['id'];
     color: #fff;
     background-color: red;
 }
-.btn-secondary{
-    background-color: #343a40;
+.btn-secondary, .btn-secondary:hover{
+    background-color: #555555;
     color: white;
 }
 

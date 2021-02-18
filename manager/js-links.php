@@ -20,6 +20,7 @@
 <!-- SlimScroll -->
 <script src="../admin/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+ <!-- multiselect --> 
 
 <!--CKEditor-->
 <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>

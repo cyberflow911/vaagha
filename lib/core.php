@@ -787,7 +787,7 @@ function upload_images($files,$conn,$table,$id_col,$column,$id,$images,$url)
                 $newFileName=$filename.time().".".$ext;
                 if(move_uploaded_file($file_tmp=$_FILES[$images]["tmp_name"][$key],"uploads/".$newFileName))
                 {
-                    $sql="insert into $table($id_col, $column) values($id,$url.'/$newFileName')";
+                    $sql="insert into $table($id_col, $column) values($id,'$url./$newFileName')";
                     if($conn->query($sql)===true)
                     {
                         $status=true;

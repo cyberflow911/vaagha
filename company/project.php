@@ -219,8 +219,6 @@
                                         <?php
                                             }
                                         ?>
-                    
-                                            <a href="#" class="btn btn-pink" value="<?=$detail['id']?>"> <i class="fa fa-eye">Review</i> </a>
                                                
                                             </form>
                                         </td>

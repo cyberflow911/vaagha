@@ -108,8 +108,8 @@ $NAME=explode(' ',$COMPANY_DATA['com_name']);
   background-color: #17a2b8;
   color: white;
 }
-.btn-secondary{
-    background-color: #343a40;
+.btn-secondary, .btn-secondary:hover{
+    background-color: #555555;
     color: white;
 }
 .badge-warning {

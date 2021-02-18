@@ -180,9 +180,6 @@
                                                 <button  class="btn btn-danger" type="submit" name="delete" value="<?=$detail['id']?>">
                                                             <i class="fa fa-trash-o"></i> Delete
                                                 </button>
-                                                <button  class="btn btn-primary" type="submit" name="review" value="<?=$detail['id']?>">
-                                                            <i class="fa fa-eye"></i> Review
-                                                </button>
                                                 
                                             <?php
                                                 if($detail['status']==1)
