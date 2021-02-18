@@ -13,6 +13,8 @@
             $description=$_POST['description'];
             $start_date=$_POST['start_date'];
             $incentive=$_POST['incentive'];
+            $group_num=$_POST['group_num'];
+            $participants=$_POST['participants'];
             $sql="select com_id from projectmanager where id='$MANAGER_ID'";
             if($result = $conn->query($sql))
             {
@@ -22,7 +24,13 @@
                 }   
             }
             $comid=$cid['com_id'];
-            $sql="insert into projects(pm_id, cm_id,  title, description, start_date, incentive, status) values('$MANAGER_ID', '$comid', '$title', '$description', 'start_date', '$incentive', '1')";
+            $res=intval($participants/$group_num);
+            $in=$incentive/$group_num;
+            $i=1;
+            $group_mem=$res+1;
+            $rem=$participants%$group_num;
+            $temp=$rem;
+            $sql="insert into projects(pm_id, cm_id,  title, description, start_date, incentive, participants, group_num, status) values('$MANAGER_ID', '$comid', '$title', '$description', 'start_date', '$incentive', '$participants', '$group_num', '1')";
             if($conn->query($sql))
             {
                 $insert_id = $conn->insert_id;
@@ -33,24 +41,76 @@
                 {
                     $resMember = "files_left";
                 }
+                if($rem==0)
+                {    
+                    $sql="insert into group_details(p_id, name, incentive, user_count, status) values";
+                        
+                    for($i=1; $i<=$group_num; $i++)
+                    {
+                    $sql .="('$insert_id', 'group$i','$in', '$res', 1),";
+                    }
+                    $sql=rtrim($sql, ',');
+                    if($conn->query($sql))
+                    {
+                        $resMember = true;
+                    }
+                    else
+                    {
+                        $errorMember = $conn->error;
+                    }
+                }
+                else if($rem!=0)
+                {
+                    $sql="insert into group_details(p_id, name, incentive, user_count, status) values";
+                    while($temp!=0)
+                    {
+                        $sql .="('$insert_id', 'group$i','$in', '$group_mem', 1),";
+                        $i++;
+                        $temp--;
+                    }
+                    if($i!=$group_num)
+                    {
+                        while($i!=$group_num)
+                        {
+                            $sql .="('$insert_id', 'group$i','$in', '$res', 1),";
+                            $i++;
+                        }
+                    }
+                    if($i==$group_num)
+                    {
+                        $sql .="('$insert_id', 'group$i','$in', '$res', 1),";
+                    }
+                    $sql=rtrim($sql, ',');
+                    if($conn->query($sql))
+                    {
+                        $resMember = true;
+                    }
+                    else
+                    {
+                        $errorMember = $conn->error;
+                    }
+                }
+               
             }
             else
             {
                 $errorMember=$conn->error;
             }
         }
-            
+    }
+    
+    if(isset($_GET['token'])&& !empty($_GET['token']))
+    { 
+        $token=$_GET['token'];
         if(isset($_POST['edit']))
         {  
             $title=$_POST['title'];
             $description=$_POST['description'];
             $start_date=$_POST['start_date'];
             $incentive=$_POST['incentive'];
-            if(isset($_GET['token'])&& !empty($_GET['token']))
-            {
-                $token=$_GET['token'];
-            }
-            $sql="update projects set start_date='$start_date', pm_id='$MANAGER_ID', title='$title', description='$description', incentive='$incentive'  where id='$token'";
+            $group_num=$_POST['group_num'];
+            $participants=$_POST['participants'];
+            $sql="update projects set start_date='$start_date', pm_id='$MANAGER_ID', title='$title', description='$description', incentive='$incentive', group_num='$group_num', participants='$participants'  where id='$token'";
             if($conn->query($sql))
             {
                 $insert_id = $token;
@@ -61,17 +121,14 @@
                 {
                     $resMember = "files_left";
                 }
+                
             }
             else
             {
                 $errorMember=$conn->error;
             }
-        }     
-    }
-
-    if(isset($_GET['token'])&&!empty($_GET['token']))
-    {
-        $token=$_GET['token'];
+        }  
+        
         $sql = "select p.* from projects p where p.id=$token";
         if($result = $conn->query($sql))
         {
@@ -100,6 +157,7 @@
              
         }
     }
+
 ?>
 <style>
     .box-body{
@@ -165,8 +223,21 @@
                                 <input type="text"  id="incentive" name="incentive" class="form-control" value="<?=$project_details['incentive']?>" required>  
                             </div> 
                         </div>
+                        <div class="col-md-5"> 
+                            <div class="form-group">
+                                <label>Number of Participants</label><br> 
+                                <input type="text"  id="participants" name="participants" class="form-control" value="<?=$project_details['participants']?>" required>
+                            </div> 
+                        </div> 
                     </div>
-                    <div class="row" style="margin-bottom:20px">    
+                    <div class="row" style="margin-bottom:20px">  
+                        <div class="col-md-5"> 
+                            <div class="form-group">
+                                <label>No. of Groups</label><br> 
+                                <input type="text"  id="group_num" name="group_num" class="form-control" value="<?=$project_details['group_num']?>" required>  
+                            </div> 
+                        </div>
+                      
                         <div class="col-md-12"> 
                             <div class="form-group">
                                 <label>Project Files</label><br>  

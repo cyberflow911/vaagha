@@ -17,7 +17,7 @@ if($res->num_rows > 0)
     $MANAGER_DATA=$row;
 }
 
- 
+$MANAGER_COMID=$MANAGER_DATA['com_id'];
 $MANAGER_ID=$MANAGER_DATA['id']; 
 
 //user_auth($type,$subadmin);
@@ -47,9 +47,9 @@ $MANAGER_ID=$MANAGER_DATA['id'];
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../admin/dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="../admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />    
+     
+     
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" /> 
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -88,10 +88,11 @@ $MANAGER_ID=$MANAGER_DATA['id'];
     color: #1f2d3d;
     background-color: red;
 }
-.btn-secondary{
-    background-color: #343a40;
+.btn-secondary, .btn-secondary:hover{
+    background-color: #555555;
     color: white;
 }
+
 
 .badge-success {
     color: #fff;

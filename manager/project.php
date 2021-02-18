@@ -177,6 +177,7 @@
                                          <td style="  text-align: center; " id="incentive<?=$i?>"><?=$detail['incentive'];?></td>
                                          <td>
                                         <form method="post">
+                                            <a href="groups?token=<?=$detail['id']?>" class="btn btn-primary"> <i class="fa fa-eye">View</i> </a>
                                             <a href="projectdetails?token=<?=$detail['id']?>" class="btn btn-success" value="<?=$detail['id']?>"> <i class="fa fa-edit">Edit</i> </a>
                                             <button  class="btn btn-danger" type="submit" name="delete" value="<?=$detail['id']?>">
                                                 <i class="fa fa-trash-o"></i> Delete
@@ -216,7 +217,6 @@
                                         <?php
                                             }
                                         ?>
-                                            <a href="#" class="btn btn-pink" value="<?=$detail['id']?>"> <i class="fa fa-eye">Review</i> </a>
                                                
                                         </form>
                                         </td>

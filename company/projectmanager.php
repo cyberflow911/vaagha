@@ -27,7 +27,7 @@
             $num=$_POST['num'];
             $email=$_POST['email'];
             $pss=md5($_POST['pss']);
-            echo $sql="insert into projectmanager(com_id, name, m_num, password, email,status) values('$COMPANY_ID', '$name','$num', '$pss', '$email','1')";
+            $sql="insert into projectmanager(com_id, name, m_num, password, email,status) values('$COMPANY_ID', '$name','$num', '$pss', '$email','1')";
             if($conn->query($sql))
             {
                 $resMember = "true";  
@@ -45,7 +45,7 @@
             $email=$_POST['eemail'];
             $id=$_POST['eid'];
             
-            echo $sql="update projectmanager set name='$name', m_num='$num', email='$email'  where id='$id'";
+            $sql="update projectmanager set name='$name', m_num='$num', email='$email'  where id='$id'";
             if($conn->query($sql))
             {
                 $resMember  = "true";

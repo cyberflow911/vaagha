@@ -14,10 +14,10 @@
             $title=$_POST['title'];
             $description=$_POST['description'];
             $name=$_POST['pmanager'];
-            $sql="select id from projectmanager where name='$name'";
-            
             $pmid=$_POST['pmanager'];
-            $sql="insert into projects(pm_id, cm_id, title, description, start_date, incentive, status) values('$pmid', '$COMPANY_ID', '$title', '$description', '$start_date', $incentive ,'1')";
+            $group_num=$_POST['group_num'];
+            $participants=$_POST['participants'];
+            $sql="insert into projects(pm_id, cm_id, title, description, start_date, incentive, participants, group_num, status) values('$pmid', '$COMPANY_ID', '$title', '$description', '$start_date', $incentive, '$participants', '$group_num','1')";
             if($conn->query($sql))
             {
                 $insert_id = $conn->insert_id;
@@ -35,7 +35,11 @@
                 $errorMember=$conn->error;
             }
         }
-            
+    }
+       
+    if(isset($_GET['token'])&& !empty($_GET['token']))
+    {
+        $token=$_GET['token'];
         if(isset($_POST['edit']))
         {  
             $title=$_POST['title'];
@@ -44,11 +48,9 @@
             $incentive=$_POST['incentive'];
             $name=$_POST['name'];
             $pmid=$_POST['pmanager'];
-            if(isset($_GET['token'])&& !empty($_GET['token']))
-            {
-                $token=$_GET['token'];
-            }
-            $sql="update projects set start_date='$start_date', pm_id='$pmid', title='$title', description='$description', incentive='$incentive'  where id='$token'";
+            $group_num=$_POST['group_num'];
+            $participants=$_POST['participants'];
+            $sql="update projects set start_date='$start_date', pm_id='$pmid', title='$title', description='$description', participants='$participants', group_num='$group_num', incentive='$incentive'  where id='$token'";
             if($conn->query($sql))
             {
                 $insert_id = $token;
@@ -64,26 +66,19 @@
             {
                 $errorMember=$conn->error;
             }
-        }     
-    }
-
-    if(isset($_GET['token'])&&!empty($_GET['token']))
-    {
-        $token=$_GET['token'];
+        } 
         $sql = "select p.*, pm.name, pm.id as pmid from projects p, projectmanager pm where p.id=$token and pm.id=p.pm_id";
         if($result = $conn->query($sql))
         {
             if($result->num_rows)
             {
                 $project_details  = $result->fetch_assoc();  
-            }
-             
+            } 
         }
         else
         {
             $errorMember=$conn->error;
         }
-
 
         $sql = "SELECT * from project_files where p_id=$token";
         if($result = $conn->query($sql))
@@ -94,11 +89,13 @@
                 {
                     $project_files[]=$row;
                 }
-                 
+                
             }
-             
+            
         }
-    }
+    }    
+    
+
     
     $sql="select * from projectmanager where com_id='$COMPANY_ID'";
     $result =  $conn->query($sql);
@@ -177,6 +174,21 @@
                     
                         <div class="col-md-5"> 
                             <div class="form-group">
+                                <label>Number of Participants</label><br> 
+                                <input type="text"  id="participants" name="participants" class="form-control" value="<?=$project_details['participants']?>" required>
+                            </div> 
+                        </div> 
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5"> 
+                            <div class="form-group">
+                                <label>No. of Groups</label><br> 
+                                <input type="text"  id="group_num" name="group_num" class="form-control" value="<?=$project_details['group_num']?>" required>  
+                            </div> 
+                        </div>
+                    
+                        <div class="col-md-5"> 
+                            <div class="form-group">
                                 <label>Project Manager</label><br> 
                                 <select name="pmanager" id="pmanager" class="form-control">
                                 <?php
@@ -187,7 +199,7 @@
                                             $selected="";
                                             if($data['id']==$project_details['pmid'])
                                             {
-                                             $selected="selected";   
+                                                $selected="selected";   
                                             }
                                                 
                                 ?>
