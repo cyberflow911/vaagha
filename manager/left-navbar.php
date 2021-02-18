@@ -1,3 +1,10 @@
+<?php
+$MANAGER_ID=$MANAGER_DATA['id']; 
+$F_NAME=$MANAGER_DATA['f_name'];
+$L_NAME=$MANAGER_DATA['l_name'];
+ $fname=$F_NAME[0];
+ $lname=$L_NAME[0];
+ ?>
  
 <!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar">
@@ -6,22 +13,13 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
          <div class="image">
-            <form enctype="multipart/form-data" action="image_upload_demo_submit.php" method="post" name="image_upload_form" id="image_upload_form">
-               <div id="imgArea" class="pull-left image">
-                  <img src="<?=$MANAGER_DATA['logo']?>" width="48" height="48" >
-                  <div class="progressBar">
-                     <div class="bar"></div>
-                     <div class="percent">0%</div>
-                  </div>
-                  <div id="imgChange"><span><i class="fa fa-edit"></i></span>
-                     <input type="file" accept="image/*" name="image_upload_file" id="image_upload_file">
-                  </div>
+               <div id="imgArea" class="pull-left image"> 
+                  <div class="profileImage"><?=ucfirst($FNAME[0]).ucfirst($LNAME[0])?></div>
                </div>
-            </form>
          </div>
          <div class="pull-left info">
-            <p><?=ucfirst($MANAGER_DATA['name']);?></p>
-             <p><?=ucfirst($MANAGER_DATA['m_num']);?></p>
+            <p style="margin-left: 5px; margin-top: 7px;">Project Manager</p>
+            <p style="margin-left: 5px;"><?=ucfirst($MANAGER_DATA['f_name']);?> <?=ucfirst($MANAGER_DATA['l_name']);?></p>
          </div>
       </div>
       <!-- /.search form -->

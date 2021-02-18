@@ -97,7 +97,7 @@ require_once 'left-navbar.php';
             }
         }
     }
-    $sql="select pm.name, p.*, c.com_name from companies c, projectmanager pm, projects p where p.pm_id=pm.id and p.cm_id=c.id order by p.id desc limit 5;";
+    $sql="select pm.f_name as name, p.*, c.com_name from companies c, com_admins pm, projects p where  pm.type=2 and p.pm_id=pm.id and p.cm_id=c.id order by p.id desc limit 5;";
     if($result =  $conn->query($sql));
     {
         if($result->num_rows)

@@ -8,7 +8,7 @@
         if(isset($_POST['delete']))
         {
             $id=$_POST['delete'];
-            $sql = "delete from projectmanager where id=$id";
+            $sql = "delete from com_admins where id=$id";
             
             if($conn->query($sql))
             {
@@ -23,7 +23,7 @@
         if(isset($_POST['block']))
         {
             $id=$_POST['block'];
-            $sql="update projectmanager set status=0 where id=$id";
+            $sql="update com_admins set status=0 where id=$id";
             if($conn->query($sql))
             {
                 $resMember = "true";
@@ -36,7 +36,7 @@
         if(isset($_POST['unblock']))
         {
             $id=$_POST['unblock'];
-            $sql="update projectmanager set status=1 where id=$id";
+            $sql="update com_admins set status=1 where id=$id";
             if($conn->query($sql))
             {
                 $resMember = "true";
@@ -54,15 +54,15 @@
         $token = $_GET['token'];
         switch ($token) {
             case '1':
-                $sql="select pm.*, c.com_name from projectmanager pm, companies c where pm.com_id=c.id and pm.status=1";
+                $sql="select pm.*, c.com_name from com_admins pm, companies c where pm.type=2 and pm.c_id=c.id and pm.status=1";
                 $title ="Unblocked Project Managers";
                 break;
             case  "2":
-                $sql="select pm.*, c.com_name from projectmanager pm, companies c where pm.com_id=c.id and pm.status=0";
+                $sql="select pm.*, c.com_name from com_admins pm, companies c where pm.type=2 and pm.c_id=c.id and pm.status=0";
                 $title ="Blocked Project Managers";
                 break; 
             case "3": 
-                $sql="select pm.*, c.com_name from projectmanager pm, companies c where pm.com_id=c.id";;
+                $sql="select pm.*, c.com_name from com_admins pm, companies c where pm.type=2 and pm.c_id=c.id";;
                 $title="Project Managers";
                 break;
             default:
@@ -156,7 +156,7 @@
                                      <tr> 
                                          
                                          <td style="  text-align: center; " id="serialNo<?=$i?>"><?=$i?></td> 
-                                         <td style="  text-align: center; " id="name<?=$i?>"><?=$detail['name'];?></td> 
+                                         <td style="  text-align: center; " id="name<?=$i?>"><?=$detail['f_name'];?> <?=$detail['l_name'];?></td> 
                                          <td style="  text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td> 
                                          <td style="  text-align: center; " id="num<?=$i?>"><?=$detail['m_num'];?></td>
                                          <td style="  text-align: center; " id="com_name<?=$i?>"><?=$detail['com_name'];?></td>

@@ -20,9 +20,10 @@ if($res->num_rows > 0)
  
 $COMPANY_ID=$COMPANY_DATA['id']; 
 
-$NAME=explode(' ',$COMPANY_DATA['com_name']);
- $FNAME=$NAME[0];
- $LNAME=$NAME[1];
+$F_NAME=$COMPANY_DATA['f_name'];
+$L_NAME=$COMPANY_DATA['l_name'];
+ $FNAME=$F_NAME[0];
+ $LNAME=$L_NAME[0];
 //user_auth($type,$subadmin);
 
 ?>

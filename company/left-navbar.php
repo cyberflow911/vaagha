@@ -1,49 +1,26 @@
- <?php
- $name=explode(' ',$COMPANY_DATA['com_name']);
- $fname=$name[0];
- $lname=$name[1];
+<?php
+$F_NAME=$COMPANY_DATA['f_name'];
+$L_NAME=$COMPANY_DATA['l_name'];
+ $fname=$F_NAME[0];
+ $lname=$L_NAME[0];
  ?>
- <style>
-   #profileImage {
-  width: 60px;
-  height: 48;
-  background: #25383C;
-  font-size: 35px;
-  color: #fff;
-  text-align: center;
-  line-height: 60px;
-  border-radius: 50%;
-}
-#name{
-   margin-top: 6px;
-   margin-left: 4px;
-}
- </style>
+ 
 <!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar">
    <!-- sidebar: style can be found in sidebar.less -->
    <section class="sidebar">
       <!-- Sidebar user panel -->
-      <div class="user-panel">
-         <div class="image">
-            <form enctype="multipart/form-data" action="image_upload_demo_submit.php" method="post" name="image_upload_form" id="image_upload_form">
-               <div id="imgArea" class="pull-left image"> 
-                  <div class="profileImage"><?=ucfirst($FNAME[0]).ucfirst($LNAME[0])?></div>
-                  <div class="progressBar">
-                     <div class="bar"></div>
-                     <div class="percent">0%</div>
+         <div class="user-panel">
+            <div class="image">
+                  <div id="imgArea" class="pull-left image"> 
+                     <div class="profileImage"><?=ucfirst($FNAME[0]).ucfirst($LNAME[0])?></div>
                   </div>
-                  <div id="imgChange"><span><i class="fa fa-edit"></i></span>
-                     <input type="file" accept="image/*" name="image_upload_file" id="image_upload_file">
-                  </div>
-               </div>
-            </form>
+            </div>
+            <div class="pull-left info">
+               <p style="margin-left: 5px; margin-top: 7px;">Company Admin</p>
+               <p style="margin-left: 5px;"><?=ucfirst($COMPANY_DATA['f_name']);?> <?=ucfirst($COMPANY_DATA['l_name']);?></p>
+            </div>
          </div>
-         <div class="pull-left info" id="name">
-            <p><?=ucfirst($COMPANY_DATA['f_name']);?> <?=ucfirst($COMPANY_DATA['l_name']);?></p>
-             <p><?=ucfirst($COMPANY_DATA['com_name']);?></p>
-         </div>
-      </div>
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">

@@ -31,18 +31,32 @@ function user_auth($page,$type)
  
 
 //login method
-    function login($email,$password,$conn,$path)
+    function login($email,$password,$conn)
     {
-        $sql="select c_id,id from com_admins where email='$email' and password='$password'";
+        
+        $sql="select c_id,id,type from com_admins where email='$email' and password='$password'";
         $res=$conn->query($sql);
         if($res->num_rows > 0)
         {
             $row=$res->fetch_assoc();  
+            $type=$row['type'];
             $id=$row['id']; 
-            header("location: $path");
-            $_SESSION['com_admin_signed_in']=$email;
-            $_SESSION['id']=$id; 
+            switch($type)
+            {
+                case 1:  
+                        header("location: ./dashboard");
+                        $_SESSION['com_admin_signed_in']=$email; 
+                      
+                        break;
+                case 2: 
+                        header("location: ../manager/dashboard");
+                        $_SESSION['projectmanager_signed_in']=$email;
+                       
+                        break;
+            }
+            $_SESSION['id']=$id;
             $_SESSION['c_id']=$row['c_id'];
+           
         }
         else
         {
@@ -60,10 +74,7 @@ function user_auth($page,$type)
         if($res->num_rows > 0)
         {
             $row=$res->fetch_assoc();  
-            $id=$row['id']; 
-            header("location: $path");
-            $_SESSION['projectmanager_signed_in']=$email;
-            $_SESSION['id']=$id; 
+             
         }
         else
         {

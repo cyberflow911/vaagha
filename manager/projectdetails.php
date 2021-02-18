@@ -30,7 +30,7 @@
             $group_mem=$res+1;
             $rem=$participants%$group_num;
             $temp=$rem;
-            $sql="insert into projects(pm_id, cm_id,  title, description, start_date, incentive, participants, group_num, status) values('$MANAGER_ID', '$comid', '$title', '$description', 'start_date', '$incentive', '$participants', '$group_num', '1')";
+            $sql="insert into projects(pm_id, cm_id,  title, description, start_date, incentive, participants, group_num, status) values('$MANAGER_ID', '$comid', '$title', '$description', '$start_date', '$incentive', '$participants', '$group_num', '1')";
             if($conn->query($sql))
             {
                 $insert_id = $conn->insert_id;

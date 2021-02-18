@@ -67,7 +67,7 @@
                 $errorMember=$conn->error;
             }
         } 
-        $sql = "select p.*, pm.name, pm.id as pmid from projects p, projectmanager pm where p.id=$token and pm.id=p.pm_id";
+        $sql = "select p.*, pm.id as pmid from projects p, com_admins pm where pm.type=2 and p.id=$token and pm.id=p.pm_id";
         if($result = $conn->query($sql))
         {
             if($result->num_rows)
@@ -97,7 +97,7 @@
     
 
     
-    $sql="select * from projectmanager where com_id='$COMPANY_ID'";
+    $sql="select * from com_admins where type=2 and c_id='$COMPANY_ID'";
     $result =  $conn->query($sql);
     if($result->num_rows)
     {
@@ -203,7 +203,7 @@
                                             }
                                                 
                                 ?>
-                                                <option value="<?=$data['id']?>" <?=$selected?>><?=$data['name']?></option>
+                                                <option value="<?=$data['id']?>" <?=$selected?>><?=$data['f_name']?> <?=$data['l_name']?></option>
                                 <?php
                                             
                                         }

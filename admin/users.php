@@ -53,15 +53,15 @@
         $token = $_GET['token'];
         switch ($token) {
             case '1':
-                $sql="select u.*, pm.name as pmname from users u, projectmanager pm where pm.id=u.pm_id and u.status=1";
+                $sql="select u.*, pm.f_name, pm.l_name from users u, com_admins pm where pm.id=u.pm_id and u.status=1";
                 $title ="Unblocked Users";
                 break;
             case  "2":
-                $sql="select u.*, pm.name as pmname from users u, projectmanager pm where pm.id=u.pm_id and u.status=0";
+                $sql="select u.*, pm.f_name, pm.l_name from users u, com_admins pm where pm.id=u.pm_id and u.status=0";
                 $title ="Blocked Users";
                 break; 
             case "3": 
-                $sql="select u.*, pm.name as pmname from users u, projectmanager pm where pm.id=u.pm_id  and u.status!=2";
+                $sql="select u.*, pm.f_name, pm.l_name from users u, com_admins pm where pm.id=u.pm_id  and u.status!=2";
                 $title="Users";
                 break;
             default:
@@ -155,7 +155,7 @@
                                          <td style="  text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td> 
                                          <td style="  text-align: center; " id="m_num<?=$i?>"><?=$detail['m_num'];?></td>
                                          <td style="  text-align: center; " id="address<?=$i?>"><?=$detail['address'];?></td>
-                                         <td style="  text-align: center; " id="pmname<?=$i?>"><?=$detail['pmname'];?></td>
+                                         <td style="  text-align: center; " id="pmname<?=$i?>"><?=$detail['f_name'];?> <?=$detail['l_name'];?></td>
                                          <td>
                                              <form method="post">
                                              <a href="viewusers?token=<?=$detail['id']?>" class="btn btn-primary"><i class="fa fa-eye">View</i></a>
