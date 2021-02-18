@@ -7,7 +7,7 @@
         {
             $email = $_POST['email'];
             $password = md5($_POST['password']);
-            if(!login($email,$password,$conn,"dashboard"))
+            if(!login($email,$password,$conn))
             {
                 $error ="Inavlid Email or Password";
             }   

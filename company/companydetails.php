@@ -46,7 +46,7 @@
         if(isset($_POST['delete3']))
         {
             $id=$_POST['delete'];
-            $sql="delete from projectmanager where id=$id";
+            $sql="delete from com_admins where id=$id";
             if($conn->query($sql))
             {
                 $resSubject=true;   
@@ -60,7 +60,7 @@
         if(isset($_POST['block3']))
         {
             $id=$_POST['block3'];
-            $sql="update projectmanager set status=0 where id=$id";
+            $sql="update com_admins set status=0 where id=$id";
             if($conn->query($sql))
             {
                 $resSubject = "true";
@@ -87,7 +87,7 @@
         if(isset($_POST['unblock3']))
         {
             $id=$_POST['unblock3'];
-            $sql="update projectmanager set status=1 where id=$id";
+            $sql="update com_admins set status=1 where id=$id";
             if($conn->query($sql))
             {
                 $resSubject = "true";
@@ -141,7 +141,7 @@
 
     }
     
-    $sql="select *  from com_admins where c_id='$COMPANY_ID' and id!='$id'";
+    $sql="select *  from com_admins where c_id='$COMPANY_ID' and id!='$id' and type=1";
     $result =  $conn->query($sql);
     if($result->num_rows)
     {
@@ -152,7 +152,7 @@
     }
 
     
-    $sql= "select c.*, a.c_id, a.id from companies c, com_admins a where c.id=a.c_id and a.id=$id";
+    $sql= "select c.*, a.c_id, a.id from companies c, com_admins a where c.id=a.c_id and a.id=$id and a.type=1";
     $result=$conn->query($sql);
     if($result->num_rows)
     {
@@ -160,7 +160,7 @@
         $comdata=$row;
     }
     
-    $sql="SELECT count(id) as count from com_admins where c_id='$COMPANY_ID'";
+    $sql="SELECT count(id) as count from com_admins where c_id='$COMPANY_ID' and type=1";
     if($result=$conn->query($sql))
     {
         if($result->num_rows>0)
@@ -169,7 +169,7 @@
             $ca_count=$row['count']; 
         }
     }
-    $sql="SELECT count(id) as count from projectmanager where com_id='$COMPANY_ID'";
+    $sql="SELECT count(id) as count from com_admins where c_id='$COMPANY_ID' and type=2";
     if($result=$conn->query($sql))
     {
         if($result->num_rows>0)
@@ -207,7 +207,7 @@
         }      
     }
 
-    $sql="select * from projectmanager where com_id='$COMPANY_ID'";
+    $sql="select * from com_admins where c_id='$COMPANY_ID' and type=2";
     $result =  $conn->query($sql);
     if($result->num_rows)
     {
@@ -380,12 +380,12 @@
                 <table id="example1" class="table table-bordered table-hover">
                     <thead>
                         <tr style="background-color: #212529; color: white;">
-                            <th>Serial Number</th>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Start Date</th>
-                            <th>Incentive</th>
-                            <th>Action</th>
+                            <th style=" text-align: center; ">Serial Number</th>
+                            <th style=" text-align: center; ">Title</th>
+                            <th style=" text-align: center; ">Description</th>
+                            <th style=" text-align: center; ">Start Date</th>
+                            <th style=" text-align: center; ">Incentive</th>
+                            <th style=" text-align: center; ">Action</th>
                         </tr>
                     </thead>
                     <tbody> 
@@ -449,11 +449,11 @@
                 <table id="example1" class="table table-bordered table-hover">
                     <thead>
                         <tr style="background-color: #212529; color: white;">
-                            <th>Serial Number</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone Number</th>
-                            <th>Action</th>
+                            <th style=" text-align: center; ">Serial Number</th>
+                            <th style=" text-align: center; ">Name</th>
+                            <th style=" text-align: center; ">Email</th>
+                            <th style=" text-align: center; ">Date</th>
+                            <th style=" text-align: center; ">Action</th>
                         </tr>
                     </thead>
                     <tbody> 
@@ -467,9 +467,10 @@
                     ?>
                     <tr> 
                         <td style=" text-align: center; " id="serialNo<?=$i?>"><?=$i?></td> 
-                        <td style=" text-align: center; " id="name<?=$i?>"><?=$detail['name'];?></td> 
-                        <td style=" text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td>  
-                        <td style=" text-align: center; " id="m_num<?=$i?>"><?=$detail['m_num'];?></td>
+                        <td style=" text-align: center; " id="name<?=$i?>"><?=$detail['f_name'];?> <?=$detail['l_name'];?></td> 
+                        <td style=" text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td> 
+                        <td style=" text-align: center; " id="date<?=$i?>"> <?php $date=date_create($detail['time_stamp']);
+                                                echo date_format($date,"M d Y"); ?></td> 
                         <td>
                             <form method="post">
                                 <button  class="btn btn-danger" type="submit" name="delete3" value="<?=$detail['id']?>">
@@ -516,12 +517,12 @@
                 <table id="example1" class="table table-bordered table-hover">
                     <thead>
                         <tr style="background-color: #212529; color: white;">
-                            <th>Serial Number</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone Number</th>
-                            <th>Address</th>
-                            <th>Action</th>
+                            <th style=" text-align: center; ">Serial Number</th>
+                            <th style=" text-align: center; ">Name</th>
+                            <th style=" text-align: center; ">Email</th>
+                            <th style=" text-align: center; ">Phone Number</th>
+                            <th style=" text-align: center; ">Address</th>
+                            <th style=" text-align: center; ">Action</th>
                         </tr>
                     </thead>
                     <tbody> 
@@ -585,10 +586,10 @@
                 <table id="example1" class="table table-bordered table-hover">
                     <thead>
                         <tr style="background-color: #212529; color: white;">
-                            <th>Serial Number</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
+                            <th style=" text-align: center; ">Serial Number</th>
+                            <th style=" text-align: center; ">First Name</th>
+                            <th style=" text-align: center; ">Last Name</th>
+                            <th style=" text-align: center; ">Email</th>
                         </tr>
                     </thead>
                     <tbody> 

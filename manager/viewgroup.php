@@ -47,6 +47,8 @@ require_once 'left-navbar.php';
                 $errorMember=$conn->error;
             }
         }  
+
+        
     }
 
 
@@ -54,6 +56,53 @@ require_once 'left-navbar.php';
 if(isset($_GET['token'])&&!empty($_GET['token']))
 {
     $token=$_GET['token'];
+
+    if(isset($_POST['invite']))
+    {
+        $email=$_POST['email'];
+        $sql="insert into users(p_id, pm_id, com_id, email, status) value('$p_id','$MANAGER_ID', '$MANAGER_COMID', '$email', 2)";
+        if($result = $conn->query($sql))
+        {
+            $iid= $conn->insert_id;
+            $sql="insert into group_users(g_id, u_id, status) values('$token', '$iid', 3)";
+            if($conn->query($sql))
+            {
+                $resMember = true;
+            }
+            else
+            {
+                $errorMember = $conn->error;
+            }
+            
+        }
+        else
+        {
+            $errorMember=$conn->error;
+        }
+    }
+
+    if(isset($_POST['add']))
+    {
+        $u_id=$_POST['uid'];
+        $incentive=$_POST['incentive'];
+        $i=0;
+        $sql="insert into group_users(g_id, u_id, status) values";
+        foreach($u_id as $data)
+        {
+            $sql .= "('$token', '$data',  1),";
+            $i++;
+        }
+            $sql=rtrim($sql, ',');
+        if($conn->query($sql))
+        {
+            $resMember = true;
+        }
+        else
+        {
+            $errorMember = $conn->error;
+        }
+    }
+
     $sql="select * from group_details where id='$token'";
     if($result=$conn->query($sql))
     {
@@ -63,6 +112,8 @@ if(isset($_GET['token'])&&!empty($_GET['token']))
             $group=$row;
         }
     }
+    $p_id=$group['p_id'];
+
     $sql="select g.*, u.name, u.email from group_users g, users u where g.g_id='$token' and g.u_id=u.id";
     if($result=$conn->query($sql))
     {
@@ -74,6 +125,21 @@ if(isset($_GET['token'])&&!empty($_GET['token']))
             }
         }
     }
+
+}
+
+
+$sql = "SELECT * from users where pm_id='$MANAGER_ID'";
+if($result = $conn->query($sql))
+{
+    if($result->num_rows)
+    {
+        while($row = $result->fetch_assoc())
+        {
+            $allusers[]=$row;
+        }
+        
+    }   
 }
 
        
@@ -82,7 +148,7 @@ if(isset($_GET['token'])&&!empty($_GET['token']))
 
 </style>
 <div class="content-wrapper">
-<section class="content-header">
+    <section class="content-header">
         <h1>
             Group Details
         </h1>
@@ -155,7 +221,7 @@ if(isset($_GET['token'])&&!empty($_GET['token']))
         <ol class="breadcrumb">
             <li>
                 <div class="pull-right">
-                    <a href="groupuseradd?token=<?=$token?>" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+                    <button title="" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-plus"></i></button>
                 </div>
             </li>
         </ol>
@@ -228,8 +294,67 @@ if(isset($_GET['token'])&&!empty($_GET['token']))
                         </div> 
         
     </section>
-  </div>
-  <div class="control-sidebar-bg"></div>
+</div>
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title"> Add Group User</h4>
+                </div>
+                <form method="post">
+                    <div class="modal-body">
+                        <div class="row">
+                            
+                            <div class="col-md-5"> 
+                                <div class="form-group">
+                                    <label>Users</label><br>   
+                                    <select class="form-control selectpicker" name="uid[]" id="userSelect" multiple data-live-search="true">
+                                    <?php
+                                        if(isset($allusers))
+                                        { 
+                                            $selected=" ";
+                                            foreach($allusers as $data)
+                                            {
+                                                
+                                    ?>
+                                                <option value=<?=$data['id']?> ><?=$data['name']?> - <?=$data['email']?></option>
+                                                
+
+                                                
+                                    <?php
+                                            }
+                                        }
+                                    ?>
+                                        
+                                    </select> 
+                                </div> 
+                                
+                            </div> 
+                            <button type="submit" name="add" class="btn btn-primary" value="">Add</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5"> 
+                                <div class="form-group">
+                                    <label>Invite User</label><br> 
+                                    <input type="text"  id="email" name="email" class="form-control">
+                                </div>
+                            </div>
+                            <button type="submit" name="invite" class="btn btn-primary" >Invite</button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                            
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <div class="control-sidebar-bg"></div>
     
   <?php
     require_once 'js-links.php';

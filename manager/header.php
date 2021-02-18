@@ -9,7 +9,7 @@ if(!projectmanager_auth())
 }
 
 
-$sql="select pm.*, c.com_name, c.logo from projectmanager pm, companies c where pm.com_id=c.id and pm.email='$id'";
+$sql="select * from com_admins where email='$id'";
 $res=$conn->query($sql);
 if($res->num_rows > 0)
 {
@@ -17,8 +17,12 @@ if($res->num_rows > 0)
     $MANAGER_DATA=$row;
 }
 
-$MANAGER_COMID=$MANAGER_DATA['com_id'];
+$MANAGER_COMID=$MANAGER_DATA['c_id'];
 $MANAGER_ID=$MANAGER_DATA['id']; 
+$F_NAME=$MANAGER_DATA['f_name'];
+$L_NAME=$MANAGER_DATA['l_name'];
+ $FNAME=$F_NAME[0];
+ $LNAME=$L_NAME[0];
 
 //user_auth($type,$subadmin);
 
@@ -64,6 +68,27 @@ $MANAGER_ID=$MANAGER_DATA['id'];
   top: 100%;
   left: 7%;
   right: 0;
+}
+
+.profileImage {
+  width: 60px;
+  height: 48;
+  background: #25383C;
+  font-size: 35px;
+  color: #fff;
+  text-align: center;
+  line-height: 60px;
+  border-radius: 50%;
+}
+.profileImageUser {
+  width: 60px;
+  height: 48;
+  background: #25383C;
+  font-size: 35px;
+  color: #fff;
+  text-align: center;
+  line-height: 60px;
+  border-radius: 50%; 
 }
 .autocomplete-items div {
   padding: 10px;

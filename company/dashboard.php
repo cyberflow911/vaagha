@@ -5,7 +5,7 @@
  
     
     $id=$_SESSION['id'];
-    $sql="SELECT count(id) as count from com_admins where c_id='$COMPANY_ID'";
+    $sql="SELECT count(id) as count from com_admins where c_id='$COMPANY_ID' and type=1";
     if($result=$conn->query($sql))
     {
         if($result->num_rows>0)
@@ -14,7 +14,7 @@
             $ca_count=$row['count']; 
         }
     }
-    $sql="SELECT count(id) as count from projectmanager where com_id='$COMPANY_ID'";
+    $sql="SELECT count(id) as count from com_admins where c_id='$COMPANY_ID' and type=2";
     if($result=$conn->query($sql))
     {
         if($result->num_rows>0)
@@ -41,7 +41,7 @@
             $u_count=$row['count']; 
         }
     }
-    $sql="select pm.name, p.*, c.com_name from companies c, projectmanager pm, projects p where p.pm_id=pm.id and p.cm_id=c.id and c.id='$COMPANY_ID' order by p.id desc limit 10;";
+    $sql="select pm.f_name, p.*, c.com_name from companies c, com_admins pm, projects p where pm.type=2 and p.pm_id=pm.id and p.cm_id=c.id and c.id='$COMPANY_ID' order by p.id desc limit 10;";
     if($result =  $conn->query($sql));
     {
         if($result->num_rows)
@@ -186,7 +186,7 @@
                                                     ?>
                                                     </td>
                                                     <td style="padding: 12px;">
-                                                    <?=$data['name']?>
+                                                    <?=$data['f_name']?>
                                                     </td>
                                                     <td style="padding: 12px;">
                                                     <?=$data['incentive']?>

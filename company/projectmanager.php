@@ -9,7 +9,7 @@
         if(isset($_POST['delete']))
         {
             $id=$_POST['delete'];
-            $sql = "delete from projectmanager where id=$id";
+            $sql = "delete from com_admins where id=$id";
             
             if($conn->query($sql))
             {
@@ -23,11 +23,11 @@
 
         if(isset($_POST['add']))
         {
-            $name=$_POST['name'];
-            $num=$_POST['num'];
+            $f_name=$_POST['f_name'];
+            $l_name=$_POST['l_name'];
             $email=$_POST['email'];
             $pss=md5($_POST['pss']);
-            $sql="insert into projectmanager(com_id, name, m_num, password, email,status) values('$COMPANY_ID', '$name','$num', '$pss', '$email','1')";
+            $sql="insert into com_admins(c_id, f_name, l_name, password, email, type, status) values('$COMPANY_ID', '$f_name','$l_name', '$pss', '$email', '2', '1')";
             if($conn->query($sql))
             {
                 $resMember = "true";  
@@ -40,12 +40,11 @@
             
         if(isset($_POST['edit']))
         {  
-            $name=$_POST['ename'];
-            $num=$_POST['enum'];
+            $f_name=$_POST['ef_name'];
+            $l_name=$_POST['el_name'];
             $email=$_POST['eemail'];
             $id=$_POST['eid'];
-            
-            $sql="update projectmanager set name='$name', m_num='$num', email='$email'  where id='$id'";
+            $sql="update com_admins set f_name='$f_name', l_name='$l_name', email='$email'  where id='$id'";
             if($conn->query($sql))
             {
                 $resMember  = "true";
@@ -59,7 +58,7 @@
         if(isset($_POST['block']))
         {
             $id=$_POST['block'];
-            $sql="update projectmanager set status=0 where id=$id";
+            $sql="update com_admins set status=0 where id=$id";
             if($conn->query($sql))
             {
                 $resMember = "true";
@@ -72,7 +71,7 @@
         if(isset($_POST['unblock']))
         {
             $id=$_POST['unblock'];
-            $sql="update projectmanager set status=1 where id=$id";
+            $sql="update com_admins set status=1 where id=$id";
             if($conn->query($sql))
             {
                 $resMember = "true";
@@ -90,15 +89,15 @@
         $token = $_GET['token'];
         switch ($token) {
             case '1':
-                $sql="select * from projectmanager where com_id='$COMPANY_ID' and status=1";
+                $sql="select * from com_admins where c_id='$COMPANY_ID' and type=2 and status=1";
                 $title ="Unblocked Project Managers";
                 break;
             case  "2":
-                $sql="select * from projectmanager where com_id='$COMPANY_ID' and status=0";
+                $sql="select * from com_admins where c_id='$COMPANY_ID' and type=2 and status=0";
                 $title ="Blocked Project Managers";
                 break; 
             case "3": 
-                $sql="select * from projectmanager where com_id='$COMPANY_ID'";
+                $sql="select * from com_admins where c_id='$COMPANY_ID' and type=2";
                 $title="Project Managers";
                 break;
             default:
@@ -170,9 +169,10 @@
                     <thead style="background-color: #212529; color: white;">
                         <tr>
                              <th>S.No.</th> 
-                             <th>Name</th>
+                             <th>First Name</th>
+                             <th>Last Name</th>
                              <th>Email</th>
-                             <th>Phone Number</th>
+                             <th>Date</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -189,9 +189,11 @@
                                      <tr> 
                                          
                                          <td style="  text-align: center; " id="serialNo<?=$i?>"><?=$i?></td> 
-                                         <td style="  text-align: center; " id="name<?=$i?>"><?=$detail['name'];?></td> 
-                                         <td style="  text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td> 
-                                         <td style="  text-align: center; " id="num<?=$i?>"><?=$detail['m_num'];?></td>
+                                         <td style="  text-align: center; " id="f_name<?=$i?>"><?=$detail['f_name'];?> </td> 
+                                         <td style="  text-align: center; " id="l_name<?=$i?>"><?=$detail['l_name'];?> </td> 
+                                         <td style="  text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td>
+                                         <td style="  text-align: center; " id="date<?=$i?>"> <?php $date=date_create($detail['time_stamp']);
+                                                echo date_format($date,"M d Y"); ?></td>
                                          <td>
                                              <form method="post">
                                                 <button name="confirm" type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-edit"  onclick="setEditValues(<?=$detail['id'] ?>,<?=$i?>)" value="<?=$detail['id'] ?>">
@@ -256,22 +258,22 @@
                         <div class="row">
                             <div class="col-md-6"> 
                                 <div class="form-group">
-                                    <label>Name</label><br>   
-                                    <input type="text"  id="name" name="name" class="form-control" required>  
+                                    <label>First Name</label><br>   
+                                    <input type="text"  id="f_name" name="f_name" class="form-control" required>  
                                 </div> 
                             </div>
                             <div class="col-md-6"> 
                                 <div class="form-group">
-                                    <label>Email</label><br>   
-                                    <input type="text"  id="email" name="email" class="form-control"  required>  
+                                    <label>Last Name</label><br>   
+                                    <input type="text"  id="l_name" name="l_name" class="form-control" required>  
                                 </div> 
                             </div>
                         </div>  
                         <div class="row">
-                            <div class="col-md-6"> 
+                        <div class="col-md-6"> 
                                 <div class="form-group">
-                                    <label>Phone Number</label><br>   
-                                    <input type="text"  id="num" name="num" class="form-control"  required>  
+                                    <label>Email</label><br>   
+                                    <input type="text"  id="email" name="email" class="form-control"  required>  
                                 </div> 
                             </div>
                             <div class="col-md-6"> 
@@ -306,23 +308,24 @@
                         <div class="row">
                             <div class="col-md-6"> 
                                 <div class="form-group">
-                                    <label>Name</label><br>   
-                                    <input type="text"  id="ename" name="ename" class="form-control" required>  
+                                    <label>First Name</label><br>   
+                                    <input type="text"  id="ef_name" name="ef_name" class="form-control" required>  
                                 </div> 
                             </div>
+                            <div class="col-md-6"> 
+                                <div class="form-group">
+                                    <label>Last Name</label><br>   
+                                    <input type="text"  id="el_name" name="el_name" class="form-control" required>  
+                                </div> 
+                            </div>
+                            
+                        </div>  
+                        <div class="row">
                             <div class="col-md-6"> 
                                 <div class="form-group">
                                     <label>Email</label><br>   
                                     <input type="hidden" name="eid" id ="eid"/>
                                     <input type="text"  id="eemail" name="eemail" class="form-control"  required>  
-                                </div> 
-                            </div>
-                        </div>  
-                        <div class="row">
-                            <div class="col-md-6"> 
-                                <div class="form-group">
-                                    <label>Phone Number</label><br>   
-                                    <input type="text"  id="enum" name="enum" class="form-control"  required>  
                                 </div> 
                             </div>
                         </div>  
@@ -335,7 +338,6 @@
                 </form>
             </div>
         </div>
-            <!-- /.modal-content -->
     </div>
           
 
@@ -353,8 +355,8 @@
     function setEditValues(id,count)
     {
         $("#eid").val(id); 
-        $("#ename").val($("#name"+count).html());
+        $("#ef_name").val($("#f_name"+count).html());
+        $("#el_name").val($("#l_name"+count).html());
         $("#eemail").val($("#email"+count).html());
-        $("#enum").val($("#num"+count).html());
     }  
 </script>
