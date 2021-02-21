@@ -87,7 +87,7 @@
                     }
                     ?>
 					<center><a href="../"><img src="../img/logo/logo.png" height="150px"  /></a></center>
-					<h3>Company Login</h3>
+					<h3>	 Login</h3>
 					<div class="form-holder">
 						<span class="lnr lnr-user"></span>
 						<input type="text" name="email" class="form-control" placeholder="Email">

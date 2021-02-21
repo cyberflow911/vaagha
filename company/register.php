@@ -17,7 +17,7 @@
 			if($conn->query($sql))
 			{
 				$com_id = $conn->insert_id;
-				$sql="INSERT INTO com_admins(c_id,f_name,l_name,email,password,status) values('$com_id','$first_name','$last_name','$email','$password','1')";
+				$sql="INSERT INTO com_admins(c_id,f_name,l_name,email,password,status,type) values('$com_id','$first_name','$last_name','$email','$password','1','1')";
 				if($conn->query($sql))
 				{
 					$register_success = true;
