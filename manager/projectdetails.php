@@ -25,7 +25,7 @@
             }
             $comid=$cid['com_id'];
             $res=intval($participants/$group_num);
-            $in=$incentive/$group_num;
+            $in=intval($incentive/$group_num);
             $i=1;
             $group_mem=$res+1;
             $rem=$participants%$group_num;
@@ -102,6 +102,7 @@
     if(isset($_GET['token'])&& !empty($_GET['token']))
     { 
         $token=$_GET['token'];
+        
         if(isset($_POST['edit']))
         {  
             $title=$_POST['title'];
@@ -110,6 +111,19 @@
             $incentive=$_POST['incentive'];
             $group_num=$_POST['group_num'];
             $participants=$_POST['participants'];
+            $res=intval($participants/$group_num);
+            $in=intval($incentive/$group_num);
+            $group_mem=$res+1;
+            $rem=$participants%$group_num;
+            $sql="select * from projects where id='$token'";
+            if($result = $conn->query($sql))
+            {
+                if($result->num_rows)
+                {
+                    $row = $result->fetch_assoc();
+                        $prev_group_num=$row['group_num'];
+                }
+            }
             $sql="update projects set start_date='$start_date', pm_id='$MANAGER_ID', title='$title', description='$description', incentive='$incentive', group_num='$group_num', participants='$participants'  where id='$token'";
             if($conn->query($sql))
             {
@@ -122,11 +136,101 @@
                     $resMember = "files_left";
                 }
                 
+                if($group_num < $prev_group_num)
+                {
+                    for($i=$group_num+1; $i<=$prev_group_num; $i++)
+                    {
+                        $sql="delete from group_details where p_id='$token' and name='group$i'";
+                        if($conn->query($sql))
+                        {
+                            $resMember = true;
+                        }
+                        else
+                        {
+                            $errorMember = $conn->error;
+                        }
+                    }
+                }
+                else if($group_num>$prev_group_num)
+                {
+                    $sql="insert into group_details(p_id, name, status) values";
+                    for($i=$prev_group_num+1; $i<=$group_num; $i++)
+                    {
+                    $sql .="('$token', 'group$i', 1),";
+                    }
+                    $sql=rtrim($sql, ',');
+                    if($conn->query($sql))
+                    {
+                        $resMember = true;
+                    }
+                    else
+                    {
+                        $errorMember = $conn->error;
+                    }
+                }
+                if($rem==0)
+                {
+                    for($i=1; $i<=$group_num; $i++)
+                    {
+                        $sql="update group_details set user_count='$res', incentive='$in' where p_id='$token' and name='group$i'";
+                        if($conn->query($sql))
+                        {
+                            $resMember = true;
+                        }
+                        else
+                        {
+                            $errorMember = $conn->error;
+                        }
+                    }
+                }
+                else if($rem>0)
+                {
+                    $i=1;
+                    while($rem!=0)
+                    {
+                        $sql="update group_details set user_count='$group_mem', incentive='$in' where p_id='$token' and name='group$i'";
+                        if($conn->query($sql))
+                        {
+                            $resMember = true;
+                        }
+                        else
+                        {
+                            $errorMember = $conn->error;
+                        }
+                        $rem--;
+                        $i++;
+                    }
+                    if($i!=$group_num)
+                    {
+                        while($i!=$group_num)
+                        {
+                            $sql="update group_details set user_count='$res', incentive='$in' where p_id='$token' and name='group$i'";
+                            if($conn->query($sql))
+                            {
+                                $resMember = true;
+                            }
+                            else
+                            {
+                                $errorMember = $conn->error;
+                            }
+                            $i++;
+                        }
+                    }
+                    if(i==$group_num)
+                    {
+                        $sql="update group_details set user_count='$res', incentive='$in' where p_id='$token' and name='group$i'";
+                        if($conn->query($sql))
+                        {
+                            $resMember = true;
+                        }
+                        else
+                        {
+                            $errorMember = $conn->error;
+                        }
+                    }
+                }
             }
-            else
-            {
-                $errorMember=$conn->error;
-            }
+                    
         }  
         
         $sql = "select p.* from projects p where p.id=$token";
