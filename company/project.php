@@ -68,19 +68,19 @@
         $token = $_GET['token'];
         switch ($token) {
             case '1':
-                $sql="select p.*, pm.f_name, pm.l_name from projects p, com_admins pm where pm.id=p.pm_id and p.cm_id='$COMPANY_ID' and pm.type=2 and p.status = 1";
+                $sql="select p.* from projects p where p.cm_id='$COMPANY_ID' and p.status = 1";
                 $title ="Active Projects";
                 break;
             case  "2":
-                $sql="select p.*, pm.f_name, pm.l_name from projects p, com_admins pm where pm.id=p.pm_id and p.cm_id='$COMPANY_ID' and pm.type=2 and p.status = 0";
+                $sql="select p.* from projects p where p.cm_id='$COMPANY_ID' and p.status = 0";
                 $title ="Projects on Hold";
                 break; 
             case "3": 
-                $sql="select p.*, pm.f_name, pm.l_name from projects p, com_admins pm where pm.id=p.pm_id and p.cm_id='$COMPANY_ID' and pm.type=2";
+                $sql="select p.* from projects p where p.cm_id='$COMPANY_ID'";
                 $title="Projects";
                 break;
             case "4": 
-                $sql="select p.*, pm.f_name, pm.l_name from projects p, com_admins pm where pm.id=p.pm_id and p.cm_id='$COMPANY_ID' and pm.type=2 and p.status=2";
+                $sql="select p.* from projects p where p.cm_id='$COMPANY_ID' and p.status=2";
                 $title="Completed Projects";
                 break;
             default:
@@ -157,7 +157,6 @@
                              <th>Project Description</th>
                              <th>Start Date</th>
                              <th>Incentive</th>
-                             <th>Project Manager</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -177,7 +176,6 @@
                                          <td style="  text-align: center; " id="description<?=$i?>"><?=$detail['description'];?></td>
                                          <td style="  text-align: center; " id="start_date<?=$i?>"><?=$detail['start_date'];?></td>
                                          <td style="  text-align: center; " id="incentive<?=$i?>"><?=$detail['incentive'];?></td>
-                                         <td style="  text-align: center; " id="name<?=$i?>"><?=$detail['f_name'];?> <?=$detail['l_name'];?></td>
                                          <td>
                                              <form method="post">
                                             <a href="projectdetails?token=<?=$detail['id']?>" class="btn btn-success" value="<?=$detail['id']?>"> <i class="fa fa-edit">Edit</i> </a>

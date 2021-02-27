@@ -108,11 +108,19 @@
         }
     }
        
-    
+    $pdate = date("Y-m-d", strtotime("-1 month"));
 ?>
 <style>
     .box-body{
 	overflow: auto!important;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
 }
 </style>
 
@@ -146,13 +154,13 @@
                         <div class="col-md-5"> 
                             <div class="form-group">
                                 <label>Project Title</label><br>   
-                                <input type="text"  id="title" name="title" class="form-control" value="<?=$project_details['title']?>" required>  
+                                <input type="text"  id="title" minlenth="3" maxlength="100" name="title" class="form-control" minlength="3" maxlength="100" value="<?=$project_details['title']?>" required>  
                             </div> 
                         </div>
                         <div class="col-md-5"> 
                             <div class="form-group">
                                 <label>Start Date</label><br> 
-                                <input type="date"  id="start_date" name="start_date" class="form-control" value="<?=$project_details['start_date']?>" required>  
+                                <input type="date"  id="start_date" min="<?=$pdate?>" name="start_date" class="form-control" value="<?=$project_details['start_date']?>" required>  
                             </div> 
                         </div>
 
@@ -161,7 +169,7 @@
                         <div class="col-md-10"> 
                             <div class="form-group">
                                 <label style="margin-left:5px">Project Description</label><br> 
-                                <textarea type="text"  id="description" name="description" class="form-control" style="resize: vertical;height:150px" required>  <?=$project_details['description']?> </textarea> 
+                                <textarea type="text"  id="description" minlength="10" maxlength="500" name="description" class="form-control" style="resize: vertical;height:150px" required><?=$project_details['description']?></textarea> 
                             </div> 
                         </div>
                     </div> 
@@ -169,14 +177,14 @@
                         <div class="col-md-5"> 
                             <div class="form-group">
                                 <label>Incentive</label><br> 
-                                <input type="text"  id="incentive" name="incentive" class="form-control" value="<?=$project_details['incentive']?>" required>  
+                                <input type="number"  id="incentive" min="1" step=".01" oninput="check(this)"  name="incentive" class="form-control" value="<?=$project_details['incentive']?>" required>  
                             </div> 
                         </div>
                     
                         <div class="col-md-5"> 
                             <div class="form-group">
                                 <label>Number of Participants</label><br> 
-                                <input type="text"  id="participants" name="participants" class="form-control" value="<?=$project_details['participants']?>" required>
+                                <input type="number"  id="participants" oninput="check(this)" name="participants" class="form-control" value="<?=$project_details['participants']?>" required>
                             </div> 
                         </div> 
                     </div>
@@ -184,7 +192,7 @@
                         <div class="col-md-5"> 
                             <div class="form-group">
                                 <label>No. of Groups</label><br> 
-                                <input type="text"  id="group_num" name="group_num" class="form-control" value="<?=$project_details['group_num']?>" required>  
+                                <input type="number"  id="group_num" oninput="check(this)" name="group_num" class="form-control" value="<?=$project_details['group_num']?>" required>  
                             </div> 
                         </div>
                     
@@ -277,14 +285,14 @@
                                 if(isset($project_details))
                                 {
                         ?>
-                                        <button type="submit" name="edit" class="btn btn-primary" style="margin-top:10" value="">Edit</button>
+                                        <button type="submit" name="edit" class="btn btn-primary" style="margin-top:10" onclick="return confirm('Do you want to save the changes? Y/N')">Save</button>
                             <?php
                                 }
                                 else
                                 {
                             ?>
                                         
-                                        <button type="submit" name="add" class="btn btn-primary" style="margin-top:10" value="">Add</button>
+                                        <button type="submit" name="add" class="btn btn-primary" style="margin-top:10" onclick="return confirm('Do you want to save the changes? Y/N')">Add</button>
                         <?php
                                 }
                         ?> 
@@ -346,6 +354,14 @@ function deleteFile(id,divId)
     
     })
 }
+function check(input) {
+    if (input.value == 0) {
+        input.setCustomValidity('The number must not be zero.');
+    } else {
+        // input is fine -- reset the error message
+        input.setCustomValidity('');
+    }
+    }
 </script>
 
 

@@ -53,15 +53,15 @@
         $token = $_GET['token'];
         switch ($token) {
             case '1':
-                $sql="select u.*, pm.name as pmname, p.title from users u, projectmanager pm, projects p where pm.id=u.pm_id and u.status=1 and u.com_id='$COMPANY_ID' u.p_id=p.id";
+                $sql="select u.*, p.title from users u, projects p where u.status=1 and u.com_id='$COMPANY_ID' u.p_id=p.id";
                 $title ="Unblocked Users";
                 break;
             case  "2":
-                $sql="select u.*, pm.name as pmname, p.title from users u, projectmanager pm, projects p where pm.id=u.pm_id and u.status=0 and u.com_id='$COMPANY_ID' u.p_id=p.id";
+                $sql="select u.*, p.title from users u, projects p where u.status=0 and u.com_id='$COMPANY_ID' u.p_id=p.id";
                 $title ="Blocked Users";
                 break; 
             case "3": 
-                $sql="select u.*, pm.name as pmname, p.title from users u, projectmanager pm, projects p where pm.id=u.pm_id and u.com_id='$COMPANY_ID' and u.p_id=p.id and u.status!=2";
+                $sql="select u.*, p.title from users u, projects p where u.com_id='$COMPANY_ID' and u.p_id=p.id and u.status!=2";
                 $title="Users";
                 break;
             default:
@@ -159,7 +159,6 @@
                              <th>Phone Number</th>
                              <th>Address</th>
                              <th>Project Name</th>
-                             <th>Project Manager</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -181,7 +180,7 @@
                                          <td style="  text-align: center; " id="m_num<?=$i?>"><?=$detail['m_num'];?></td>
                                          <td style="  text-align: center; " id="address<?=$i?>"><?=$detail['address'];?></td>
                                          <td style="  text-align: center; " id="title<?=$i?>"><?=$detail['title'];?></td>
-                                         <td style="  text-align: center; " id="pmname<?=$i?>"><?=$detail['pmname'];?></td>
+                                        
                                          <td>
                                              <form method="post">
                                              <a href="useraddedit?token=<?=$detail['id']?>" class="btn btn-success"><i class="fa fa-edit">Edit</i></a>

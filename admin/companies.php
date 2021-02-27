@@ -39,6 +39,20 @@
                 $errorSubject=$conn->error;
             }
         }
+        if(isset($_POST['accept']))
+        {
+            $id=$_POST['accept'];
+            
+            $sql="update companies set status=1 where id=$id";
+            if($conn->query($sql))
+            {
+                $resSubject=true;   
+            }
+            else
+            {
+                $errorSubject=$conn->error;
+            }
+        }
 
         if(isset($_POST['block']))
         {
@@ -53,6 +67,7 @@
                 $errorSubject=$conn->error;
             }
         }
+
         if(isset($_POST['unblock']))
         {
             $id=$_POST['unblock'];
@@ -83,6 +98,10 @@
             case "3": 
                 $sql="select * from companies";
                 $title="Companies";
+                break;
+            case "4": 
+                $sql="select * from companies where status=2";
+                $title="Pending Companies";
                 break;
             default:
                 $title="INVALID REQUEST";
@@ -121,7 +140,7 @@
         <ol class="breadcrumb">
             <li>
                 <div class="pull-right">
-                    <button title="" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-plus"></i></button> 
+                <a href="companyaddedit" class="btn btn-primary"><i class="fa fa-plus"></i></a> 
                     <a href="" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Rebuild"><i class="fa fa-refresh"></i></a>
                 </div>
             </li>
@@ -189,9 +208,11 @@
                                            
                                             <form method="post">
                                             <a href="viewadmin?token=<?=$detail['id']?>" class="btn btn-primary"><i class="fa fa-eye">View</i></a>
+                                            <a href="companyaddedit?token=<?=$detail['id']?>" class="btn btn-success"><i class="fa fa-edit">Edit</i></a>
                                                 <button  class="btn btn-danger" type="submit" name="delete" value="<?=$detail['id']?>">
                                                             <i class="fa fa-trash-o"></i> Delete
                                                 </button>
+                                                
                                                 <?php
                                                     if($detail['status']==1)
                                                     {
@@ -205,6 +226,14 @@
                                                 ?>
                                                         <button  class="btn btn-success" type="submit" name="unblock" value="<?=$detail['id']?>">
                                                                     <i class="fa fa-check">Unblock</i>
+                                                        </button>
+                                                <?php
+                                                    }   
+                                                    else if($detail['status']==2)   
+                                                    {
+                                                ?>
+                                                        <button  class="btn btn-success" type="submit" name="accept" value="<?=$detail['id']?>">
+                                                                    <i class="fa fa-check">Accept</i>
                                                         </button>
                                                 <?php
                                                     }
@@ -230,64 +259,6 @@
     </section>
     <!-- /.content -->
 </div>
-
-<div class="modal fade" id="modal-default">
-    <div class="modal-dialog" >
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <h4 class="modal-title">Add A Company</q></h4>
-        </div>
-        <form method="post">
-           <div class="modal-body">
-               <div class="row">
-                  <div class="col-md-6"> 
-                       <div class="form-group">
-                            <label>Company Name</label><br>   
-                            <input type="text"  id="nm" name="nm" class="form-control" required>  
-                        </div> 
-                   </div>
-                   <div class="col-md-6"> 
-                       <div class="form-group">
-                            <label>Registration Number</label><br>   
-                            <input type="text"  id="rn" name="rn" class="form-control"  required>  
-                        </div> 
-                   </div>
-                </div>  
-               <div class="row">
-                  <div class="col-md-6"> 
-                       <div class="form-group">
-                            <label>Address</label><br>   
-                            <input type="text"  id="adr" name="adr" class="form-control"  required>  
-                        </div> 
-                   </div>
-                   <div class="col-md-6"> 
-                       <div class="form-group">
-                            <label>Post Code</label><br>   
-                            <input type="text"  id="pst" name="pst" class="form-control"  required>  
-                        </div> 
-                   </div>
-                </div>
-                <div class="row">
-                   <div class="col-md-6"> 
-                       <div class="form-group">
-                            <label>Vat</label><br>   
-                            <input type="text"  id="vt" name="vt" class="form-control"  required>  
-                        </div> 
-                   </div>
-                </div>
-            </div>  
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                <button type="submit" name="add" class="btn btn-primary" value="">Add</button>
-            </div>
-        </form>
-    </div>          
-</div>
-            <!-- /.modal-content -->
-
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->       
   <div class="control-sidebar-bg"></div>

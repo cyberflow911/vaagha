@@ -41,7 +41,7 @@
             $u_count=$row['count']; 
         }
     }
-    $sql="select pm.f_name, p.*, c.com_name from companies c, com_admins pm, projects p where pm.type=2 and p.pm_id=pm.id and p.cm_id=c.id and c.id='$COMPANY_ID' order by p.id desc limit 10;";
+    $sql="select p.* from projects p where p.cm_id='$COMPANY_ID' order by p.id desc limit 10;";
     if($result =  $conn->query($sql));
     {
         if($result->num_rows)
@@ -148,7 +148,7 @@
                                         <th style="text-align: center;">S.no.</th>
                                         <th style="text-align: center;">Title</th>
                                         <th style="text-align: center;">Status</th>
-                                        <th style="text-align: center;">Project Manager</th>
+                                        <th style="text-align: center;">Start Date</th>
                                         <th style="text-align: center;">Incentive</th>
                                     </tr>
                                 </thead>
@@ -186,7 +186,7 @@
                                                     ?>
                                                     </td>
                                                     <td style="padding: 12px;">
-                                                    <?=$data['f_name']?>
+                                                    <?=$data['start_date']?>
                                                     </td>
                                                     <td style="padding: 12px;">
                                                     <?=$data['incentive']?>

@@ -46,6 +46,7 @@
             
             <ul class="treeview-menu">
                <li><a href="companies?token=3"><i class="fa fa-circle-o"></i>All Companies</a></li>
+               <li><a href="companies?token=4"><i class="fa fa-circle-o"></i>Pending</a></li>
                <li><a href="companies?token=2"><i class="fa fa-circle-o"></i>Blocked</a></li>
                <li><a href="companies?token=1"><i class="fa fa-circle-o"></i>Unblocked </a></li>
             </ul>
