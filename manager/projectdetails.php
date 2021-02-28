@@ -216,7 +216,7 @@
                             $i++;
                         }
                     }
-                    if(i==$group_num)
+                    if($i==$group_num)
                     {
                         $sql="update group_details set user_count='$res', incentive='$in' where p_id='$token' and name='group$i'";
                         if($conn->query($sql))
