@@ -153,9 +153,10 @@
                         <tr>
                              <th>S.No.</th>
                              <th>Project Title</th>
-                             <th>Project Description</th>
                              <th>Start Date</th>
                              <th>Incentive</th>
+                             <th>Groups</th>
+                             <th>Participants</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -172,9 +173,10 @@
                                      <tr> 
                                          <td style="  text-align: center; " id="serialNo<?=$i?>"><?=$i?></td> 
                                          <td style="  text-align: center; " id="title<?=$i?>"><?=$detail['title'];?></td> 
-                                         <td style="  text-align: center; " id="description<?=$i?>"><?=$detail['description'];?></td>
                                          <td style="  text-align: center; " id="start_date<?=$i?>"><?=$detail['start_date'];?></td>
                                          <td style="  text-align: center; " id="incentive<?=$i?>"><?=$detail['incentive'];?></td>
+                                         <td style="  text-align: center; " id="group_num<?=$i?>"><?=$detail['group_num'];?></td>
+                                         <td style="  text-align: center; " id="participants<?=$i?>"><?=$detail['participants'];?></td>
                                          <td>
                                         <form method="post">
                                             <a href="groups?token=<?=$detail['id']?>" class="btn btn-primary"> <i class="fa fa-eye">View</i> </a>

@@ -309,13 +309,6 @@
                                         Vat <span class="float-right badge bg-green"><?=$comdata['vat']?></span>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                        Registration Date <span class="float-right badge bg-red">
-                                            <?php $date=date_create($detail['time_stamp']);
-                                                echo date_format($date,"M d Y"); ?></span>
-                                        </a>
-                                    </li>
                                 </ul>
                             </div>
                         </div>

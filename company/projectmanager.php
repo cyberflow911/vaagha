@@ -26,8 +26,7 @@
             $f_name=$_POST['f_name'];
             $l_name=$_POST['l_name'];
             $email=$_POST['email'];
-            $pss=md5($_POST['pss']);
-            $sql="insert into com_admins(c_id, f_name, l_name, password, email, type, status) values('$COMPANY_ID', '$f_name','$l_name', '$pss', '$email', '2', '1')";
+            $sql="insert into com_admins(c_id, f_name, l_name, email, type, status) values('$COMPANY_ID', '$f_name','$l_name', '$email', '2', '1')";
             if($conn->query($sql))
             {
                 $resMember = "true";  
@@ -118,8 +117,7 @@
     else{
         $title="INVALID REQUEST";
     }
-    
- 
+   
 ?>
 
 <style>
@@ -132,7 +130,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1 style="font-weight: 900;">
-            <?=$title?>
+            <?=$title?> 
         </h1>
         <ol class="breadcrumb">
             <li>
@@ -274,12 +272,6 @@
                                 <div class="form-group">
                                     <label>Email</label><br>   
                                     <input type="text"  id="email" name="email" class="form-control"  required>  
-                                </div> 
-                            </div>
-                            <div class="col-md-6"> 
-                                <div class="form-group">
-                                    <label>Password</label><br>   
-                                    <input type="password"  id="pss" name="pss" class="form-control"  required>  
                                 </div> 
                             </div>
                         </div> 

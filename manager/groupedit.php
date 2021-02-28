@@ -13,7 +13,9 @@
             $recruiter=$_POST['recruiter'];
             $user_count=$_POST['user_count'];
             $incentive=$_POST['incentive'];
-            $sql="update group_details set user_count='$user_count', name='$name', recruiter='$recruiter', incentive='$incentive'  where id='$token'";
+            $email=$_POST['email'];
+            $venue=$_POST['venue'];
+            $sql="update group_details set user_count='$user_count', name='$name', recruiter='$recruiter', incentive='$incentive',email='$email',venue='$venue'  where id='$token'";
             if($conn->query($sql))
             {
                 $resMember = true; 
@@ -99,6 +101,20 @@
                             <div class="form-group">
                                 <label>Total Users</label><br> 
                                 <input type="text"  id="user_count" name="user_count" class="form-control" value="<?=$group_details['user_count']?>" required>
+                            </div> 
+                        </div> 
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5"> 
+                            <div class="form-group">
+                                <label>Venue</label><br> 
+                                <input type="text"  id="venue" name="venue" class="form-control" value="<?=$group_details['venue']?>" required>  
+                            </div> 
+                        </div>
+                        <div class="col-md-5"> 
+                            <div class="form-group">
+                                <label>Email</label><br> 
+                                <input type="email"  id="email" name="email" class="form-control" value="<?=$group_details['email']?>" required>
                             </div> 
                         </div> 
                     </div>

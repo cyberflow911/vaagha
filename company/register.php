@@ -2,18 +2,19 @@
 	require_once '../lib/core.php';
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
-		if(isset($_POST['reg-num'])&&isset($_POST['com-name'])&&isset($_POST['address'])&&isset($_POST['post'])&&isset($_POST['vat'])&&isset($_POST['first-name'])&&isset($_POST['last-name'])&&isset($_POST['email'])&&isset($_POST['password']))
+		if(isset($_POST['reg-num'])&&isset($_POST['com-name'])&&isset($_POST['address'])&&isset($_POST['traddress'])&&isset($_POST['post'])&&isset($_POST['vat'])&&isset($_POST['first-name'])&&isset($_POST['last-name'])&&isset($_POST['email'])&&isset($_POST['password']))
 		{
 			$reg_num = $_POST['reg-num'];	
 			$com_name = $_POST['com-name'];
 			$address = $_POST['address'];
+			$tr_address = $_POST['traddress'];
 			$post = $_POST['post'];
 			$vat = $_POST['vat'];
 			$first_name = $_POST['first-name'];
 			$last_name = $_POST['last-name'];
 			$email = $_POST['email'];
 			$password = md5($_POST['password']);
-			$sql="INSERT INTO companies(reg_num,com_name,address,post,vat,status) VALUES('$reg_num','$com_name','$address','$post','$vat','1')";
+			$sql="INSERT INTO companies(reg_num,com_name,address,tr_address,post,vat,status) VALUES('$reg_num','$com_name','$address','$tr_address','$post','$vat','2')";
 			if($conn->query($sql))
 			{
 				$com_id = $conn->insert_id;
@@ -67,6 +68,18 @@
 			border: 1px solid transparent;
 			border-radius: .25rem;
 		}
+		input, textarea{
+			font-family: 'Open Sans', sans-serif;
+    		font-weight: 600;
+    		font-size: 14px;
+		}
+		label, legend{
+			font-family: 'Open Sans', sans-serif;
+    		font-size: 11px;
+			font-weight: 700;
+			color: #999;
+		}
+
 		.alert-success {
 			color: #155724;
 			background-color: #d4edda;
@@ -97,6 +110,14 @@
     border-radius: .25rem;
 	margin:10px;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	}
+	
+	input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
 	}
 	</style>
 </head>
@@ -145,7 +166,7 @@
 									<div class="form-holder">
 										<fieldset>
 											<legend>Company Reg. Number</legend>
-											<input type="text" class="form-control" id="reg-num" name="reg-num" placeholder="Company Reg. Number" required>
+											<input type="number" class="form-control" oninput="check(this)" id="reg-num" name="reg-num" placeholder="Company Reg. Number">
 											
 										</fieldset>
 										<button  class="btn btn-info" type="button">Search</button>
@@ -161,16 +182,29 @@
 								<div class="form-row">
 									<div class="form-holder form-holder-2">
 										<fieldset>
-											<legend>Address</legend>  
+											<legend>Communication Address</legend>  
 											<textarea id="address" name="address" placeholder="Company Address" class="form-control" rows="3" style="resize: none;width: 100%;border:none;" required></textarea>
 										</fieldset>
 									</div>
 								</div>
 								<div class="form-row">
 									<div class="form-holder form-holder-2">
+									<fieldset>
+										<legend>Trading Address</legend>  
+										<textarea id="traddress" name="traddress" placeholder="Company Trading Address" class="form-control" rows="3" style="resize: none;width: 100%;border:none;" required></textarea>
+									</fieldset>
+									</div> 
+									<div class="col-xs-8">
+									<br><input type="checkbox" id="traddresscheck" name="traddresscheck">
+  										<label for="traddresscheck">Same as communication address</label>
+									</div>
+								</div>
+								
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
 										<fieldset>
 											<legend>Post Code</legend>
-											<input type="text" class="form-control" id="post" name="post" placeholder="496034" required>
+											<input type="text" class="form-control" id="post" name="post" placeholder="12AB34" required pattern="[a-zA-Z0-9]">
 										</fieldset>
 									</div>
 								</div> 
@@ -178,7 +212,7 @@
 									<div class="form-holder form-holder-2">
 										<fieldset>
 											<legend>VAT</legend>
-											<input type="text" class="form-control" id="vat" name="vat" placeholder="VAT" required>
+											<input type="text" class="form-control" id="vat" name="vat" placeholder="VAT">
 										</fieldset>
 										
 									</div>
@@ -265,5 +299,29 @@
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/jquery.steps.js"></script>
 	<script src="js/main.js?token=2"></script>
+	<script>
+		$(document).ready(function(){
+			$('input[type="checkbox"]').click(function(){
+				if($(this).prop("checked") == true){
+					var address = $("#address").val();
+
+					$("#traddress").html(address);
+				}
+				else if($(this).prop("checked") == false){
+					$("#traddress").html("");
+				}
+			});
+
+			function check(input)
+			{
+				var x=$("#reg-num").val();
+				var len=x.toString().length;
+				if(len<8 || len>8)
+				{
+					input.setCustomValidity('The number must be equals to 8.');
+				}
+			}
+		});
+	</script>
 </body> 
 </html>
