@@ -25,13 +25,29 @@
     if(isset($_GET['token'])&&!empty($_GET['token']))
     {
         $token = $_GET['token'];
-        $sql="select g.*from group_details g where g.p_id='$token'";
+        $sql="select g.* from group_details g where g.p_id='$token'";
         $result =  $conn->query($sql);
         if($result->num_rows)
         {
             while($row = $result->fetch_assoc())
             {
-                $groups[] = $row;
+                $gid=$row['id'];
+                $groups[$gid] = $row;
+                
+                $sql="select count(gu.id) as count from group_users gu where g_id='$gid' and status=1";
+                $res =  $conn->query($sql);
+                if($res->num_rows)
+                {
+                    $row1 = $res->fetch_assoc();
+                        $groups[$gid]['count']=$row1['count'];
+                }
+                $sql="select count(gu.id) as count from group_users gu where g_id='$gid' and status=3";
+                $res =  $conn->query($sql);
+                if($res->num_rows)
+                {
+                    $row1 = $res->fetch_assoc();
+                        $groups[$gid]['incount']=$row1['count'];
+                }
             }
         }
 
@@ -136,6 +152,8 @@
                              <th style="  text-align: center; ">Recruiter</th>
                              <th style="  text-align: center; ">Incentive</th>
                              <th style="  text-align: center; ">Total Users</th>
+                             <th style="  text-align: center; ">Active Users</th>
+                             <th style="  text-align: center; ">Invited Users</th>
                             <th style="  text-align: center; ">Action</th>
                         </tr>
                     </thead>
@@ -155,6 +173,8 @@
                                          <td style="  text-align: center; " id="recruiter<?=$i?>"><?=$detail['recruiter'];?></td>
                                          <td style="  text-align: center; " id="incentive<?=$i?>"><?=$detail['incentive'];?></td>
                                          <td style="  text-align: center; " id="user_count<?=$i?>"><?=$detail['user_count'];?></td>
+                                        <td style="  text-align: center; " id="c_user<?=$i?>"><?=$detail['count']?></td>
+                                        <td style="  text-align: center; " id="in_user<?=$i?>"><?=$detail['incount']?></td>
                                          <td>
                                         <form method="post">
                                             <a href="viewgroup?token=<?=$detail['id']?>" class="btn btn-primary"> <i class="fa fa-eye">View</i> </a>

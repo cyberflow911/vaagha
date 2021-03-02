@@ -491,8 +491,8 @@ input[type=number]::-webkit-outer-spin-button {
     }
     
     function check(input) {
-    if (input.value == 0) {
-        input.setCustomValidity('The number must not be zero.');
+    if (input.value == 0 || input.value < 0) {
+        input.setCustomValidity('The number must not be zero or smaller than 0.');
     } else {
         // input is fine -- reset the error message
         input.setCustomValidity('');

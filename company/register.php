@@ -312,16 +312,17 @@
 				}
 			});
 
-			function check(input)
-			{
-				var x=$("#reg-num").val();
-				var len=x.toString().length;
-				if(len<8 || len>8)
-				{
-					input.setCustomValidity('The number must be equals to 8.');
-				}
-			}
+			
 		});
+		function check(input)
+		{
+			var x=$(input).val();
+			var len=x.toString().length;
+			if(len<8 || len>8)
+			{
+				input.setCustomValidity('The number must be equals to 8.');
+			}
+		}
 	</script>
 </body> 
 </html>
