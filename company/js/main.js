@@ -24,9 +24,11 @@ function submit_regis_form(){
     if(validate_fields('admin-infomation'))
     {
         var res  = verify_credentials()
+
         if(res==='ok')
         {
             $("#register-form").submit();
+            // console.log("not working")
         }
         else
         {
@@ -61,6 +63,8 @@ function validate_fields(id){
 
 function verify_credentials()
 {
+    var first   = $("#first-name").val();
+    var last = $("#last-name").val();
     var email = $("#email").val();
     var password = $("#password").val();
     var re_email = $("#re_email").val();
@@ -69,11 +73,30 @@ function verify_credentials()
     {
             return "Email Mismatched";
     }
-    if(password!==re_password)
+    console.log(first.length);
+    if(first.length<2 || first.length>20)
     {
-        return "Password Mismatched";
+        return "First Name length Should be between 2-20";
     }
-    
+
+    if(last.length<2 || last.length>20)
+    {
+        return "Last Name length Should be between 2-20";
+    }
+ var reg= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+    if(password.length>=8 && reg.test(password))
+    { 
+       
+        if(password!==re_password)
+        { 
+            return "Password Mismatched";
+        }
+        
+    } 
+    else
+    {
+        return "Password Should be 8 Character Long with at least 1 number,1 lowercase character,1 uppercase character";
+    }   
     return "ok";
 }
 
