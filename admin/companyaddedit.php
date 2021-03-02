@@ -14,7 +14,7 @@
             $tr_address=$_POST['tr_address'];
             $post=$_POST['post'];
             $vat=$_POST['vat'];
-            $sql="insert into companies(reg_num, com_name, address, tr_address, post, vat, status) values('$reg_num', '$com_name', '$address', $tr_address, '$post', '$vat','2')";
+            $sql="insert into companies(reg_num, com_name, address, tr_address, cpost, post, vat, status) values('$reg_num', '$com_name', '$address', '$tr_address', '$cpost', '$post', '$vat','2')";
             if($conn->query($sql))
             {
                 $resMember = true;
@@ -36,8 +36,9 @@
             $address=$_POST['address'];
             $tr_address=$_POST['tr_address'];
             $post=$_POST['post'];
+            $cpost=$_POST['cpost'];
             $vat=$_POST['vat'];
-            $sql="update companies set address='$address', reg_num='$reg_num', com_name='$com_name', vat='$vat', post='$post', tr_address='$tr_address'  where id='$token'";
+            $sql="update companies set address='$address', reg_num='$reg_num', com_name='$com_name', vat='$vat', post='$post', cpost='$cpost', tr_address='$tr_address'  where id='$token'";
             if($conn->query($sql))
             {
                 $resMember = true;
@@ -107,6 +108,23 @@
                         </div>
 
                     </div>  
+                    
+                    <div class="row">
+                        <div class="col-md-10"> 
+                            <div class="form-group">
+                                <label style="margin-left:5px">Registered Address</label><br> 
+                                <textarea id="traddress" name="traddress" class="form-control" rows="3" style="resize: none;width: 100%;border:none;" required><?=$com_data['tr_address']?></textarea>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5"> 
+                            <div class="form-group">
+                                <label>Post Code</label><br> 
+                                <input type="text"  id="post" name="post" class="form-control" value="<?=$com_data['post']?>" required>  
+                            </div> 
+                        </div> 
+                    </div>
                     <div class="row">
                         <div class="col-md-10"> 
                             <div class="form-group">
@@ -114,15 +132,8 @@
                                 <textarea id="address" name="address" class="form-control" rows="3" style="resize: none;width: 100%;border:none;" required><?=$com_data['address']?></textarea>
                             </div> 
                         </div>
-                    </div> 
-                    <div class="row">
-                        <div class="col-md-10"> 
-                            <div class="form-group">
-                                <label style="margin-left:5px">Trading Address</label><br> 
-                                <textarea id="tr_address" name="tr_address" class="form-control" rows="3" style="resize: none;width: 100%;border:none;" required><?=$com_data['tr_address']?></textarea>
-                            </div> 
-                        </div>
                     </div>
+                    
                     <?php
                     if(!isset($com_data))
                     {
@@ -130,7 +141,7 @@
                     <div class="row">
                         <div class="col-xs-4">
                         <input type="checkbox" id="traddresscheck" name="traddresscheck">
-  						<label for="traddresscheck">Same as communication address</label>
+  						<label for="traddresscheck">Same as registered address</label>
                         </div>
                     </div> 
                     <?php
@@ -141,7 +152,7 @@
                         <div class="col-md-5"> 
                             <div class="form-group">
                                 <label>Post Code</label><br> 
-                                <input type="text"  id="post" name="post" class="form-control" value="<?=$com_data['post']?>" required>  
+                                <input type="text"  id="cpost" name="cpost" class="form-control" value="<?=$com_data['cpost']?>" required>  
                             </div> 
                         </div>
                     
@@ -180,14 +191,15 @@
 
 <script>
     $(document).ready(function(){
-        $('input[type="checkbox"]').click(function(){
-            if($(this).prop("checked") == true){
-                var address = $("#address").val();
+        $('input[type="checkbox"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                var address = $("#traddress").val();
 
-                $("#tr_address").html(address);
-            }
-            else if($(this).prop("checked") == false){
-                $("#tr_address").html("");
+                $("#address").html(address);
+                $("#cpost").val($("#post").val())
+            } else if ($(this).prop("checked") == false) {
+                $("#address").html("");
+                $("#cpost").val("");
             }
         });
     });

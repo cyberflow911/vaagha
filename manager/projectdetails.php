@@ -216,7 +216,7 @@
                             $i++;
                         }
                     }
-                    if(i==$group_num)
+                    if($i==$group_num)
                     {
                         $sql="update group_details set user_count='$res', incentive='$in' where p_id='$token' and name='group$i'";
                         if($conn->query($sql))
@@ -444,7 +444,7 @@ input[type=number]::-webkit-outer-spin-button {
     var counter=1;
     function addFilesField()
     {
-        var inhtml  = `<div class="row" style="margin-top:20px">    
+        var inhtml  = `<div class="row" style="margin-top:20px" >    
                             <div class="col-md-10">
                                 <input   type="file" id='projectfile${counter}' name="projectFile[]" class="form-control"/>
                             </div> 

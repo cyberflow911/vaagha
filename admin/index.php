@@ -43,7 +43,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 <div class="login-box">
   <div class="login-logo">
   <center><a href="../"><img src="../img/logo/logo_white.png" height="70px"  /></a></center>
-    <a href="index2.html" style="color:#fff">Master Admin Login</a>
+    <a href="index.html" style="color:#fff">Master Admin Login</a>
   </div>
     <?php
     if(isset($error))
