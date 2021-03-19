@@ -355,7 +355,7 @@
                                         <fieldset>
                                             <legend>Password</legend>
                                             <input type="password" name="password" id="password" class="form-controle"
-                                                pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" required>
+                                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" required>
                                         </fieldset>
                                     </div>
                                 </div>
@@ -364,7 +364,7 @@
                                         <fieldset>
                                             <legend>Verify Password</legend>
                                             <input type="password" name="re_password" id="re_password"
-                                                class="form-controle" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" required>
+                                                class="form-controle" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" required>
                                         </fieldset>
                                     </div>
                                 </div>
