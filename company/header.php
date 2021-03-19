@@ -30,12 +30,12 @@ $L_NAME=$COMPANY_DATA['l_name'];
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+<meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Admin Panel | PW</title>
+  <title>Project Manager Panel | PW</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="../admin/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
@@ -51,9 +51,31 @@ $L_NAME=$COMPANY_DATA['l_name'];
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../admin/dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="../admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />    
+    <head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>Project Manager Panel</title>
+	<!--favicon-->
+	<link rel="icon" href="../images/favicon-32x32.png" type="image/png" />
+	<!--plugins-->
+	<link href="../admin/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+	<link href="../admin/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+	<link href="../admin/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+	<!-- loader-->
+	<link href="../css/pace.min.css" rel="stylesheet" />
+	<script src="../js/pace.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="../css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&amp;family=Roboto&amp;display=swap" />
+	<!-- Icons CSS -->
+	<link rel="stylesheet" href="../css/icons.css" />
+	<!-- App CSS -->
+	<link rel="stylesheet" href="../css/app.css" />
+	<link rel="stylesheet" href="../css/dark-sidebar.css" />
+	<link rel="stylesheet" href="../css/dark-theme.css" />  
+     
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" /> 
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -195,5 +217,13 @@ $L_NAME=$COMPANY_DATA['l_name'];
 ._3qzZ9{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-flex-align:start;align-items:flex-start}
 </style>
 </head>
-    <body class="hold-transition fixed skin-blue-light sidebar-mini">
-<div class="wrapper">
+<body>
+<header class="top-header">
+    <nav class="navbar navbar-expand">
+        <div class="right-topbar ml-auto">
+            <ul class="navbar-nav">
+                
+            </ul>
+        </div>
+    </nav>
+</header>

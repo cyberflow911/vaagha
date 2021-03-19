@@ -1,6 +1,5 @@
 <?php
     require_once 'header.php';
-    require_once 'navbar.php';
     require_once 'left-navbar.php';
  
     $id=$_SESSION['id'];
@@ -80,7 +79,7 @@
                 break;
             case "4": 
                 $sql="select p.*  from projects p where p.pm_id='$MANAGER_ID' and p.status='2'";
-                $title="Projects";
+                $title="Completed Projects";
                 break;
             default:
                 $title="INVALID REQUEST";
@@ -111,25 +110,26 @@
 </style>
 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1 style="font-weight: 900;">
-            <?=$title?>
-        </h1>
-        <ol class="breadcrumb">
-            <li>
-                <div class="pull-right">
-                <a href="projectdetails" class="btn btn-primary"><i class="fa fa-plus"></i></a>
-                    <a href="" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Rebuild"><i class="fa fa-refresh"></i></a>
+<div class="page-wrapper">
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+                <div class="breadcrumb-title pr-3"><?=$title?></div>
+                <div class="pl-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item"><a href="dashboard"><i class='bx bx-home-alt'></i></a>
+                            </li>
+                        </ol>
+                    </nav>
                 </div>
-            </li>
-        </ol>
-    </section>
-
-    <!-- Main content -->
-      <br>
-    <section class="content">
+                <div class="ml-auto">
+                    <div class="btn-group">
+                        <a href="projectdetails" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+                        <a href="" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Rebuild"><i class="fa fa-refresh"></i></a>
+                    </div>
+                </div>
+            </div>
         <?php
             if(isset($resMember))
             {
@@ -145,24 +145,21 @@
                 
             }
         ?>
-      
             <div class="box">
-              <div class="box-body">
-                <table id="example2" class="table table-bordered table-hover">
-                    <thead style="background-color: #212529; color: white;">
-                        <tr>
-                             <th>S.No.</th>
-                             <th>Project Title</th>
-                             <th>Start Date</th>
-                             <th>Incentive</th>
-                             <th>Groups</th>
-                             <th>Participants</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                     <tbody> 
- 
-                    
+                <div class="box-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead style="background-color: #212529; color: white;">
+                            <tr>
+                                <th scope="col" style="text-align: center;">S.No.</th>
+                                <th scope="col" style="text-align: center;">Project Title</th>
+                                <th scope="col" style="text-align: center;">Start Date</th>
+                                <th scope="col" style="text-align: center;">Incentive</th>
+                                <th scope="col" style="text-align: center;">Groups</th>
+                                <th scope="col" style="text-align: center;">Participants</th>
+                                <th scope="col" style="text-align: center;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody> 
                     <?php 
                             if (isset($projects)) 
                             {
@@ -170,27 +167,27 @@
                                 foreach ($projects as $detail) 
                                 {     
                     ?> 
-                                     <tr> 
-                                         <td style="  text-align: center; " id="serialNo<?=$i?>"><?=$i?></td> 
-                                         <td style="  text-align: center; " id="title<?=$i?>"><?=$detail['title'];?></td> 
-                                         <td style="  text-align: center; " id="start_date<?=$i?>"><?=$detail['start_date'];?></td>
-                                         <td style="  text-align: center; " id="incentive<?=$i?>"><?=$detail['incentive'];?></td>
-                                         <td style="  text-align: center; " id="group_num<?=$i?>"><?=$detail['group_num'];?></td>
-                                         <td style="  text-align: center; " id="participants<?=$i?>"><?=$detail['participants'];?></td>
-                                         <td>
+                                    <tr> 
+                                        <td style="  text-align: center; " id="serialNo<?=$i?>"><?=$i?></td> 
+                                        <td style="  text-align: center; " id="title<?=$i?>"><?=$detail['title'];?></td> 
+                                        <td style="  text-align: center; " id="start_date<?=$i?>"><?=$detail['start_date'];?></td>
+                                        <td style="  text-align: center; " id="incentive<?=$i?>"><?=$detail['incentive'];?></td>
+                                        <td style="  text-align: center; " id="group_num<?=$i?>"><?=$detail['group_num'];?></td>
+                                        <td style="  text-align: center; " id="participants<?=$i?>"><?=$detail['participants'];?></td>
+                                        <td>
                                         <form method="post">
                                             <a href="groups?token=<?=$detail['id']?>" class="btn btn-primary"> <i class="fa fa-eye">View</i> </a>
                                             <a href="projectdetails?token=<?=$detail['id']?>" class="btn btn-success" value="<?=$detail['id']?>"> <i class="fa fa-edit">Edit</i> </a>
                                             <button  class="btn btn-danger" type="submit" name="delete" value="<?=$detail['id']?>">
                                                 <i class="fa fa-trash-o"></i> Delete
                                             </button>
-                                            <?php
+                                        <?php
                                             if($detail['status']==1)
                                             { 
                                         ?>
                                                 <button  class="btn btn-secondary" type="submit" name="completed" value="<?=$detail['id']?>">
-                                                        <i class="fa fa-check-square ">Complete</i>
-                                                    </button>
+                                                        <i class="fa fa-check-square ">&nbspComplete</i>
+                                                </button>
                                                 <button  class="btn btn-warning" type="submit" name="hold" value="<?=$detail['id']?>">
                                                     <i class="fa fa-ban"></i> Hold
                                                 </button>  
@@ -210,12 +207,12 @@
                                             else if($detail['status']==2)
                                             {
                                         ?>
-                                                <button  class="btn btn-warning" type="submit" name="hold" value="<?=$detail['id']?>">
-                                                    <i class="fa fa-ban"></i> Hold
-                                                </button>    
-                                                <button  class="btn btn-info" type="submit" name="active" value="<?=$detail['id']?>">
-                                                    <i class="fa fa-check"></i> Active
-                                                </button>
+                                                        <button  class="btn btn-warning" type="submit" name="hold" value="<?=$detail['id']?>">
+                                                            <i class="fa fa-ban"></i> Hold
+                                                        </button>    
+                                                        <button  class="btn btn-info" type="submit" name="active" value="<?=$detail['id']?>">
+                                                            <i class="fa fa-check"></i> Active
+                                                        </button>
                                         <?php
                                             }
                                         ?>
@@ -224,29 +221,25 @@
                                         </td>
                                     </tr>
                                  
-                            <?php
+                        <?php
                                 $i++;
-                                    
-                                            
                                 }
                             }
-                         ?>
+                            else if(!isset($projects))
+                            {
+                        ?>
+                                <p style="font-size: 18px;">No Projects To Display</p>
+                        <?php
+                            }
+                        ?>
           
                         </tbody>
-                                </table>
-                       
-                        </div>
-            <!-- /.box-footer-->
-                        </div>    
-      <!-- /.box -->
-    </section>
-    <!-- /.content -->
-</div>
-
-          
-
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->       
+                    </table>
+                </div>
+            </div> 
+        </div>
+    </div> 
+</div>  
 <div class="control-sidebar-bg"></div>
 
   

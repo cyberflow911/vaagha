@@ -71,25 +71,21 @@
 
 ?>
     
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1>
-           User Details 
-        </h1>
-        <ol class="breadcrumb">
-            <li>
-                <div class="pull-right">
-                    <a href="" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Rebuild"><i class="fa fa-refresh"></i></a>
+<div class="page-wrapper">
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+                <div class="breadcrumb-title pr-3">Group Details</div>
+                <div class="pl-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item"><a href="dashboard"><i class='bx bx-home-alt'></i></a>
+                            </li>
+                        </ol>
+                    </nav>
                 </div>
-            </li>
-        </ol>
-    </section>
-
-    <!-- Main content -->
-      <br>
-    <section class="content">
-    <?php
+            </div>
+        <?php
             if(isset($resMember))
             {
         ?>
@@ -103,65 +99,58 @@
         <?php
                 
             }
-        ?>
-      
-      <?php
             if(isset($users))
             {
         ?>
             
-                <div class="row">
-                    <div class="col-md-4 "  >
-                    <!-- Widget: user widget style 2 -->
-                        <div class="card card-widget widget-user-2 shadow-sm">
-              <!-- Add the bg color to the header using any of the bg-* classes -->
-                            <div class="widget-user-header bg-yellow">
-                                <div class="widget-user-image">
-                                    <img class="img-circle elevation-2" src=".\uploads\medium\7061609903739.jpg" alt="User Avatar">
-                                </div>
-                <!-- /.widget-user-image -->
-                                <h3 class="widget-user-username"><?=$users['name']?></h3>
-                                <h5 class="widget-user-desc"><?=$users['email']?></h5>
+            <div class="row">
+                <div class="col-md-4 "  >
+                    <div class="card card-widget widget-user-2 shadow-sm">
+                        <div class="widget-user-header bg-yellow">
+                            <div class="widget-user-image">
+                                <img class="img-circle elevation-2" src=".\uploads\medium\7061609903739.jpg" alt="User Avatar">
                             </div>
-                            <div class="card-footer p-0" style="background-color: white; ">
-                                <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            Mobile Number<span class="float-right badge bg-blue"><?=$users['m_num']?></span>
-                                     </a>
-                                    </li>
-                                    <!-- <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                        Zip Code <span class="float-right badge bg-DeepSkyBlue"></span>
-                                        </a>
-                                    </li> -->
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                        Address <span class="float-right badge bg-green"><?=$users['address']?></span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                        Date of Joining<span class="float-right badge bg-red">
-                                            <?php $date=date_create($users['time_stamp']);
-                                                echo date_format($date,"M d Y"); ?></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <h3 class="widget-user-username"><?=$users['name']?></h3>
+                            <h5 class="widget-user-desc"><?=$users['email']?></h5>
                         </div>
-                    <!-- /.widget-user -->
+                        <div class="card-footer p-0" style="background-color: white; ">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        Mobile Number<span class="float-right badge bg-blue"><?=$users['m_num']?></span>
+                                    </a>
+                                </li>
+                                <!-- <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                    Zip Code <span class="float-right badge bg-DeepSkyBlue"></span>
+                                    </a>
+                                </li> -->
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                    Address <span class="float-right badge bg-green"><?=$users['address']?></span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                    Date of Joining<span class="float-right badge bg-red">
+                                        <?php $date=date_create($users['time_stamp']);
+                                            echo date_format($date,"M d Y"); ?></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                <!-- /.widget-user -->
                 </div>
+            </div>
         <?php
             }
         ?>
         <br>
-        <section class="content-header">
+            <section class="content-header">
                 <h1>
                     User's Project Details
                 </h1>
-                
             </section>
             <br>
             <div class="box">
@@ -233,16 +222,11 @@
                     </table>
                        
                 </div>
-             <!-- /.box-footer-->
-            </div>    
-      <!-- /.box -->
-    </section>
-    <!-- /.content -->
-</div>
-
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->       
-       <div class="control-sidebar-bg"></div>
+            </div> 
+        </div>
+    </div>
+</div>       
+<div class="control-sidebar-bg"></div>
 
   
 

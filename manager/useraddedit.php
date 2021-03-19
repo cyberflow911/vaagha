@@ -89,21 +89,25 @@
 }
 </style>
 
-<div class="content-wrapper">
-
-    <section class="content-header">
-        <h1>
-        User Details
-        </h1>
-    </section>
-    <section class="content">
+<div class="page-wrapper">
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+                <div class="breadcrumb-title pr-3">User Details</div>
+                <div class="pl-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item"><a href="dashboard"><i class='bx bx-home-alt'></i></a>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
         <?php
             if(isset($resMember))
             {
         ?>
                 <div class="alert alert-success"><strong>Success! </strong> your request successfully updated. </div> 
-                
-                
         <?php
             }
             else if(isset($errorMember))
@@ -114,86 +118,90 @@
                 
             }
         ?>
-        
-                <form method="post">
-                    <div class="row">
-                       <div class="col-md-5"> 
-                            <div class="form-group">
-                                <label>Email</label><br>   
-                                <input type="email"  id="email" name="email" class="form-control" value="<?=$user_details['email']?>" required>  
-                            </div> 
-                        </div>
-                        <div class="col-md-5"> 
-                            <div class="form-group">
-                                <label>Projects</label><br> 
-                                <select name="project" id="project" class="form-control">
-                                <option value="<?=$user_details['pid']?>"><?=$user_details['title']?></option>
-                                <?php
-                                    if(isset($p_name))
-                                    {
-                                        foreach($p_name as $data)
-                                        {          
-                                            if($data['title']!=$user_details['title'])
+            <form method="post">
+                <div class="card radius-15 border-lg-top-primary">
+                    <div class="card-body p-5">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Email</label><br>   
+                                        <input type="email" style="font-size: 16px;" id="email" name="email" class="form-control radius-30" value="<?=$user_details['email']?>" required>  
+                                    </div> 
+                                </div>
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Projects</label><br> 
+                                        <select name="project" style="font-size: 16px;" id="project" class="form-control radius-30">
+                                        <option value="<?=$user_details['pid']?>"><?=$user_details['title']?></option>
+                                        <?php
+                                            if(isset($p_name))
                                             {
-                                                
-                                ?>
-                                                <option value="<?=$data['id']?>"><?=$data['title']?></option>
-                                <?php
+                                                foreach($p_name as $data)
+                                                {          
+                                                    if($data['title']!=$user_details['title'])
+                                                    {
+                                                        
+                                        ?>
+                                                        <option value="<?=$data['id']?>"><?=$data['title']?></option>
+                                        <?php
+                                                    }
+                                                }
                                             }
-                                        }
-                                    }
-                                ?>  
-                                </select> 
-                            </div> 
+                                        ?>  
+                                        </select> 
+                                    </div> 
+                                </div>
+                            </div>
+                        
+                            
+                        
+            
+                <?php
+                        if(isset($user_details))
+                        {
+                ?>
+                            <div class="row">
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Address</label><br>   
+                                        <input type="text" style="font-size: 16px;" id="address" name="address" class="form-control radius-30" value="<?=$user_details['address']?>" required>  
+                                    </div> 
+                                </div>   
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Name</label><br>   
+                                        <input type="text" style="font-size: 16px;" id="name" name="name" class="form-control radius-30" value="<?=$user_details['name']?>" required>  
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Phone Number</label><br>   
+                                        <input type="text" style="font-size: 16px;" id="m_num" name="m_num" class="form-control radius-30" value="<?=$user_details['m_num']?>" required>  
+                                    </div> 
+                                </div>
+                            </div>
+                                
+                        
+                            <button type="submit" name="edit" style="width: 60px; height: 30px; font-size: 16px;" class="btn btn-primary" value="">Save</button>
+                <?php
+                    }
+                    else
+                    {
+                ?>
+                            
+                            <button type="submit" name="add" class="btn btn-primary" value="">Add</button>
+            <?php
+                    }
+            ?>
                         </div>
                     </div>
-                    
-                         
-                    
-        
-                        <?php
-                                if(isset($user_details))
-                                {
-                        ?>
-                                    <div class="row">
-                                       <div class="col-md-5"> 
-                                            <div class="form-group">
-                                                <label>Address</label><br>   
-                                                <input type="text"  id="address" name="address" class="form-control" value="<?=$user_details['address']?>" required>  
-                                            </div> 
-                                        </div>   
-                                        <div class="col-md-5"> 
-                                            <div class="form-group">
-                                                <label>Name</label><br>   
-                                                <input type="text"  id="name" name="name" class="form-control" value="<?=$user_details['name']?>" required>  
-                                            </div> 
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-5"> 
-                                            <div class="form-group">
-                                                <label>Phone Number</label><br>   
-                                                <input type="text"  id="m_num" name="m_num" class="form-control" value="<?=$user_details['m_num']?>" required>  
-                                            </div> 
-                                        </div>
-                                    </div>    
-                                    <button type="submit" name="edit" class="btn btn-primary" value="">Edit</button>
-                            <?php
-                                }
-                                else
-                                {
-                            ?>
-                                        
-                                        <button type="submit" name="add" class="btn btn-primary" value="">Add</button>
-                        <?php
-                                }
-                        ?>
-                
-                    
-                </form>
-         
-
-    </section>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 <div class="control-sidebar-bg"></div>
 

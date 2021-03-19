@@ -1,7 +1,6 @@
 <?php
-    require_once 'header.php';
-    require_once 'navbar.php';
-    require_once 'left-navbar.php';
+   require_once 'header.php';
+   require_once 'left-navbar.php';
  
     $id=$_SESSION['id'];
     if($_SERVER["REQUEST_METHOD"] == "POST")
@@ -73,27 +72,26 @@
 	overflow: auto!important;
 }
 </style>
-
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1 style="font-weight: 900;">
-            <?=$title?>
-        </h1>
-        <ol class="breadcrumb">
-            <li>
-                <div class="pull-right">
-                    <button title="" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-plus"></i></button>
-                    <a href="" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Rebuild"><i class="fa fa-refresh"></i></a>
+<div class="page-wrapper">
+	<div class="page-content-wrapper">
+        <div class="page-content">
+            <!--breadcrumb-->
+            <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+                <div class="breadcrumb-title pr-3">Invited Users</div>
+                <div class="pl-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item"><a href="dashboard"><i class='bx bx-home-alt'></i></a>
+                            </li>
+                        </ol>
+                    </nav>
                 </div>
-            </li>
-        </ol>
-    </section>
-
-    <!-- Main content -->
-      <br> <br>
-    <section class="content">
+                <div class="ml-auto">
+                    <div class="btn-group">
+                    <button title="" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-plus"></i></button> 
+                    </div>
+                </div>
+            </div>
         <?php
             if(isset($resMember))
             {
@@ -109,111 +107,108 @@
                 
             }
         ?>
-      
-            <div class="box">
-              <div class="box-body">
-                <table id="example2" class="table table-bordered table-hover">
-                    <thead style="background-color: #212529; color: white;">
-                        <tr>
-                            <th>S.No.</th>
-                            <th>Email id</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody> 
- 
-                    
-                     <?php 
-                            if (isset($users)) 
-                            {
-                                $i = 1;
-                                foreach ($users as $detail) 
-                                {     
-                     ?> 
-                                     <tr> 
-                                         <td style="  text-align: center; " id="serialNo<?=$i?>"><?=$i?></td> 
-                                         <td style="  text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td> 
-                                         <td>
-                                        <form method="post">
-                                            <button  class="btn btn-danger" type="submit" name="delete" value="<?=$detail['id']?>">
-                                                <i class="fa fa-trash-o"></i> Delete
-                                            </button>
-                                        </form>
-                                        </td>
-                                    </tr>
-                                 
-                            <?php
-                                $i++;            
-                                }
-                            }
-                         ?>
-          
-                    </tbody>
-                </table>
+					<!--end breadcrumb-->
+            <div class="card radius-15">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead style="background-color: #212529; color: white;">
+                                <tr>
+                                    <th scope="col" style="text-align: center;">S.No.</th>
+                                    <th scope="col" style="text-align: center;">Email id</th>
+                                    <th scope="col" style="text-align: center;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody> 
+        
+                            
+                            <?php 
+                                    if (isset($users)) 
+                                    {
+                                        $i = 1;
+                                        foreach ($users as $detail) 
+                                        {     
+                            ?> 
+                                            <tr> 
+                                                <td style="  text-align: center; " scope="row" id="serialNo<?=$i?>"><?=$i?></td> 
+                                                <td style="  text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td> 
+                                                <td>
+                                                <form method="post">
+                                                    <center><button  class="btn btn-danger" type="submit" name="delete" value="<?=$detail['id']?>">
+                                                        <i class="fa fa-trash-o"></i> Delete
+                                                    </button></center>
+                                                </form>
+                                                </td>
+                                            </tr>
+                                        
+                                    <?php
+                                        $i++;            
+                                        }
+                                    }
+                                ?>
+                
+                            </tbody>
+                        </table>
+                    </div>
+                </div> 
             </div>
-            <!-- /.box-footer-->
-            </div>    
-      <!-- /.box -->
-    </section>
-    <!-- /.content -->
-</div>
-<div class="modal fade" id="modal-default">
-        <div class="modal-dialog" >
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title"> Add New User</h4>
-                </div>
-                <form method="post">
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-6"> 
-                                <div class="form-group">
-                                    <label>Email</label><br>   
-                                    <input type="text"  id="email" name="email" class="form-control"  required>  
+            <div class="modal fade" id="modal-default">
+                <div class="modal-dialog" >
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h4 class="modal-title"> Add New User</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            
+                        </div>
+                        <form method="post">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6"> 
+                                        <div class="form-group">
+                                            <label>Email</label><br>   
+                                            <input type="text"  id="email" name="email" class="form-control"  required>  
+                                        </div> 
+                                    </div>
+                                    <div class="col-md-6"> 
+                                        <div class="form-group">
+                                            <label>Projects</label><br> 
+                                            <select name="project" id="project" class="form-control">
+                                                <option value=""></option>
+                                            <?php
+                                                if(isset($p_name))
+                                                {
+                                                    foreach($p_name as $data)
+                                                    {          
+                                                        if($data['title']!=$user_details['title'])
+                                                        {
+                                                            
+                                            ?>
+                                                            <option value="<?=$data['id']?>"><?=$data['title']?></option>
+                                            <?php
+                                                        }
+                                                    }
+                                                }
+                                            ?>  
+                                            </select> 
+                                        </div>  
+                                    </div>
+                                    
                                 </div> 
                             </div>
-                            <div class="col-md-6"> 
-                                <div class="form-group">
-                                    <label>Projects</label><br> 
-                                    <select name="project" id="project" class="form-control">
-                                        <option value=""></option>
-                                    <?php
-                                        if(isset($p_name))
-                                        {
-                                            foreach($p_name as $data)
-                                            {          
-                                                if($data['title']!=$user_details['title'])
-                                                {
-                                                    
-                                    ?>
-                                                    <option value="<?=$data['id']?>"><?=$data['title']?></option>
-                                    <?php
-                                                }
-                                            }
-                                        }
-                                    ?>  
-                                    </select> 
-                                </div>  
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                                <button type="submit" name="add" class="btn btn-primary" value="">Add</button>
                             </div>
-                            
-                        </div> 
+                        </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                        <button type="submit" name="add" class="btn btn-primary" value="">Add</button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
-        <!-- /.modal-content -->
     </div>
-          
-
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->       
+</div>
+    
 <div class="control-sidebar-bg"></div>
 
   

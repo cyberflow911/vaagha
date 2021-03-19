@@ -20,9 +20,34 @@
 <!-- SlimScroll -->
 <script src="../admin/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+ <!-- multiselect --> 
 
 <!--CKEditor-->
 <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+
+<script src="../js/jquery.min.js"></script>
+	<script src="../js/popper.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<!--plugins-->
+	<script src="../admin/plugins/simplebar/js/simplebar.min.js"></script>
+	<script src="../admin/plugins/metismenu/js/metisMenu.min.js"></script>
+	<script src="../admin/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	<!-- App JS -->
+	<script src="../js/app.js"></script>
+
+  <script src="../admin/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
+	<script src="../admin/plugins/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+	<script src="../admin/plugins/vectormap/jquery-jvectormap-in-mill.js"></script>
+	<script src="../admin/plugins/vectormap/jquery-jvectormap-us-aea-en.js"></script>
+	<script src="../admin/plugins/vectormap/jquery-jvectormap-uk-mill-en.js"></script>
+	<script src="../admin/plugins/vectormap/jquery-jvectormap-au-mill.js"></script>
+	<script src="../admin/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
+	<script src="../js/index.js"></script>
+	<!-- App JS -->
+	<script>
+		new PerfectScrollbar('.dashboard-social-list');
+		new PerfectScrollbar('.dashboard-top-countries');
+	</script>
  
 <script>
   $(function () {

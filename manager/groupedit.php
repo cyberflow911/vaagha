@@ -47,86 +47,88 @@
 }
 </style>
 
-<div class="content-wrapper">
-
-    <section class="content-header">
-        <h1>
-          Project Details
-        </h1>
-    </section>
-    <section class="content">
-        <?php
-            if(isset($resMember))
-            {
-        ?>
-                <div class="alert alert-success"><strong>Success! </strong> your request successfully updated. </div> 
-                
-                
-        <?php
-            }
-            else if(isset($errorMember))
-            {
-        ?>
-                <div class="alert alert-danger"><strong>Error! </strong><?=$errorMember?></div> 
-        <?php
-                
-            }
-        ?>
-        
-                <form method="post" >
-                    <div class="row">
-                        
-                        <div class="col-md-5"> 
-                            <div class="form-group">
-                                <label>Name</label><br>   
-                                <input type="text"  id="name" name="name" class="form-control" value="<?=$group_details['name']?>" required>  
-                            </div> 
-                        </div>
-                        <div class="col-md-5"> 
-                            <div class="form-group">
-                                <label>Recruiter</label><br> 
-                                <input type="text"  id="recruiter" name="recruiter" class="form-control" value="<?=$group_details['recruiter']?>" required>  
-                            </div> 
-                        </div>
-
-                    </div> 
-                    <div class="row">
-                        <div class="col-md-5"> 
-                            <div class="form-group">
-                                <label>Incentive</label><br> 
-                                <input type="text"  id="incentive" name="incentive" class="form-control" value="<?=$group_details['incentive']?>" required>  
-                            </div> 
-                        </div>
-                        <div class="col-md-5"> 
-                            <div class="form-group">
-                                <label>Total Users</label><br> 
-                                <input type="text"  id="user_count" name="user_count" class="form-control" value="<?=$group_details['user_count']?>" required>
-                            </div> 
-                        </div> 
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5"> 
-                            <div class="form-group">
-                                <label>Venue</label><br> 
-                                <input type="text"  id="venue" name="venue" class="form-control" value="<?=$group_details['venue']?>" required>  
-                            </div> 
-                        </div>
-                        <div class="col-md-5"> 
-                            <div class="form-group">
-                                <label>Email</label><br> 
-                                <input type="email"  id="email" name="email" class="form-control" value="<?=$group_details['email']?>" required>
-                            </div> 
-                        </div> 
-                    </div>
+<div class="page-wrapper">
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+                <div class="breadcrumb-title pr-3">Add Project</div>
+                <div class="pl-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item"><a href="dashboard"><i class='bx bx-home-alt'></i></a>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <?php
+                if(isset($resMember))
+                {
+            ?>
+                    <div class="alert alert-success"><strong>Success! </strong> your request successfully updated. </div> 
+            <?php
+                }
+                else if(isset($errorMember))
+                {
+            ?>
+                    <div class="alert alert-danger"><strong>Error! </strong><?=$errorMember?></div> 
+            <?php
                     
-                    <button type="submit" name="edit" class="btn btn-primary" value="">Edit</button>
-                         
-                
-                    
-                </form>
-         
-
-    </section>
+                }
+            ?>
+            <form method="post" enctype="multipart/form-data">
+                <div class="card radius-15 border-lg-top-primary">
+                    <div class="card-body p-5">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Name</label><br>   
+                                        <input type="text" style="font-size: 16px;" id="name" name="name" class="form-control radius-30" value="<?=$group_details['name']?>" required>  
+                                    </div> 
+                                </div>
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Recruiter</label><br> 
+                                        <input type="text" style="font-size: 16px;" id="recruiter" name="recruiter" class="form-control radius-30" value="<?=$group_details['recruiter']?>" required>  
+                                    </div> 
+                                </div>
+                            </div> 
+                            <div class="row">
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Incentive</label><br> 
+                                        <input type="text" style="font-size: 16px;" id="incentive" name="incentive" class="form-control radius-30" value="<?=$group_details['incentive']?>" required>  
+                                    </div> 
+                                </div>
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Total Users</label><br> 
+                                        <input type="text" style="font-size: 16px;" id="user_count" name="user_count" class="form-control radius-30" value="<?=$group_details['user_count']?>" required>
+                                    </div> 
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Venue</label><br> 
+                                        <input type="text" style="font-size: 16px;" id="venue" name="venue" class="form-control radius-30" value="<?=$group_details['venue']?>" required>  
+                                    </div> 
+                                </div>
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Email</label><br> 
+                                        <input type="email" style="font-size: 16px;" id="email" name="email" class="form-control radius-30" value="<?=$group_details['email']?>" required>
+                                    </div> 
+                                </div> 
+                            </div>
+                            <button type="submit" name="edit" class="btn btn-primary" value="">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 <div class="control-sidebar-bg"></div>
 
