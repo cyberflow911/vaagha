@@ -1,6 +1,5 @@
 <?php
     require_once 'header.php';
-    require_once 'navbar.php';
     require_once 'left-navbar.php';
  
     $id=$_SESSION['id'];
@@ -123,182 +122,191 @@ input[type=number]::-webkit-outer-spin-button {
 }
 </style>
 
-<div class="content-wrapper">
-
-    <section class="content-header">
-        <h1>
-          Project Details
-        </h1>
-    </section>
-    <section class="content">
-        <?php
-            if(isset($resMember))
-            {
-        ?>
-                <div class="alert alert-success"><strong>Success! </strong> your request successfully updated. </div>   
-        <?php
-            }
-            else if(isset($errorMember))
-            {
-        ?>
-                <div class="alert alert-danger"><strong>Error! </strong><?=$errorMember?></div> 
-        <?php
+<div class="page-wrapper">
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+                <div class="breadcrumb-title pr-3">Add Project</div>
+                <div class="pl-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item"><a href="dashboard"><i class='bx bx-home-alt'></i></a>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
                 
-            }
-        ?>
+            </div>
+<?php
+    if(isset($resMember))
+    {
+?>
+        <div class="alert alert-success"><strong>Success! </strong> your request successfully updated. </div> 
+<?php
+    }
+    else if(isset($errorMember))
+    {
+?>
+        <div class="alert alert-danger"><strong>Error! </strong><?=$errorMember?></div> 
+<?php
         
-                <form method="post" enctype="multipart/form-data">
-                    <div class="row">
-                        
-                        <div class="col-md-5"> 
-                            <div class="form-group">
-                                <label>Project Title</label><br>   
-                                <input type="text"  id="title" minlenth="3" maxlength="100" name="title" class="form-control" minlength="3" maxlength="100" value="<?=$project_details['title']?>" required>  
+    }
+?>
+            <form method="post" enctype="multipart/form-data">
+                <div class="card radius-15 border-lg-top-primary">
+                    <div class="card-body p-5">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Project Title</label><br>   
+                                        <input type="text"  id="title" style="font-size: 16px;" minlenth="3" maxlength="100" name="title" class="form-control" minlength="3" maxlength="100" value="<?=$project_details['title']?>" required>  
+                                    </div> 
+                                </div>
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Start Date</label><br> 
+                                        <input type="date" style="font-size: 16px;" id="start_date" min="<?=$pdate?>" name="start_date" class="form-control" value="<?=$project_details['start_date']?>" required>  
+                                    </div> 
+                                </div>
+                            </div>  
+                            <div class="row">
+                                <div class="col-md-10"> 
+                                    <div class="form-group">
+                                        <label style="margin-left:5px">Project Description</label><br> 
+                                        <textarea type="text" style="font-size: 16px;" id="description" minlength="10" maxlength="500" name="description" class="form-control" style="resize: vertical;height:150px" required><?=$project_details['description']?></textarea> 
+                                    </div> 
+                                </div>
                             </div> 
-                        </div>
-                        <div class="col-md-5"> 
-                            <div class="form-group">
-                                <label>Start Date</label><br> 
-                                <input type="date"  id="start_date" min="<?=$pdate?>" name="start_date" class="form-control" value="<?=$project_details['start_date']?>" required>  
-                            </div> 
-                        </div>
-
-                    </div>  
-                    <div class="row">
-                        <div class="col-md-10"> 
-                            <div class="form-group">
-                                <label style="margin-left:5px">Project Description</label><br> 
-                                <textarea type="text"  id="description" minlength="10" maxlength="500" name="description" class="form-control" style="resize: vertical;height:150px" required><?=$project_details['description']?></textarea> 
-                            </div> 
-                        </div>
-                    </div> 
-                    <div class="row">
-                        <div class="col-md-5"> 
-                            <div class="form-group">
-                                <label>Incentive</label><br> 
-                                <input type="number"  id="incentive" min="1" step=".01" oninput="check(this)"  name="incentive" class="form-control" value="<?=$project_details['incentive']?>" required>  
-                            </div> 
-                        </div>
-                    
-                        <div class="col-md-5"> 
-                            <div class="form-group">
-                                <label>Number of Participants</label><br> 
-                                <input type="number"  id="participants" oninput="check(this)" name="participants" class="form-control" value="<?=$project_details['participants']?>" required>
-                            </div> 
-                        </div> 
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5"> 
-                            <div class="form-group">
-                                <label>No. of Groups</label><br> 
-                                <input type="number"  id="group_num" oninput="check(this)" name="group_num" class="form-control" value="<?=$project_details['group_num']?>" required>  
-                            </div> 
-                        </div>
-                    
-                        <div class="col-md-5"> 
-                            <div class="form-group">
-                                <label>Project Manager</label><br> 
-                                <select name="pmanager" id="pmanager" class="form-control">
-                                <?php
-                                    if(isset($pm_name))
-                                    {
-                                        foreach($pm_name as $data)
-                                        {   
-                                            $selected="";
-                                            if($data['id']==$project_details['pmid'])
-                                            {
-                                                $selected="selected";   
-                                            }
-                                                
-                                ?>
-                                                <option value="<?=$data['id']?>" <?=$selected?>><?=$data['f_name']?> <?=$data['l_name']?></option>
-                                <?php
-                                            
-                                        }
-                                    }
-                                ?>  
-                                </select> 
-                            </div> 
-                        </div> 
-                    </div>
-                    <div class="row" style="margin-bottom:20px">    
-                        <div class="col-md-12"> 
-                            <div class="form-group">
-                                <label>Project Files</label><br>  
-                                <button type="button" class="btn btn-success" onclick="addFilesField()"><i class="fa fa-plus"></i></button>
-                            </div> 
-                        </div>
-                    </div>
-                    <div class="row" style="margin-bottom:20px"> 
-                        
-                            <?php
-                                if(isset($project_files)) 
-                                {
-                                    $counter=0;
-                                    foreach($project_files as $file)
-                                    {
-
-                                        $ext=pathinfo($file['file'],PATHINFO_EXTENSION);
-                                        if(strtolower($ext)=="pdf")
-                                        {
-                                            
-                                        ?>
-                                        <div class="col-md-2" id="file<?=$counter?>">
-                                            <div class="col-md-8">
-                                                <a href="<?=$file['file']?>" target="_blank"><img src="../img/extras/PDF.svg" width="100px" height="100px"/></a>            
-                                            </div>
-                                            <div class="col-md-1">
-                                                <button type="button" class="btn btn-danger" onclick="deleteFile(<?=$file['id']?>,'file<?=$counter?>')"><i class="fa fa-trash"></i></button>
-                                            </div>
-                                        </div> 
-                                        <?php
-                                        }
-                                        else
-                                        {
-                                        ?>
-                                        <div class="col-md-2" id="file<?=$counter?>">
-                                            <div class="col-md-8">
-                                                <a href="<?=$file['file']?>" target="_blank"><img src="<?=$file['file']?>" width="100px" height="100px"/></a>
-                                            </div>
-                                            <div class="col-md-1">
-                                                <button type="button" class="btn btn-danger" onclick="deleteFile(<?=$file['id']?>,'file<?=$counter?>')"><i class="fa fa-trash"></i></button>
-                                            </div>
-                                        </div>
-                                        <?php
-                                        }
-                                    }
-                                }
+                            <div class="row">
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Incentive</label><br> 
+                                        <input type="number" style="font-size: 16px;" id="incentive" min="1" step=".01" oninput="check(this)"  name="incentive" class="form-control" value="<?=$project_details['incentive']?>" required>  
+                                    </div> 
+                                </div>
                             
-                            ?>
-                                  
-                        
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4" id="filesDiv"> 
-                                 
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Number of Participants</label><br> 
+                                        <input type="number" style="font-size: 16px;" id="participants" oninput="check(this)" name="participants" class="form-control" value="<?=$project_details['participants']?>" required>
+                                    </div> 
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>No. of Groups</label><br> 
+                                        <input type="number" style="font-size: 16px;" id="group_num" oninput="check(this)" name="group_num" class="form-control" value="<?=$project_details['group_num']?>" required>  
+                                    </div> 
+                                </div>
+                            
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Project Manager</label><br> 
+                                        <select name="pmanager" style="font-size: 16px;" id="pmanager" class="form-control">
+                                        <?php
+                                            if(isset($pm_name))
+                                            {
+                                                foreach($pm_name as $data)
+                                                {   
+                                                    $selected="";
+                                                    if($data['id']==$project_details['pmid'])
+                                                    {
+                                                        $selected="selected";   
+                                                    }
+                                                        
+                                        ?>
+                                                        <option value="<?=$data['id']?>" <?=$selected?>><?=$data['f_name']?> <?=$data['l_name']?></option>
+                                        <?php
+                                                    
+                                                }
+                                            }
+                                        ?>  
+                                        </select> 
+                                    </div> 
+                                </div> 
+                            </div>
+                            <div class="row" style="margin-bottom:20px">    
+                                <div class="col-md-12"> 
+                                    <div class="form-group">
+                                        <label>Project Files</label><br>  
+                                        <button type="button" class="btn btn-success" onclick="addFilesField()"><i class="fa fa-plus"></i></button>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom:20px"> 
                                 
-                        </div>
-                    </div>
+                                    <?php
+                                        if(isset($project_files)) 
+                                        {
+                                            $counter=0;
+                                            foreach($project_files as $file)
+                                            {
+
+                                                $ext=pathinfo($file['file'],PATHINFO_EXTENSION);
+                                                if(strtolower($ext)=="pdf")
+                                                {
+                                                    
+                                                ?>
+                                                <div class="col-md-2" id="file<?=$counter?>">
+                                                    <div class="col-md-8">
+                                                        <a href="<?=$file['file']?>" target="_blank"><img src="../img/extras/PDF.svg" width="100px" height="100px"/></a>            
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <button type="button" class="btn btn-danger" onclick="deleteFile(<?=$file['id']?>,'file<?=$counter?>')"><i class="fa fa-trash"></i></button>
+                                                    </div>
+                                                </div> 
+                                                <?php
+                                                }
+                                                else
+                                                {
+                                                ?>
+                                                <div class="col-md-2" id="file<?=$counter?>">
+                                                    <div class="col-md-8">
+                                                        <a href="<?=$file['file']?>" target="_blank"><img src="<?=$file['file']?>" width="100px" height="100px"/></a>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <button type="button" class="btn btn-danger" onclick="deleteFile(<?=$file['id']?>,'file<?=$counter?>')"><i class="fa fa-trash"></i></button>
+                                                    </div>
+                                                </div>
+                                                <?php
+                                                }
+                                            }
+                                        }
+                                    
+                                    ?>
+                                        
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4" id="filesDiv"> 
+                                        
+                                        
+                                </div>
+                            </div>
         
                         <?php
                                 if(isset($project_details))
                                 {
                         ?>
-                                        <button type="submit" name="edit" class="btn btn-primary" style="margin-top:10" onclick="return confirm('Do you want to save the changes? Y/N')">Save</button>
+                                        <button type="submit" name="edit" class="btn btn-primary" style="margin-top:10; width: 60px; height: 30px; font-size: 16px;" onclick="return confirm('Do you want to save the changes? Y/N')">Save</button>
                             <?php
                                 }
                                 else
                                 {
                             ?>
                                         
-                                        <button type="submit" name="add" class="btn btn-primary" style="margin-top:10" onclick="return confirm('Do you want to save the changes? Y/N')">Add</button>
+                                        <button type="submit" name="add" class="btn btn-primary" style="margin-top:10; width: 60px; height: 30px; font-size: 16px;" onclick="return confirm('Do you want to save the changes? Y/N')" >Add</button>
                         <?php
                                 }
                         ?> 
-                </form>
-         
-
-    </section>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 <?php
     require_once 'js-links.php';
@@ -310,7 +318,7 @@ input[type=number]::-webkit-outer-spin-button {
     {
         var inhtml  = `<div class="row" style="margin-top:20px">    
                             <div class="col-md-10">
-                                <input   type="file" id='projectfile${counter}' name="projectFile[]" class="form-control"/>
+                                <input style="font-size: 16px;"  type="file" id='projectfile${counter}' name="projectFile[]" class="form-control"/>
                             </div> 
                             <div class="col-md-2">
                                 <button type="button" class="btn btn-danger" onclick="removeField('projectfile${counter}')"><i class="fa fa-trash"></i></button>

@@ -60,157 +60,142 @@
 }
 </style>
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <section class="content-header">
-        <h1>
-            Dashboard
-        </h1>
-    </section>
-
-    <section class="content">
-        <?php
-            if(isset($resSubject))
-            {
-        ?>
-                <div class="alert alert-success"><strong>Success!</strong> your request successfully updated.</div> 
-        <?php
-            }
-            else if(isset($errorSubject))
-            {
-        ?>
-                <div class="alert alert-danger"><strong>Error! </strong><?=$errorSubject?></div> 
-        <?php
-                
-            }
-        ?>
-        <div class="row">
-            <div class="col-md-5">
-            <!-- Info Boxes Style 2 -->
-                <div class="info-box mb-3 bg-yellow">
-                    <span class="info-box-icon"><i class="fa fa-building"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Total Company Admins</span>
-                        <span class="info-box-number"><?=$ca_count?></span>
+<div class="wrapper">
+    <div class="page-wrapper">
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-12 col-lg-4">
+                        <div class="card radius-15 overflow-hidden">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div>
+                                        <p class="mb-0 font-weight-bold">Total Company Admins</p>
+                                        <h2 class="mb-0"><?=$ca_count?></h2>
+                                    </div>
+                                    <div class="ml-auto align-self-end">
+                                        <p class="mb-0 font-14 text-primary"><i class='bx bxs-up-arrow-circle'></i>  <span></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div id="chart1"></div>
+                            </div>
+                        </div>
                     </div>
-                    <!-- /.info-box-content -->
+                    <div class="col-12 col-lg-4">
+                        <div class="card radius-15 overflow-hidden">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div>
+                                        <p class="mb-0 font-weight-bold">Project Managers</p>
+                                        <h2 class="mb-0"><?=$pm_count?></h2>
+                                    </div>
+                                    <div class="ml-auto align-self-end">
+                                        <p class="mb-0 font-14 text-success"><i class='bx bxs-up-arrow-circle'></i>  <span></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div id="chart2"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <div class="card radius-15 overflow-hidden">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div>
+                                        <p class="mb-0 font-weight-bold">Projects</p>
+                                        <h2 class="mb-0"><?=$p_count?></h2>
+                                    </div>
+                                    <div class="ml-auto align-self-end">
+                                        <p class="mb-0 font-14 text-danger"><i class='bx bxs-down-arrow-circle'></i>  <span></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div id="chart3"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- /.info-box -->
-                <a href="project?token=3" style="background-color: white;">
-                    <div class="info-box mb-3 bg-green">
-                        <span class="info-box-icon"><i class="fa fa-tasks"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Projects</span>
-                            <span class="info-box-number"><?=$p_count?></span>
+                <div class="card radius-15">
+                    <div class="card-header border-bottom-0" style=" background-color: #343a40;">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <h5 class="mb-0" style="font-size: 18px; color: white;">Company's Latest Projects</h5>
+                            </div>
+                            <div class="ml-auto">
+                                <a href="project?token=3" class="btn btn-white radius-15">View More</a>
+                            </div>
                         </div>
-                        <!-- /.info-box-content -->
                     </div>
-                </a>
-            </div>
-            <div class="col-md-5" style="margin-left: 40px;" >
-                <!-- /.info-box -->
-                <a href="projectmanager?token=3" style="background-color: white;">
-                    <div class="info-box mb-3 bg-red">
-                        <span class="info-box-icon"><i class="fa fa-user-plus"></i></span>
-                        <div class="info-box-content" style="color: white;">
-                            <span class="info-box-text">Project Managers</span>
-                            <span class="info-box-number"><?=$pm_count?></span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                </a>
-                <!-- /.info-box -->
-                <a href="users?token=3" style="background-color: white;">
-                    <div class="info-box mb-3 bg-blue">
-                        <span class="info-box-icon"><i class="fa fa-user-circle"></i></span>
-                        <div class="info-box-content" style="color: white;">
-                            <span class="info-box-text" >Users</span>
-                            <span class="info-box-number"><?=$u_count?></span>
-                        </div>
-                        <!-- /.info-box-content -->   
-                    </div>
-                </a>
-                <!-- /.info-box -->
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header border-transparent" style="background-color: #343a40;">
-                        <h3 class="card-title" style="color: white;">Company's Latest Projects</h3>
-                    </div>
-                    <!-- /.card-header -->
                     <div class="card-body p-0">
                         <div class="table-responsive">
-                            <table class="table m-0" style="border-spacing: 2px;  font-size: 16px;">
-                                <thead style="font-weight: 800; background-color: #6c757d; color: white;">
+                            <table class="table mb-0">
+                                <thead>
                                     <tr>
-                                        <th style="text-align: center;">S.no.</th>
-                                        <th style="text-align: center;">Title</th>
-                                        <th style="text-align: center;">Status</th>
-                                        <th style="text-align: center;">Start Date</th>
-                                        <th style="text-align: center;">Incentive</th>
+                                        <th>S.no</th>
+                                        <th>Title</th>
+                                        <th>Incentive</th>
+                                        <th>Start Date</th>
+                                        <th>Groups</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
-                                <tbody style="text-align: center;">
-                                    <?php
-                                        if(isset($pdetails))
+                                <tbody>
+                                <?php
+                                    if(isset($pdetails))
+                                    {
+                                        $i=1;
+                                        foreach($pdetails as $data)
                                         {
-                                            $i=1;
-                                            foreach($pdetails as $data)
-                                            {
-                                    ?>
-                                                <tr>
-                                                    <td style="padding: 12px; color: #17a2b8;"><?=$i?></td>
-                                                    <td style="padding: 12px;"><?=$data['title']?></td>
-                                                    <td style="padding: 12px;">
-                                                    <?php
-                                                        if($data['status']==0)
-                                                        {
-                                                            ?>
-                                                            <span class="badge badge-danger">Hold</span>
-                                                            <?php
-                                                        }
-                                                        else if($data['status']==1)
-                                                        {
-                                                            ?>
-                                                            <span class="badge badge-warning">Active</span>
-                                                            <?php
-                                                        }
-                                                        else if($data['status']==2)
-                                                        {
-                                                            ?>
-                                                            <span class="badge badge-success">Completed</span>
-                                                            <?php
-                                                        }
-                                                    ?>
-                                                    </td>
-                                                    <td style="padding: 12px;">
-                                                    <?=$data['start_date']?>
-                                                    </td>
-                                                    <td style="padding: 12px;">
-                                                    <?=$data['incentive']?>
-                                                    </td>
-                                                    
-                                                </tr>
-                                    <?php
-                                                $i++;
-                                            }
+                                ?>
+                                            <tr>
+                                                <td>
+                                                    <?=$i?>
+                                                </td>
+                                                <td><?=$data['title']?></td>
+                                                <td><?=$data['incentive']?></td>
+                                                <td><?=$data['start_date']?></td>
+                                                <td><?=$data['group_num']?></td>
+                                                <td>
+                                                <?php
+                                                    if($data['status']==0)
+                                                    {
+                                                        ?>
+                                                        <span class="badge badge-danger">Hold</span>
+                                                        <?php
+                                                    }
+                                                    else if($data['status']==1)
+                                                    {
+                                                        ?>
+                                                        <span class="badge badge-warning">Active</span>
+                                                        <?php
+                                                    }
+                                                    else if($data['status']==2)
+                                                    {
+                                                        ?>
+                                                        <span class="badge badge-success">Completed</span>
+                                                        <?php
+                                                    }
+                                                ?>
+                                                </td>
+                                            </tr>
+                                <?php
+                                            $i++;
                                         }
-                                    ?>
+                                    }
+                                ?>
+                                    
                                 </tbody>
                             </table>
                         </div>
-                        <div class="card-footer clearfix">
-                            <a href="project?token=3" class="btn btn-sm btn-info float-right">View All Projects</a>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </div>
 
-    
 <div class="control-sidebar-bg"></div>
 <?php
 require_once 'js-links.php';

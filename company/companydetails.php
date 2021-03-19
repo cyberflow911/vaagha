@@ -239,25 +239,26 @@
 }
 </style>
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1>
-            Company Details
-        </h1>
-        <ol class="breadcrumb">
-            <li>
-                <div class="pull-right">
-                    <!-- <button title="" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-plus"></i></button>  -->
-                    <a href="" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Rebuild"><i class="fa fa-refresh"></i></a>
+<div class="page-wrapper">
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+                <div class="breadcrumb-title pr-3">Company Details</div>
+                <div class="pl-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item"><a href="dashboard"><i class='bx bx-home-alt'></i></a>
+                            </li>
+                        </ol>
+                    </nav>
                 </div>
-            </li>
-        </ol>
-    </section>
-
-    <!-- Main content -->
-      <br>
-    <section class="content">
+                <div class="ml-auto">
+                    <div class="btn-group">
+                        <a href="" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Rebuild"><i class="fa fa-refresh"></i></a>
+                    </div>
+                </div>
+            </div
+            <br>
         <?php
             if(isset($resSubject))
             {
@@ -277,96 +278,91 @@
             if(isset($comdata))
             {
         ?>
-            <div>
-                <div class="row">
-                    <div class="col-md-4 "  >
-                    <!-- Widget: user widget style 2 -->
-                        <div class="card card-widget widget-user-2 shadow-sm">
-              <!-- Add the bg color to the header using any of the bg-* classes -->
-                            <div class="widget-user-header bg-yellow">
-                                <div class="widget-user-image">
-                                    <img class="img-circle elevation-2" src=".\uploads\medium\7061609903739.jpg" alt="User Avatar">
-                                </div>
-                <!-- /.widget-user-image -->
-                                <h3 class="widget-user-username"><?=$comdata['com_name']?></h3>
-                                <h5 class="widget-user-desc"><?=$comdata['address']?>-<?=$comdata['post']?></h5>
+            <div class="row">
+                <div class="col-md-4 "  >
+                    <div class="card card-widget widget-user-2 shadow-sm">
+            
+                        <div class="widget-user-header bg-yellow">
+                            <div class="widget-user-image">
+                                <img class="img-circle elevation-2" src=".\uploads\medium\7061609903739.jpg" alt="User Avatar">
                             </div>
-                            <div class="card-footer p-0" style="background-color: white; ">
-                                <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            Registration Number <span class="float-right badge bg-blue"><?=$comdata['reg_num']?></span>
-                                     </a>
-                                    </li>
-                                    <!-- <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                        Zip Code <span class="float-right badge bg-DeepSkyBlue"></span>
-                                        </a>
-                                    </li> -->
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                        Vat <span class="float-right badge bg-green"><?=$comdata['vat']?></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <h3 class="widget-user-username"><?=$comdata['com_name']?></h3>
+                            <h5 class="widget-user-desc"><?=$comdata['address']?>-<?=$comdata['post']?></h5>
                         </div>
-                    <!-- /.widget-user -->
+                        <div class="card-footer p-0" style="background-color: white; ">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        Registration Number <span class="float-right badge bg-blue"><?=$comdata['reg_num']?></span>
+                                    </a>
+                                </li>
+                                <!-- <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                    Zip Code <span class="float-right badge bg-DeepSkyBlue"></span>
+                                    </a>
+                                </li> -->
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                    Vat <span class="float-right badge bg-green"><?=$comdata['vat']?></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                </div>
         <?php
             }
         ?>
-                    <div class="col-md-4" style="margin-top: 30px;" >
-                    <!-- Info Boxes Style 2 -->
-                        <div class="info-box mb-3 bg-yellow">
-                            <span class="info-box-icon"><i class="fa fa-building"></i></span>
-                            <div class="info-box-content">
-                                <span class="info-box-text">Company Admins</span>
-                                <span class="info-box-number"><?=$ca_count?></span>
-                            </div>
-                            <!-- /.info-box-content -->
+                <div class="col-md-4" style="margin-top: 30px;" >
+                    <div class="info-box mb-3 bg-yellow">
+                        <span class="info-box-icon"><i class="fa fa-building"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Company Admins</span>
+                            <span class="info-box-number"><?=$ca_count?></span>
                         </div>
-                        <!-- /.info-box -->
-                        <div class="info-box mb-3 bg-green">
-                            <span class="info-box-icon"><i class="fa fa-tasks"></i></span>
-                            <div class="info-box-content">
-                                <span class="info-box-text">Projects</span>
-                                <span class="info-box-number"><?=$p_count?></span>
-                            </div>
-                            <!-- /.info-box-content -->
-                        </div>
+                        <!-- /.info-box-content -->
                     </div>
-                    <div class="col-md-4" style="margin-top: 30px;" >
-                        <!-- /.info-box -->
-                        <div class="info-box mb-3 bg-red">
-                            <span class="info-box-icon"><i class="fa fa-user-plus"></i></span>
-                            <div class="info-box-content" style="color: white;">
-                                <span class="info-box-text">Project Managers</span>
-                                <span class="info-box-number"><?=$pm_count?></span>
-                            </div>
-                            <!-- /.info-box-content -->
+                    <!-- /.info-box -->
+                    <div class="info-box mb-3 bg-green">
+                        <span class="info-box-icon"><i class="fa fa-tasks"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Projects</span>
+                            <span class="info-box-number"><?=$p_count?></span>
                         </div>
-                        <!-- /.info-box -->
-                        <div class="info-box mb-3 bg-blue">
-                            <span class="info-box-icon"><i class="fa fa-user-circle"></i></span>
-                            <div class="info-box-content" style="color: white;">
-                                <span class="info-box-text" >Users</span>
-                                <span class="info-box-number"><?=$u_count?></span>
-                            </div>
-                            <!-- /.info-box-content -->   
-                        </div>
-                        <!-- /.info-box -->
+                        <!-- /.info-box-content -->
                     </div>
                 </div>
+                <div class="col-md-4" style="margin-top: 30px;" >
+                    <!-- /.info-box -->
+                    <div class="info-box mb-3 bg-red">
+                        <span class="info-box-icon"><i class="fa fa-user-plus"></i></span>
+                        <div class="info-box-content" style="color: white;">
+                            <span class="info-box-text">Project Managers</span>
+                            <span class="info-box-number"><?=$pm_count?></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                    <div class="info-box mb-3 bg-blue">
+                        <span class="info-box-icon"><i class="fa fa-user-circle"></i></span>
+                        <div class="info-box-content" style="color: white;">
+                            <span class="info-box-text" >Users</span>
+                            <span class="info-box-number"><?=$u_count?></span>
+                        </div>
+                        <!-- /.info-box-content -->   
+                    </div>
+                    <!-- /.info-box -->
+                </div>
             </div>
+        </div>
                 
-            <br>
-    <section class="content-header">
-        <h1>
-            Projects
-        </h1>
-    </section>
-    <br>
+        <br>
+        <section class="content-header">
+            <h1>
+                Projects
+            </h1>
+        </section>
+        <br>
         <div class="box">
             <div class="box-body">
                 <table id="example1" class="table table-bordered table-hover">
@@ -607,15 +603,10 @@
                     </tbody>
                 </table>            
             </div>
-        </div>    
-        
-    </section>
+        </div>  
+    </div>
 </div>
-
-    <!-- /.content -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->       
-    <div class="control-sidebar-bg"></div>
+<div class="control-sidebar-bg"></div>
     
 <?php
     require_once 'js-links.php';

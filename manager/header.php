@@ -272,10 +272,9 @@ div {
 <body>
 <header class="top-header">
     <nav class="navbar navbar-expand">
-        <div class="right-topbar ml-auto">
-            <ul class="navbar-nav">
-                
-            </ul>
+        <div class="left-topbar d-flex align-items-center">
+            <a href="javascript:;" class="toggle-btn">	<i class="bx bx-menu"></i>
+            </a>
         </div>
     </nav>
 </header>

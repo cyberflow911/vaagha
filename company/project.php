@@ -1,6 +1,5 @@
 <?php
     require_once 'header.php';
-    require_once 'navbar.php';
     require_once 'left-navbar.php';
  
     $id=$_SESSION['id'];
@@ -111,26 +110,26 @@
 }
 </style>
 
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1 style="font-weight: 900;">
-            <?=$title?>
-        </h1>
-        <ol class="breadcrumb">
-            <li>
-                <div class="pull-right">
-                <a href="projectdetails" class="btn btn-primary"><i class="fa fa-plus"></i></a>
-                    <a href="" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Rebuild"><i class="fa fa-refresh"></i></a>
+<div class="page-wrapper">
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+                <div class="breadcrumb-title pr-3"><?=$title?></div>
+                <div class="pl-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item"><a href="dashboard"><i class='bx bx-home-alt'></i></a>
+                            </li>
+                        </ol>
+                    </nav>
                 </div>
-            </li>
-        </ol>
-    </section>
-
-    <!-- Main content -->
-      <br>
-    <section class="content">
+                <div class="ml-auto">
+                    <div class="btn-group">
+                        <a href="projectdetails" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+                        <a href="" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Rebuild"><i class="fa fa-refresh"></i></a>
+                    </div>
+                </div>
+            </div>
         <?php
             if(isset($resMember))
             {
@@ -146,12 +145,11 @@
                 
             }
         ?>
-      
             <div class="box">
-              <div class="box-body">
-                <table id="example2" class="table table-bordered table-hover">
-                    <thead style="background-color: #212529; color: white;">
-                        <tr>
+                <div class="box-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead style="background-color: #212529; color: white;">
+                            <tr>
                              <th>S.No.</th>
                              <th>Project Title</th>
                              <th>Project Description</th>
@@ -159,8 +157,8 @@
                              <th>Incentive</th>
                             <th>Action</th>
                         </tr>
-                    </thead>
-                     <tbody> 
+                        </thead>
+                        <tbody> 
  
                     
                      <?php 
@@ -231,20 +229,13 @@
                          ?>
           
                         </tbody>
-                                </table>
-                       
-                        </div>
-            <!-- /.box-footer-->
-                        </div>    
-      <!-- /.box -->
-    </section>
-    <!-- /.content -->
+                    </table>
+                </div>
+            </div>    
+        </div>
+    </div>
 </div>
-
-          
-
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->       
+      
 <div class="control-sidebar-bg"></div>
 
   

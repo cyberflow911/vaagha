@@ -1,6 +1,5 @@
 <?php
     require_once 'header.php';
-    require_once 'navbar.php';
     require_once 'left-navbar.php';
  
     if($_SERVER["REQUEST_METHOD"] == "POST")
@@ -112,26 +111,27 @@
 	overflow: auto!important;
 }
 </style>
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1 style="font-weight: 900;">
-            <?=$title?>
-        </h1>
-        <ol class="breadcrumb">
-            <li>
-                <div class="pull-right">
+
+<div class="page-wrapper">
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+                <div class="breadcrumb-title pr-3"><?=$title?></div>
+                <div class="pl-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item"><a href="dashboard"><i class='bx bx-home-alt'></i></a>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="ml-auto">
+                    <div class="btn-group">
                     <a href="useraddedit" class="btn btn-primary"><i class="fa fa-plus"></i></a>
                     <a href="" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Rebuild"><i class="fa fa-refresh"></i></a>
+                    </div>
                 </div>
-            </li>
-        </ol>
-    </section>
-
-    <!-- Main content -->
-      <br>
-    <section class="content">
+            </div>
         <?php
             if(isset($resMember))
             {
@@ -147,22 +147,21 @@
                 
             }
         ?>
-      
             <div class="box">
-              <div class="box-body">
-                <table id="example2" class="table table-bordered table-hover">
-                    <thead style="background-color: #212529; color: white;">
-                        <tr>
-                             <th>S.No.</th> 
-                             <th>Name</th>
-                             <th>Email</th>
-                             <th>Phone Number</th>
-                             <th>Address</th>
-                             <th>Project Name</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                     <tbody> 
+                <div class="box-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead style="background-color: #212529; color: white;">
+                            <tr>
+                                <th>S.No.</th> 
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Address</th>
+                                <th>Project Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody> 
  
                     
                      <?php 
@@ -219,14 +218,11 @@
                          ?>
           
                         </tbody>
-                                </table>
-                       
-                        </div>
-            <!-- /.box-footer-->
-                        </div>    
-      <!-- /.box -->
-    </section>
-    <!-- /.content -->
+                    </table>
+                </div>
+            </div>  
+        </div>
+    </div>
 </div>
 <div class="control-sidebar-bg"></div>
 
