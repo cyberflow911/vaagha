@@ -32,7 +32,6 @@ $L_NAME=$MANAGER_DATA['l_name'];
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Project Manager Panel | PW</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
@@ -51,7 +50,6 @@ $L_NAME=$MANAGER_DATA['l_name'];
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../admin/dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="../admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-    <head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -95,25 +93,25 @@ $L_NAME=$MANAGER_DATA['l_name'];
 }
 
 .profileImage {
-  width: 60px;
-  height: 48;
-  background: #25383C;
-  font-size: 35px;
-  color: #fff;
-  text-align: center;
-  line-height: 60px;
-  border-radius: 50%;
-}
-.profileImageUser {
-  width: 60px;
-  height: 48;
-  background: #25383C;
-  font-size: 35px;
-  color: #fff;
-  text-align: center;
-  line-height: 60px;
-  border-radius: 50%; 
-}
+    width: 50px;
+    height: 50px;
+    background: #25383C;
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    }
+    .profileImageUser {
+    width: 50px;
+    height: 48;
+    background: #25383C;
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+    line-height: 60px;
+    border-radius: 50%; 
+    }
 .autocomplete-items div {
   padding: 10px;
   cursor: pointer;
@@ -270,11 +268,27 @@ div {
 </style>
 </head>
 <body>
-<header class="top-header">
-    <nav class="navbar navbar-expand">
-        <div class="left-topbar d-flex align-items-center">
-            <a href="javascript:;" class="toggle-btn">	<i class="bx bx-menu"></i>
-            </a>
-        </div>
-    </nav>
-</header>
+<div class="wrapper">
+    <header class="top-header">
+			<nav class="navbar navbar-expand">
+				<div class="left-topbar d-flex align-items-center">
+					<a href="javascript:;" class="toggle-btn">	<i class="bx bx-menu"></i>
+					</a>
+				</div>
+				<div class="right-topbar ml-auto">
+					<ul class="navbar-nav">
+						<li class="nav-item dropdown dropdown-user-profile">
+							<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-toggle="dropdown">
+								<div class="media user-box align-items-center">
+									<div class="media-body user-info">
+										<p class="user-name mb-0"><?=$COMPANY_DATA['f_name']?>-<?=$COMPANY_DATA['l_name']?></p>
+										<p class="designattion mb-0"><?=$COMPANY_DATA['email']?></p>
+									</div>
+									<div class="profileImage"><?=ucfirst($FNAME[0]).ucfirst($LNAME[0])?></div>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</header>

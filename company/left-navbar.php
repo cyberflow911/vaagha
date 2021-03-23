@@ -5,17 +5,10 @@ $L_NAME=$COMPANY_DATA['l_name'];
  $lname=$L_NAME[0];
  ?>
 
-
-
-<div class="wrapper">
-		<!--sidebar-wrapper-->
 		<div class="sidebar-wrapper" data-simplebar="true">
 			<div class="sidebar-header">
-				<div class="">
-					<img src="../img/logo/logo_white.png" class="logo-icon-2" alt="" />
-				</div>
 				<div>
-					<h4 class="logo-text">Project Wize</h4>
+					<h4 class="logo-text" style="font-size: 18px;">Company Admin</h4>
 				</div>
 				<a href="javascript:;" class="toggle-btn ml-auto"> <i class="bx bx-menu"></i>
 				</a>

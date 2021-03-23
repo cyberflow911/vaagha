@@ -151,12 +151,12 @@
     }
 
     
-    $sql= "select c.*, a.c_id, a.id from companies c, com_admins a where c.id=a.c_id and a.id=$id and a.type=1";
-    $result=$conn->query($sql);
+    $sql="select c.* from companies c, com_admins a where c.id=a.c_id and a.id='$id'";
+    $result =  $conn->query($sql);
     if($result->num_rows)
     {
-        $row=$result->fetch_assoc();
-        $comdata=$row;
+        $row = $result->fetch_assoc();
+            $comdata = $row;     
     }
     
     $sql="SELECT count(id) as count from com_admins where c_id='$COMPANY_ID' and type=1";
@@ -225,20 +225,7 @@
             $users[] = $row;
         }      
     }
-
-    
-    
-        
-    
- 
 ?>
-
-<style>
-    .box-body{
-	overflow: auto!important;
-}
-</style>
-<!-- Content Wrapper. Contains page content -->
 <div class="page-wrapper">
     <div class="page-content-wrapper">
         <div class="page-content">
@@ -252,55 +239,48 @@
                         </ol>
                     </nav>
                 </div>
-                <div class="ml-auto">
-                    <div class="btn-group">
-                        <a href="" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Rebuild"><i class="fa fa-refresh"></i></a>
-                    </div>
-                </div>
-            </div
-            <br>
+            </div>
         <?php
-            if(isset($resSubject))
+            if(isset($resMember))
             {
         ?>
-                <div class="alert alert-success"><strong>Success!</strong> your request successfully updated.</div> 
+                <div class="alert alert-success"><strong>Success! </strong> your request successfully updated. </div> 
         <?php
             }
-            else if(isset($errorSubject))
+            else if(isset($errorMember))
             {
         ?>
-                <div class="alert alert-danger"><strong>Error! </strong><?=$errorSubject?></div> 
+                <div class="alert alert-danger"><strong>Error! </strong><?=$errorMember?></div> 
         <?php
                 
             }
         ?>
-        <?php
-            if(isset($comdata))
-            {
-        ?>
+            
             <div class="row">
                 <div class="col-md-4 "  >
                     <div class="card card-widget widget-user-2 shadow-sm">
-            
-                        <div class="widget-user-header bg-yellow">
-                            <div class="widget-user-image">
-                                <img class="img-circle elevation-2" src=".\uploads\medium\7061609903739.jpg" alt="User Avatar">
+                        <div class="widget-user-header bg-yellow" style="display:flex;flex:1;flex-direction:'row'">
+                            <div class="widget-user-image " style="flex:0.2"> 
+                                <div class="profileImage" style="margin-top:5px;width: 60px; height: 48; font-size: 35px; ">
+                                    <?php
+                                        $F_NAME=$comdata['com_name'];
+                                        $fname=$F_NAME[0];
+                                        echo ucfirst($fname[0]);
+                                    ?>
+                                </div>
                             </div>
-                            <h3 class="widget-user-username"><?=$comdata['com_name']?></h3>
-                            <h5 class="widget-user-desc"><?=$comdata['address']?>-<?=$comdata['post']?></h5>
+                            <div>
+                                <h3 class="widget-user-username" style="margin-left:10px !important"><?=$comdata['com_name']?></h3>
+                                <h5 class="widget-user-desc"  style="margin-left:10px !important"><?=$comdata['address']?>-<?=$comdata['post']?></h5>
+                            </div>
                         </div>
                         <div class="card-footer p-0" style="background-color: white; ">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        Registration Number <span class="float-right badge bg-blue"><?=$comdata['reg_num']?></span>
+                                    Registration Number<span class="float-right badge bg-blue"><?=$comdata['reg_num']?></span>
                                     </a>
                                 </li>
-                                <!-- <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                    Zip Code <span class="float-right badge bg-DeepSkyBlue"></span>
-                                    </a>
-                                </li> -->
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
                                     Vat <span class="float-right badge bg-green"><?=$comdata['vat']?></span>
@@ -310,227 +290,184 @@
                         </div>
                     </div>
                 </div>
-        <?php
-            }
-        ?>
-                <div class="col-md-4" style="margin-top: 30px;" >
-                    <div class="info-box mb-3 bg-yellow">
-                        <span class="info-box-icon"><i class="fa fa-building"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Company Admins</span>
-                            <span class="info-box-number"><?=$ca_count?></span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                    <div class="info-box mb-3 bg-green">
-                        <span class="info-box-icon"><i class="fa fa-tasks"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Projects</span>
-                            <span class="info-box-number"><?=$p_count?></span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                </div>
-                <div class="col-md-4" style="margin-top: 30px;" >
-                    <!-- /.info-box -->
-                    <div class="info-box mb-3 bg-red">
-                        <span class="info-box-icon"><i class="fa fa-user-plus"></i></span>
-                        <div class="info-box-content" style="color: white;">
-                            <span class="info-box-text">Project Managers</span>
-                            <span class="info-box-number"><?=$pm_count?></span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                    <div class="info-box mb-3 bg-blue">
-                        <span class="info-box-icon"><i class="fa fa-user-circle"></i></span>
-                        <div class="info-box-content" style="color: white;">
-                            <span class="info-box-text" >Users</span>
-                            <span class="info-box-number"><?=$u_count?></span>
-                        </div>
-                        <!-- /.info-box-content -->   
-                    </div>
-                    <!-- /.info-box -->
-                </div>
             </div>
-        </div>
-                
-        <br>
-        <section class="content-header">
             <h1>
                 Projects
             </h1>
-        </section>
-        <br>
-        <div class="box">
-            <div class="box-body">
-                <table id="example1" class="table table-bordered table-hover">
-                    <thead>
-                        <tr style="background-color: #212529; color: white;">
-                            <th style=" text-align: center; ">Serial Number</th>
-                            <th style=" text-align: center; ">Title</th>
-                            <th style=" text-align: center; ">Description</th>
-                            <th style=" text-align: center; ">Start Date</th>
-                            <th style=" text-align: center; ">Incentive</th>
-                            <th style=" text-align: center; ">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody> 
-                    <?php
-                        
-                            if(isset($projects)) 
-                            {
-                                $i = 1;
-                                foreach($projects as $detail) 
-                                {    
-                    ?>
-                    <tr> 
-                        <td style=" text-align: center; " id="serialNo<?=$i?>"><?=$i?></td> 
-                        <td style=" text-align: center; " id="title<?=$i?>"><?=$detail['title'];?></td> 
-                        <td style=" text-align: center; " id="description<?=$i?>"><?=$detail['description'];?></td>  
-                        <td style=" text-align: center; " id="start_date<?=$i?>"><?=$detail['start_date'];?></td>  
-                        <td style=" text-align: center; " id="incentive<?=$i?>"><?=$detail['incentive'];?></td>
-                        <td>
-                            <form method="post">
-                                <button  class="btn btn-danger" type="submit" name="delete2" value="<?=$detail['id']?>">
-                                    <i class="fa fa-trash-o"></i> Delete
-                                </button>
-                                <?php
-                                if($detail['status']==1)
-                                {
-                                    ?>
-                                    <button  class="btn btn-warning" type="submit" name="hold" value="<?=$detail['id']?>">
-                                        <i class="fa fa-ban">Hold</i>
-                                    </button>
+            <div class="card radius-15">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead style="background-color: #212529; color: white;">
+                                <tr>
+                                    <th scope="col" style="text-align: center;">S.No.</th>
+                                    <th scope="col" style="text-align: center;">Title</th>
+                                    <th scope="col" style="text-align: center;">Description</th>
+                                    <th scope="col" style="text-align: center;">Start Date</th>
+                                    <th scope="col" style="text-align: center;">Incentive</th>
+                                    <th scope="col" style="text-align: center;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody> 
+        
+                            
+                            <?php 
+                                    if (isset($projects)) 
+                                    {
+                                        $i = 1;
+                                        foreach ($projects as $detail) 
+                                        {     
+                            ?> 
+                                            <tr> 
+                                                <td style="  text-align: center; " scope="row" id="serialNo<?=$i?>"><?=$i?></td> 
+                                                <td style="  text-align: center; " id="title<?=$i?>"><?=$detail['title'];?></td> 
+                                                <td style="  text-align: center; " id="description<?=$i?>"><?=$detail['description'];?></td> 
+                                                <td style="  text-align: center; " id="start_date<?=$i?>"><?=$detail['start_date'];?></td>
+                                                <td style="  text-align: center; " id="incentive<?=$i?>"><?=$detail['incentive'];?></td>
+                                                <td>
+                                                <form method="post">
+                                                    <button  class="btn btn-danger" type="submit" name="delete" value="<?=$detail['id']?>">
+                                                        <i class="fa fa-trash-o"></i> Delete
+                                                    </button>
+                                                    <?php
+                                                    if($detail['status']==1)
+                                                    {
+                                                        ?>
+                                                        <button  class="btn btn-warning" type="submit" name="hold" value="<?=$detail['id']?>">
+                                                            <i class="fa fa-ban">Hold</i>
+                                                        </button>
+                                                        <?php
+                                                    }
+                                                    else if($detail['status']==0)
+                                                    {
+                                                        ?>
+                                                        <button  class="btn btn-success" type="submit" name="active" value="<?=$detail['id']?>">
+                                                            <i class="fa fa-check">Active</i>
+                                                        </button>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </form>
+                                                </td>
+                                            </tr>
+                                        
                                     <?php
-                                }
-                                else if($detail['status']==0)
-                                {
-                                    ?>
-                                    <button  class="btn btn-success" type="submit" name="active" value="<?=$detail['id']?>">
-                                        <i class="fa fa-check">Active</i>
-                                    </button>
-                                    <?php
-                                }
+                                        $i++;            
+                                        }
+                                    }
                                 ?>
-                            </form>
-                        </td>
-                    </tr>
-                    <?php
-                        $i++;            
-                        }
-                    }
-                    ?>
-                    </tbody>
-                </table>            
+                
+                            </tbody>
+                        </table>
+                    </div>
+                </div> 
             </div>
-        </div>    
-        <section class="content-header">
             <h1>
                 Project Managers
             </h1>
-        </section>
-        <br>
-        <div class="box">
-            <div class="box-body">
-                <table id="example1" class="table table-bordered table-hover">
-                    <thead>
-                        <tr style="background-color: #212529; color: white;">
-                            <th style=" text-align: center; ">Serial Number</th>
-                            <th style=" text-align: center; ">Name</th>
-                            <th style=" text-align: center; ">Email</th>
-                            <th style=" text-align: center; ">Date</th>
-                            <th style=" text-align: center; ">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody> 
-                    <?php
-                        
-                            if(isset($projectmanager)) 
-                            {
-                                $i = 1;
-                                foreach($projectmanager as $detail) 
-                                {    
-                    ?>
-                    <tr> 
-                        <td style=" text-align: center; " id="serialNo<?=$i?>"><?=$i?></td> 
-                        <td style=" text-align: center; " id="name<?=$i?>"><?=$detail['f_name'];?> <?=$detail['l_name'];?></td> 
-                        <td style=" text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td> 
-                        <td style=" text-align: center; " id="date<?=$i?>"> <?php $date=date_create($detail['time_stamp']);
-                                                echo date_format($date,"M d Y"); ?></td> 
-                        <td>
-                            <form method="post">
-                                <button  class="btn btn-danger" type="submit" name="delete3" value="<?=$detail['id']?>">
-                                    <i class="fa fa-trash-o"></i> Delete
-                                </button>
-                                <?php
-                                if($detail['status']==1)
-                                {
-                                    ?>
-                                    <button  class="btn btn-warning" type="submit" name="block3" value="<?=$detail['id']?>">
-                                        <i class="fa fa-ban">Block</i>
-                                    </button>
+            <div class="card radius-15">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead style="background-color: #212529; color: white;">
+                                <tr>
+                                    <th scope="col" style="text-align: center;">S.No.</th>
+                                    <th scope="col" style="text-align: center;">Name</th>
+                                    <th scope="col" style="text-align: center;">Email</th>
+                                    <th scope="col" style="text-align: center;">Date</th>
+                                    <th scope="col" style="text-align: center;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody> 
+        
+                            
+                            <?php 
+                                    if (isset($projectmanager)) 
+                                    {
+                                        $i = 1;
+                                        foreach ($projectmanager as $detail) 
+                                        {     
+                            ?> 
+                                            <tr> 
+                                                <td style="  text-align: center; " scope="row" id="serialNo<?=$i?>"><?=$i?></td> 
+                                                <td style="  text-align: center; " id="name<?=$i?>"><?=$detail['f_name'];?></td> 
+                                                <td style="  text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td> 
+                                                <td style="  text-align: center; " id="date<?=$i?>"><?php $date=date_create($detail['time_stamp']);
+                                                echo date_format($date,"M d Y"); ?></td>
+                                                
+                                                <td>
+                                                <form method="post">
+                                                <button  class="btn btn-danger" type="submit" name="delete3" value="<?=$detail['id']?>"><i class="fa fa-trash-o"></i> Delete
+                                                </button>
+                                                <?php
+                                                if($detail['status']==1)
+                                                {
+                                                    ?>
+                                                    <button  class="btn btn-warning" type="submit" name="block3" value="<?=$detail['id']?>">
+                                                        <i class="fa fa-ban">Block</i>
+                                                    </button>
+                                                    <?php
+                                                }
+                                                else if($detail['status']==0)
+                                                {
+                                                    ?>
+                                                    <button  class="btn btn-success" type="submit" name="unblock3" value="<?=$detail['id']?>">
+                                                        <i class="fa fa-check">Unblock</i>
+                                                    </button>
+                                                    <?php
+                                                }
+                                                ?>
+                                                </form>
+                                                </td>
+                                            </tr>
+                                        
                                     <?php
-                                }
-                                else if($detail['status']==0)
-                                {
-                                    ?>
-                                    <button  class="btn btn-success" type="submit" name="unblock3" value="<?=$detail['id']?>">
-                                        <i class="fa fa-check">Unblock</i>
-                                    </button>
-                                    <?php
-                                }
+                                        $i++;            
+                                        }
+                                    }
                                 ?>
-                            </form>
-                        </td>
-                    </tr>
-                    <?php
-                        $i++;            
-                        }
-                    }
-                    ?>
-                    </tbody>
-                </table>            
+                
+                            </tbody>
+                        </table>
+                    </div>
+                </div> 
             </div>
-        </div>    
-        <section class="content-header">
             <h1>
                 Users
             </h1>
-        </section>
-        <br>
-        <div class="box">
-            <div class="box-body">
-                <table id="example1" class="table table-bordered table-hover">
-                    <thead>
-                        <tr style="background-color: #212529; color: white;">
-                            <th style=" text-align: center; ">Serial Number</th>
-                            <th style=" text-align: center; ">Name</th>
-                            <th style=" text-align: center; ">Email</th>
-                            <th style=" text-align: center; ">Phone Number</th>
-                            <th style=" text-align: center; ">Address</th>
-                            <th style=" text-align: center; ">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody> 
-                    <?php
-                        
-                            if(isset($users)) 
-                            {
-                                $i = 1;
-                                foreach($users as $detail) 
-                                {    
-                    ?>
-                    <tr> 
-                        <td style=" text-align: center; " id="serialNo<?=$i?>"><?=$i?></td> 
-                        <td style=" text-align: center; " id="name<?=$i?>"><?=$detail['name'];?></td> 
-                        <td style=" text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td>  
-                        <td style=" text-align: center; " id="m_num<?=$i?>"><?=$detail['m_num'];?></td>
-                        <td style=" text-align: center; " id="address<?=$i?>"><?=$detail['address'];?></td>
-                        <td>
-                            <form method="post">
-                                <button  class="btn btn-danger" type="submit" name="delete4" value="<?=$detail['id']?>">
+            <div class="card radius-15">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead style="background-color: #212529; color: white;">
+                                <tr>
+                                    <th scope="col" style="text-align: center;">S.No.</th>
+                                    <th scope="col" style="text-align: center;">Name</th>
+                                    <th scope="col" style="text-align: center;">Email</th>
+                                    <th scope="col" style="text-align: center;">Phone Number</th>
+                                    <th scope="col" style="text-align: center;">Address</th>
+                                    <th scope="col" style="text-align: center;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody> 
+        
+                            
+                            <?php 
+                                    if (isset($users)) 
+                                    {
+                                        $i = 1;
+                                        foreach ($users as $detail) 
+                                        {     
+                            ?> 
+                                            <tr> 
+                                                <td style=" text-align: center; " id="serialNo<?=$i?>"><?=$i?></td> 
+                                                <td style=" text-align: center; " id="name<?=$i?>"><?=$detail['name'];?></td> 
+                                                <td style=" text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td>  
+                                                <td style=" text-align: center; " id="m_num<?=$i?>"><?=$detail['m_num'];?></td>
+                                                <td style=" text-align: center; " id="address<?=$i?>"><?=$detail['address'];?></td> 
+                                                <td>
+                                                <form method="post">
+                                                <button  class="btn btn-danger" type="submit" name="delete4" value="<?=$detail['id']?>">
                                     <i class="fa fa-trash-o"></i> Delete
                                 </button>
                                 <?php
@@ -551,67 +488,65 @@
                                     <?php
                                 }
                                 ?>
-                            </form>
-                        </td>
-                    </tr>
-                    <?php
-                        $i++;            
-                        }
-                    }
-                    ?>
-                    </tbody>
-                </table>            
+                                                </form>
+                                                </td>
+                                            </tr>
+                                        
+                                    <?php
+                                        $i++;            
+                                        }
+                                    }
+                                ?>
+                
+                            </tbody>
+                        </table>
+                    </div>
+                </div> 
             </div>
-        </div>    
-        <section class="content-header">
             <h1>
                 Other Company Admins
             </h1>
-        </section>
-        <br>
-        <div class="box">
-            <div class="box-body">
-                <table id="example1" class="table table-bordered table-hover">
-                    <thead>
-                        <tr style="background-color: #212529; color: white;">
-                            <th style=" text-align: center; ">Serial Number</th>
-                            <th style=" text-align: center; ">First Name</th>
-                            <th style=" text-align: center; ">Last Name</th>
-                            <th style=" text-align: center; ">Email</th>
-                        </tr>
-                    </thead>
-                    <tbody> 
-                    <?php
-                        
-                            if(isset($adminname)) 
-                            {
-                                $i = 1;
-                                foreach($adminname as $detail) 
-                                {    
-                    ?>
-                    <tr> 
-                        <td style=" text-align: center; " id="serialNo<?=$i?>"><?=$i?></td> 
-                        <td style=" text-align: center; " id="f_name<?=$i?>"><?=$detail['f_name'];?></td> 
-                        <td style=" text-align: center; " id="l_name<?=$i?>"><?=$detail['l_name'];?></td> 
-                        <td style=" text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td>    
-                    </tr>
-                    <?php
-                        $i++;            
-                        }
-                    }
-                    ?>
-                    </tbody>
-                </table>            
+            <div class="card radius-15">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead style="background-color: #212529; color: white;">
+                                <tr>
+                                    <th scope="col" style="text-align: center;">S.No.</th>
+                                    <th scope="col" style="text-align: center;">First Name</th>
+                                    <th scope="col" style="text-align: center;">Last Name</th>
+                                    <th scope="col" style="text-align: center;">Email</th>
+                                </tr>
+                            </thead>
+                            <tbody> 
+        
+                            
+                            <?php 
+                                    if (isset($adminname)) 
+                                    {
+                                        $i = 1;
+                                        foreach ($adminname as $detail) 
+                                        {     
+                            ?> 
+                                            <tr> 
+                                            <td style=" text-align: center; " id="serialNo<?=$i?>"><?=$i?></td> 
+                                            <td style=" text-align: center; " id="f_name<?=$i?>"><?=$detail['f_name'];?></td> 
+                                            <td style=" text-align: center; " id="l_name<?=$i?>"><?=$detail['l_name'];?></td> 
+                                            <td style=" text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td>
+                                            </tr>
+                                        
+                                    <?php
+                                        $i++;            
+                                        }
+                                    }
+                                ?>
+                
+                            </tbody>
+                        </table>
+                    </div>
+                </div> 
             </div>
-        </div>  
+
+        </div>
     </div>
 </div>
-<div class="control-sidebar-bg"></div>
-    
-<?php
-    require_once 'js-links.php';
-?> 
-
-
-
-        

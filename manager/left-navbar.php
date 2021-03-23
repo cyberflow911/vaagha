@@ -1,13 +1,9 @@
 
- <div class="wrapper">
 		<!--sidebar-wrapper-->
 		<div class="sidebar-wrapper" data-simplebar="true">
 			<div class="sidebar-header">
-				<div class="">
-					<img src="../img/logo/logo_white.png" class="logo-icon-2" alt="" />
-				</div>
 				<div>
-					<h4 class="logo-text">Project Wize</h4>
+					<h4 class="logo-text" style="font-size: 18px;">Project Manager</h4>
 				</div>
 				<a href="javascript:;" class="toggle-btn ml-auto"> <i class="bx bx-menu"></i>
 				</a>
@@ -23,7 +19,7 @@
 				</li>
 				<li>
 					<a class="has-arrow" href="#">
-						<div class="parent-icon icon-color-10"><i class="bx bx-spa"></i>
+						<div class="parent-icon icon-color-10"><i class="bx bx-Spreadsheet"></i>
 						</div>
 						<div class="menu-title">Projects</div>
 					</a>
@@ -55,6 +51,12 @@
 						</li>
 					</ul>
 				</li>
-				
+				<li>
+					<a href="logout">
+						<div class="parent-icon icon-color-1"><i class="bx bx-home-alt"></i>
+						</div>
+						<div class="menu-title">Logout</div>
+					</a>
+				</li>
 			</ul>
 		</div>
