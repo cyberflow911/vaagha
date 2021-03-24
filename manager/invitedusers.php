@@ -156,7 +156,7 @@
                 <div class="modal-dialog" >
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h4 class="modal-title"> Add New User</h4>
+                        <h4 class="modal-title" style="font-size: 18px;">Add New User</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -168,13 +168,13 @@
                                     <div class="col-md-6"> 
                                         <div class="form-group">
                                             <label>Email</label><br>   
-                                            <input type="text"  id="email" name="email" class="form-control"  required>  
+                                            <input type="text" style="font-size: 16px;" id="email" name="email" class="form-control"  required>  
                                         </div> 
                                     </div>
                                     <div class="col-md-6"> 
                                         <div class="form-group">
                                             <label>Projects</label><br> 
-                                            <select name="project" id="project" class="form-control">
+                                            <select name="project" style="font-size: 16px;" id="project" class="form-control">
                                                 <option value=""></option>
                                             <?php
                                                 if(isset($p_name))
@@ -198,8 +198,8 @@
                                 </div> 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                                <button type="submit" name="add" class="btn btn-primary" value="">Add</button>
+                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal"style="margin-top:10; width: 60px; height: 30px; font-size: 16px;">Close</button>
+                                <button type="submit" name="add" class="btn btn-primary" style="margin-top:10; width: 60px; height: 30px; font-size: 16px;">Add</button>
                             </div>
                         </form>
                     </div>

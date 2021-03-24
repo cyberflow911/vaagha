@@ -238,7 +238,7 @@
             <div class="modal-dialog" >
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title"> Add New Project Manager</h4>
+                        <h4 class="modal-title" style="font-size: 18px;">Add Project Manager</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -249,13 +249,13 @@
                                 <div class="col-md-6"> 
                                     <div class="form-group">
                                         <label>First Name</label><br>   
-                                        <input type="text"  id="f_name" name="f_name" class="form-control" required>  
+                                        <input type="text" style="font-size: 16px;" id="f_name" name="f_name" class="form-control" required>  
                                     </div> 
                                 </div>
                                 <div class="col-md-6"> 
                                     <div class="form-group">
                                         <label>Last Name</label><br>   
-                                        <input type="text"  id="l_name" name="l_name" class="form-control" required>  
+                                        <input type="text" style="font-size: 16px;" id="l_name" name="l_name" class="form-control" required>  
                                     </div> 
                                 </div>
                             </div>  
@@ -263,14 +263,14 @@
                             <div class="col-md-6"> 
                                     <div class="form-group">
                                         <label>Email</label><br>   
-                                        <input type="text"  id="email" name="email" class="form-control"  required>  
+                                        <input type="text" style="font-size: 16px;" id="email" name="email" class="form-control"  required>  
                                     </div> 
                                 </div>
                             </div> 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                            <button type="submit" name="add" class="btn btn-primary" value="">Add</button>
+                            <button type="button" style="margin-top:10; width: 60px; height: 30px; font-size: 16px;" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                            <button type="submit" name="add" class="btn btn-primary" style="margin-top:10; width: 60px; height: 30px; font-size: 16px;" value="">Add</button>
                         </div>
                     </form>
                 </div>
@@ -281,10 +281,11 @@
             <div class="modal-dialog" >
                 <div class="modal-content">
                     <div class="modal-header">
+                    
+                    <h4 class="modal-title" style="font-size: 18px;">Edit Details</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 class="modal-title">Edit Details</h4>
                     </div>
                     <form method="post">
                         <div class="modal-body">
@@ -292,13 +293,13 @@
                                 <div class="col-md-6"> 
                                     <div class="form-group">
                                         <label>First Name</label><br>   
-                                        <input type="text"  id="ef_name" name="ef_name" class="form-control" required>  
+                                        <input type="text" style="font-size: 16px;" id="ef_name" name="ef_name" class="form-control" required>  
                                     </div> 
                                 </div>
                                 <div class="col-md-6"> 
                                     <div class="form-group">
                                         <label>Last Name</label><br>   
-                                        <input type="text"  id="el_name" name="el_name" class="form-control" required>  
+                                        <input type="text" style="font-size: 16px;" id="el_name" name="el_name" class="form-control" required>  
                                     </div> 
                                 </div>
                                 
@@ -308,15 +309,15 @@
                                     <div class="form-group">
                                         <label>Email</label><br>   
                                         <input type="hidden" name="eid" id ="eid"/>
-                                        <input type="text"  id="eemail" name="eemail" class="form-control"  required>  
+                                        <input type="text" style="font-size: 16px;" id="eemail" name="eemail" class="form-control"  required>  
                                     </div> 
                                 </div>
                             </div>  
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                            <button type="submit" name="edit" class="btn btn-primary" value="">Edit</button>
+                            <button type="button" style="margin-top:10; width: 60px; height: 30px; font-size: 16px;" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                            <button type="submit" name="edit" style="margin-top:10; width: 60px; height: 30px; font-size: 16px;" class="btn btn-primary" value="">Edit</button>
                         </div>
                     </form>
                 </div>

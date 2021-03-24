@@ -126,13 +126,13 @@
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>Email</label><br>   
-                                        <input type="email" style="font-size: 16px;" id="email" name="email" class="form-control radius-30" value="<?=$user_details['email']?>" required>  
+                                        <input type="email" style="font-size: 16px;" id="email" name="email" class="form-control" value="<?=$user_details['email']?>" required>  
                                     </div> 
                                 </div>
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>Projects</label><br> 
-                                        <select name="project" style="font-size: 16px;" id="project" class="form-control radius-30">
+                                        <select name="project" style="font-size: 16px;" id="project" class="form-control">
                                         <option value="<?=$user_details['pid']?>"><?=$user_details['title']?></option>
                                         <?php
                                             if(isset($p_name))
@@ -165,13 +165,13 @@
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>Address</label><br>   
-                                        <input type="text" style="font-size: 16px;" id="address" name="address" class="form-control radius-30" value="<?=$user_details['address']?>" required>  
+                                        <input type="text" style="font-size: 16px;" id="address" name="address" class="form-control" value="<?=$user_details['address']?>" required>  
                                     </div> 
                                 </div>   
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>Name</label><br>   
-                                        <input type="text" style="font-size: 16px;" id="name" name="name" class="form-control radius-30" value="<?=$user_details['name']?>" required>  
+                                        <input type="text" style="font-size: 16px;" id="name" name="name" class="form-control" value="<?=$user_details['name']?>" required>  
                                     </div> 
                                 </div>
                             </div>
@@ -179,7 +179,7 @@
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>Phone Number</label><br>   
-                                        <input type="text" style="font-size: 16px;" id="m_num" name="m_num" class="form-control radius-30" value="<?=$user_details['m_num']?>" required>  
+                                        <input type="text" style="font-size: 16px;" id="m_num" name="m_num" class="form-control" value="<?=$user_details['m_num']?>" required>  
                                     </div> 
                                 </div>
                             </div>

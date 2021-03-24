@@ -84,13 +84,13 @@
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>Name</label><br>   
-                                        <input type="text" style="font-size: 16px;" id="name" name="name" class="form-control radius-30" value="<?=$group_details['name']?>" required>  
+                                        <input type="text" style="font-size: 16px;" id="name" name="name" class="form-control" value="<?=$group_details['name']?>" required>  
                                     </div> 
                                 </div>
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>Recruiter</label><br> 
-                                        <input type="text" style="font-size: 16px;" id="recruiter" name="recruiter" class="form-control radius-30" value="<?=$group_details['recruiter']?>" required>  
+                                        <input type="text" style="font-size: 16px;" id="recruiter" name="recruiter" class="form-control" value="<?=$group_details['recruiter']?>" required>  
                                     </div> 
                                 </div>
                             </div> 
@@ -98,13 +98,13 @@
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>Incentive</label><br> 
-                                        <input type="text" style="font-size: 16px;" id="incentive" name="incentive" class="form-control radius-30" value="<?=$group_details['incentive']?>" required>  
+                                        <input type="text" style="font-size: 16px;" id="incentive" name="incentive" class="form-control" value="<?=$group_details['incentive']?>" required>  
                                     </div> 
                                 </div>
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>Total Users</label><br> 
-                                        <input type="text" style="font-size: 16px;" id="user_count" name="user_count" class="form-control radius-30" value="<?=$group_details['user_count']?>" required>
+                                        <input type="text" style="font-size: 16px;" id="user_count" name="user_count" class="form-control" value="<?=$group_details['user_count']?>" required>
                                     </div> 
                                 </div> 
                             </div>
@@ -112,17 +112,17 @@
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>Venue</label><br> 
-                                        <input type="text" style="font-size: 16px;" id="venue" name="venue" class="form-control radius-30" value="<?=$group_details['venue']?>" required>  
+                                        <input type="text" style="font-size: 16px;" id="venue" name="venue" class="form-control" value="<?=$group_details['venue']?>" required>  
                                     </div> 
                                 </div>
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>Email</label><br> 
-                                        <input type="email" style="font-size: 16px;" id="email" name="email" class="form-control radius-30" value="<?=$group_details['email']?>" required>
+                                        <input type="email" style="font-size: 16px;" id="email" name="email" class="form-control" value="<?=$group_details['email']?>" required>
                                     </div> 
                                 </div> 
                             </div>
-                            <button type="submit" name="edit" class="btn btn-primary" value="">Edit</button>
+                            <button type="submit" style="margin-top:10; width: 60px; height: 30px; font-size: 16px;" name="edit" class="btn btn-primary" value="">Edit</button>
                         </div>
                     </div>
                 </div>

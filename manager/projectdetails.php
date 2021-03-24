@@ -316,13 +316,13 @@ input[type=number]::-webkit-outer-spin-button {
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>Project Title</label><br>   
-                                        <input type="text" style="font-size: 16px;" id="title"  minlength="3" maxlength="100" name="title" class="form-control radius-30" value="<?=$project_details['title']?>" required>  
+                                        <input type="text" style="font-size: 16px;" id="title"  minlength="3" maxlength="100" name="title" class="form-control" value="<?=$project_details['title']?>" required>  
                                     </div> 
                                 </div>
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>Start Date</label><br> 
-                                        <input type="date"  id="start_date" style="font-size: 16px;" min="<?=$pdate?>" name="start_date" class="form-control radius-30" value="<?=$project_details['start_date']?>" required>  
+                                        <input type="date"  id="start_date" style="font-size: 16px;" min="<?=$pdate?>" name="start_date" class="form-control" value="<?=$project_details['start_date']?>" required>  
                                     </div> 
                                 </div>
                             </div>  
@@ -330,7 +330,7 @@ input[type=number]::-webkit-outer-spin-button {
                                 <div class="col-md-10"> 
                                     <div class="form-group">
                                         <label style="margin-left:5px">Project Description</label><br> 
-                                        <textarea type="text"  id="description" style="font-size: 16px;" minlength="10" maxlength="500"  name="description" class="form-control radius-30" style="resize: vertical;height:150px" required><?=$project_details['description']?> </textarea> 
+                                        <textarea type="text"  id="description" style="font-size: 16px;" minlength="10" maxlength="500"  name="description" class="form-control" style="resize: vertical;height:150px" required><?=$project_details['description']?> </textarea> 
                                     </div> 
                                 </div>
                             </div> 
@@ -338,13 +338,13 @@ input[type=number]::-webkit-outer-spin-button {
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>Incentive</label><br> 
-                                        <input type="number"  id="incentive" style="font-size: 16px;" min="1" step=".01" oninput="check(this)" name="incentive" class="form-control radius-30" value="<?=$project_details['incentive']?>" required>  
+                                        <input type="number"  id="incentive" style="font-size: 16px;" min="1" step=".01" oninput="check(this)" name="incentive" class="form-control" value="<?=$project_details['incentive']?>" required>  
                                     </div> 
                                 </div>
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>Number of Participants</label><br> 
-                                        <input type="number"  id="participants" style="font-size: 16px;" oninput="check(this)" name="participants" class="form-control radius-30" value="<?=$project_details['participants']?>" required>
+                                        <input type="number"  id="participants" style="font-size: 16px;" oninput="check(this)" name="participants" class="form-control" value="<?=$project_details['participants']?>" required>
                                     </div> 
                                 </div> 
                             </div>
@@ -352,7 +352,7 @@ input[type=number]::-webkit-outer-spin-button {
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>No. of Groups</label><br> 
-                                        <input type="number"  id="group_num" style="font-size: 16px;" oninput="check(this)" name="group_num" class="form-control radius-30" value="<?=$project_details['group_num']?>" required>  
+                                        <input type="number"  id="group_num" style="font-size: 16px;" oninput="check(this)" name="group_num" class="form-control" value="<?=$project_details['group_num']?>" required>  
                                     </div> 
                                 </div>
                                 
@@ -456,7 +456,7 @@ input[type=number]::-webkit-outer-spin-button {
     {
         var inhtml  = `<div class="row" style="margin-top:20px" >    
                             <div class="col-md-10">
-                                <input   type="file" style="font-size: 16px;" id='projectfile${counter}' name="projectFile[]" class="form-control radius-30"/>
+                                <input   type="file" style="font-size: 16px;" id='projectfile${counter}' name="projectFile[]" class="form-control"/>
                             </div> 
                             <div class="col-md-2">
                                 <button type="button" class="btn btn-danger" onclick="removeField('projectfile${counter}')"><i class="fa fa-trash"></i></button>
