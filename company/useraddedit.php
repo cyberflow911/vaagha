@@ -48,7 +48,7 @@
     if(isset($_GET['token'])&&!empty($_GET['token']))
     {
         $token=$_GET['token'];
-        $sql = "select u.*, pm.name as pmname, pm.id as pmid, p.title, p.id as pid from users u, projects p, projectmanager pm where u.id='$token' and u.pm_id=pm.id and u.p_id=p.id and u.status!=2";
+        $sql = "select u.*, pm.f_name as pmname, pm.id as pmid, p.title, p.id as pid from users u, projects p, com_admins pm where u.id='$token' and u.pm_id=pm.id and u.p_id=p.id and u.status!=2";
         if($result = $conn->query($sql))
         {
             if($result->num_rows)
@@ -59,7 +59,7 @@
         }
     }
     
-    $sql="select * from projectmanager where com_id='$COMPANY_ID'";
+    $sql="select * from com_admins where c_id='$COMPANY_ID' and type=2";
     $result =  $conn->query($sql);
     if($result->num_rows)
     {
@@ -123,26 +123,25 @@
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>Email</label><br>   
-                                        <input type="email" style="font-size: 16px;"  id="email" name="email" class="form-control" value="<?=$user_details['email']?>" required>  
+                                        <input type="email" style="font-size: 16px;"  id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" class="form-control" value="<?=$user_details['email']?>" required>  
                                     </div> 
                                 </div>
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>Project Manager</label><br> 
-                                        <select name="pmanager" id="pmanager" style="font-size: 16px;"  class="form-control">
-                                        <option value="<?=$user_details['pmid']?>"><?=$user_details['pmname']?></option>
+                                        <select name="pmanager" id="pmanager" style="color:black; font-size: 16px;"  class="form-control">
                                         <?php
                                             if(isset($pm_name))
                                             {
                                                 foreach($pm_name as $data)
                                                 {          
-                                                    if($data['name']==$user_details['pmname'])
+                                                    if($data['id']==$user_details['pmid'])
                                                     {
                                                         $select="selected";
                                                     }
                                                         
                                         ?>
-                                                        <option value="<?=$data['id']?>" <?=$selected?>><?=$data['name']?></option>
+                                                        <option value="<?=$data['id']?>" <?=$selected?>><?=$data['f_name']?> <?=$data['l_name']?></option>
                                         <?php
                                                 }
                                             }
@@ -229,6 +228,18 @@
 <?php
 require_once 'js-links.php';
 ?>
+<script>
+    function ValidateEmail(mail) 
+    {
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(myForm.emailAddr.value))
+    {
+        return (true)
+    }
+        alert("You have entered an invalid email address!")
+        return (false)
+    }
+</script>
+
 
 
 

@@ -11,7 +11,7 @@
             $reg_num=$_POST['reg_num'];
             $com_name=$_POST['com_name'];
             $address=$_POST['address'];
-            $tr_address=$_POST['tr_address'];
+            $tr_address=$_POST['traddress'];
             $post=$_POST['post'];
             $vat=$_POST['vat'];
             $sql="insert into companies(reg_num, com_name, address, tr_address, cpost, post, vat, status) values('$reg_num', '$com_name', '$address', '$tr_address', '$cpost', '$post', '$vat','2')";
@@ -34,7 +34,7 @@
             $reg_num=$_POST['reg_num'];
             $com_name=$_POST['com_name'];
             $address=$_POST['address'];
-            $tr_address=$_POST['tr_address'];
+            $tr_address=$_POST['traddress'];
             $post=$_POST['post'];
             $cpost=$_POST['cpost'];
             $vat=$_POST['vat'];
@@ -126,6 +126,12 @@
                         </div> 
                     </div>
                     <div class="row">
+                        <div class="col-xs-4">
+                        <input type="checkbox" id="traddresscheck" name="traddresscheck">
+  						<label for="traddresscheck">Same as registered address</label>
+                        </div>
+                    </div> 
+                    <div class="row">
                         <div class="col-md-10"> 
                             <div class="form-group">
                                 <label style="margin-left:5px">Communication Address</label><br> 
@@ -134,19 +140,6 @@
                         </div>
                     </div>
                     
-                    <?php
-                    if(!isset($com_data))
-                    {
-                    ?>
-                    <div class="row">
-                        <div class="col-xs-4">
-                        <input type="checkbox" id="traddresscheck" name="traddresscheck">
-  						<label for="traddresscheck">Same as registered address</label>
-                        </div>
-                    </div> 
-                    <?php
-                    }
-                    ?>
                     <br>
                     <div class="row">
                         <div class="col-md-5"> 
@@ -159,7 +152,7 @@
                         <div class="col-md-5"> 
                             <div class="form-group">
                                 <label>VAT</label><br> 
-                                <input type="text" name="vat" id="vat" value="<?=$com_data['vat']?>" class="form-control">
+                                <input type="text" name="vat" oninput="check(this)" id="vat" value="<?=$com_data['vat']?>" class="form-control">
                             </div> 
                         </div> 
                     </div>
@@ -191,6 +184,7 @@
 
 <script>
     $(document).ready(function(){
+
         $('input[type="checkbox"]').click(function() {
             if ($(this).prop("checked") == true) {
                 var address = $("#traddress").val();
@@ -202,6 +196,15 @@
                 $("#cpost").val("");
             }
         });
+
+        function check(input) {
+        if (input.value.length >12) {
+            input.setCustomValidity('The number of character must be smaller or equals to 12.');
+        } else {
+            // input is fine -- reset the error message
+            input.setCustomValidity('');
+        }
+        }
     });
 </script>
 

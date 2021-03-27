@@ -189,7 +189,7 @@
                                                         <i class="fa fa-ban ">Hold</i>
                                                     </button>
                                                     <button  class="btn btn-secondary" type="submit" name="completed" value="<?=$detail['id']?>">
-                                                        <i class="fa fa-check-square ">Complete</i>
+                                                        <i class="fa fa-check-square ">&nbspComplete</i>
                                                     </button>
                                             <?php
                                                 }
@@ -200,7 +200,7 @@
                                                         <i class="fa fa-check">Active</i>
                                                     </button>
                                                     <button  class="btn btn-secondary" type="submit" name="completed" value="<?=$detail['id']?>">
-                                                        <i class="fa fa-check-square ">Complete</i>
+                                                        <i class="fa fa-check-square ">&nbspComplete</i>
                                                     </button>
                                             <?php
                                                 }

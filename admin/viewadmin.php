@@ -44,7 +44,7 @@
         }
         if(isset($_POST['delete2']))
         {
-            $id=$_POST['delete'];
+            $id=$_POST['delete2'];
             $sql="delete from projects where id=$id";
             if($conn->query($sql))
             {
@@ -57,8 +57,21 @@
         }
         if(isset($_POST['delete3']))
         {
-            $id=$_POST['delete'];
-            $sql="delete from projectmanager where id=$id";
+            $id=$_POST['delete3'];
+            $sql="delete from com_admins where id=$id";
+            if($conn->query($sql))
+            {
+                $resSubject=true;   
+            }
+            else
+            {
+                $errorSubject=$conn->error;
+            }
+        }
+        if(isset($_POST['delete4']))
+        {
+            $id=$_POST['delete4'];
+            $sql="delete from users where id=$id";
             if($conn->query($sql))
             {
                 $resSubject=true;   
@@ -85,7 +98,7 @@
         if(isset($_POST['block3']))
         {
             $id=$_POST['block3'];
-            $sql="update projectmanager set status=0 where id=$id";
+            $sql="update com_admins set status=0 where id=$id";
             if($conn->query($sql))
             {
                 $resSubject = "true";
@@ -125,7 +138,7 @@
         if(isset($_POST['unblock3']))
         {
             $id=$_POST['unblock3'];
-            $sql="update projectmanager set status=1 where id=$id";
+            $sql="update com_admins set status=1 where id=$id";
             if($conn->query($sql))
             {
                 $resSubject = "true";
@@ -181,7 +194,7 @@
     if(isset($_GET['token']))
     {   
         $token=$_GET['token'];
-        $sql="select *  from com_admins where c_id=$token";
+        $sql="select *  from com_admins where c_id='$token' and type=1";
         $result =  $conn->query($sql);
         if($result->num_rows)
         {
@@ -199,7 +212,7 @@
             $comdata=$row;
         }
         
-        $sql="SELECT count(id) as count from com_admins where c_id='$token'";
+        $sql="SELECT count(id) as count from com_admins where c_id='$token' and type =1";
         if($result=$conn->query($sql))
         {
             if($result->num_rows>0)
@@ -208,7 +221,7 @@
                 $ca_count=$row['count']; 
             }
         }
-        $sql="SELECT count(id) as count from projectmanager where com_id='$token'";
+        $sql="SELECT count(id) as count from com_admins where c_id='$token' and type=2";
         if($result=$conn->query($sql))
         {
             if($result->num_rows>0)
@@ -246,7 +259,7 @@
             }      
         }
     
-        $sql="select * from projectmanager where com_id='$token'";
+        $sql="select * from com_admins where c_id='$token' and type=2";
         $result =  $conn->query($sql);
         if($result->num_rows)
         {
@@ -567,9 +580,9 @@
                     <thead>
                         <tr style="background-color: #212529; color: white;">
                             <th>Serial Number</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone Number</th>
+                            <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -584,9 +597,9 @@
                     ?>
                     <tr> 
                         <td style=" text-align: center; " id="serialNo<?=$i?>"><?=$i?></td> 
-                        <td style=" text-align: center; " id="name<?=$i?>"><?=$detail['name'];?></td> 
-                        <td style=" text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td>  
-                        <td style=" text-align: center; " id="m_num<?=$i?>"><?=$detail['m_num'];?></td>
+                        <td style=" text-align: center; " id="f_name<?=$i?>"><?=$detail['f_name'];?></td> 
+                        <td style=" text-align: center; " id="l_name<?=$i?>"><?=$detail['l_name'];?></td> 
+                        <td style=" text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td> 
                         <td>
                             <form method="post">
                                 <button  class="btn btn-danger" type="submit" name="delete3" value="<?=$detail['id']?>">

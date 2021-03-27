@@ -49,7 +49,7 @@
         }
         if(isset($_POST['completed']))
         {
-            $id=$_POST['active'];
+            $id=$_POST['completed'];
             $sql="update projects set status=2 where id=$id";
             if($conn->query($sql))
             {

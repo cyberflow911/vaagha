@@ -138,7 +138,6 @@
                             <th>S.No.</th> 
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Phone Number</th>
                             <th>Company Name</th>
                             <th>Action</th>
                         </tr>
@@ -158,7 +157,6 @@
                                          <td style="  text-align: center; " id="serialNo<?=$i?>"><?=$i?></td> 
                                          <td style="  text-align: center; " id="name<?=$i?>"><?=$detail['f_name'];?> <?=$detail['l_name'];?></td> 
                                          <td style="  text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td> 
-                                         <td style="  text-align: center; " id="num<?=$i?>"><?=$detail['m_num'];?></td>
                                          <td style="  text-align: center; " id="com_name<?=$i?>"><?=$detail['com_name'];?></td>
                                          <td>
                                              <form method="post">

@@ -29,7 +29,7 @@
             }
         }
 
-        if(isset($_POST['delete2']))
+        if(isset($_POST['delete']))
         {
             $id=$_POST['delete'];
             $sql="delete from projects where id=$id";
@@ -44,8 +44,21 @@
         }
         if(isset($_POST['delete3']))
         {
-            $id=$_POST['delete'];
+            $id=$_POST['delete3'];
             $sql="delete from com_admins where id=$id";
+            if($conn->query($sql))
+            {
+                $resSubject=true;   
+            }
+            else
+            {
+                $errorSubject=$conn->error;
+            }
+        }
+        if(isset($_POST['delete4']))
+        {
+            $id=$_POST['delete4'];
+            $sql="delete from users where id=$id";
             if($conn->query($sql))
             {
                 $resSubject=true;   

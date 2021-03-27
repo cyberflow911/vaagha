@@ -38,11 +38,11 @@
         if(isset($_POST['edit']))
         {
             $name=$_POST['ename'];
-            $password=$_POST['epassword'];
+            $password=md5($_POST['epassword']);
             $address=$_POST['eaddress'];
             $m_num=$_POST['emobile'];
             $id=$_POST['eid'];
-            echo $sql="update users set password='$password', m_num='$m_num', name='$name', status='1', address='$address' where id='$id'";
+            $sql="update users set password='$password', m_num='$m_num', name='$name', status='1', address='$address' where id='$id'";
             if($conn->query($sql))
             {
                 $resMember = "true"; 
@@ -257,7 +257,7 @@
                                     <div class="col-md-6"> 
                                         <div class="form-group">
                                             <label>Password</label><br>   
-                                            <input type="epassword" style="font-size: 16px;" id="epassword" name="password" class="form-control"  required>  
+                                            <input type="password" style="font-size: 16px;" id="epassword" name="epassword" class="form-control"  required>  
                                         </div>  
                                     </div>
                                 </div> 

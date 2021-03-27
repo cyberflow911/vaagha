@@ -197,7 +197,7 @@
                                             {
                                         ?>
                                                 <button  class="btn btn-secondary" type="submit" name="completed" value="<?=$detail['id']?>">
-                                                        <i class="fa fa-check-square ">Complete</i>
+                                                        <i class="fa fa-check-square ">&nbspComplete</i>
                                                     </button>
                                                 <button  class="btn btn-info" type="submit" name="active" value="<?=$detail['id']?>">
                                                     <i class="fa fa-check"></i> Active
