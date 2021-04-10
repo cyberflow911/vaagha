@@ -52,6 +52,24 @@
 					</ul>
 				</li>
 				<li>
+					<a class="has-arrow" href="#">
+						<div class="parent-icon icon-color-11"><i class="bx bx-repeat"></i>
+						</div>
+						<div class="menu-title">Payments</div>
+					</a>
+					<ul>
+						<li> <a href="adduserforpayment"><i class="bx bx-right-arrow-alt"></i>Initiate Payment</a>
+						</li>
+						<li> <a href="pending_bank_details.php"><i class="bx bx-right-arrow-alt"></i>Pending Bank Details</a>
+						</li>
+						<li> <a href="pending_tandc"><i class="bx bx-right-arrow-alt"></i>Pending T&Cs</a>
+						</li>
+						<li> <a href="pending_payments"><i class="bx bx-right-arrow-alt"></i>Pending Payments</a></li>
+						<li> <a href="paid_users"><i class="bx bx-right-arrow-alt"></i>Paid</a>
+						</li>
+					</ul>
+				</li>
+				<li>
 					<a href="logout">
 						<div class="parent-icon icon-color-1"><i class="bx bx-home-alt"></i>
 						</div>

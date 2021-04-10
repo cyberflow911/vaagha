@@ -44,10 +44,10 @@
 	<script src="../admin/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
 	<script src="../js/index.js"></script>
 	<!-- App JS -->
-	<script>
+	<!-- <script>
 		new PerfectScrollbar('.dashboard-social-list');
 		new PerfectScrollbar('.dashboard-top-countries');
-	</script>
+	</script> -->
  
 <script>
   $(function () {

@@ -48,17 +48,19 @@ $merchant_id=178079;
 
 
 ////mail config
-	$mail = new PHPMailer();
-     $mail->SMTPDebug = 3;                         // Enable verbose debug output
-	$mail->isSMTP();                                      // Set mailer to use SMTP
-	$mail->Host = 'mail.scanitapp.in';  // Specify main and backup SMTP servers
-	$mail->SMTPAuth = true;                               // Enable SMTP authentication
-	$mail->Username = 'buddy@scanitapp.in';                 // SMTP username
-	$mail->Password = 'buddy@cyber';                            // SMTP password
-	$mail->SMTPSecure = '';                            // Enable TLS encryption, `ssl` also accepted
-	$mail->Port = 587;                                    // TCP port to connect to
+$mail = new PHPMailer(); 
+$mail->SMTPDebug = false;               // Enable verbose debug output
+$mail->isSMTP();                                      // Set mailer to use SMTP
+$mail->Host = 'mail.tattbooking.com';  // Specify main and backup SMTP servers
+$mail->SMTPAuth = true;                               // Enable SMTP authentication
+$mail->Username = 'info@tattbooking.com';                 // SMTP username
+$mail->Password = '${ZULymF5Ur+';                            // SMTP password
+$mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+$mail->Port = 465;                                    // TCP port to connect to
 
-	$mail->setFrom('buddy@scanitapp.in', 'Cyber Flow');
+$mail->setFrom('info@tattbooking.com', 'Tatt Book');                                    // TCP port to connect to
+
+ 
 // 	$mail->addReplyTo('No Reply Please', 'Information');
  
 //    // Optional name

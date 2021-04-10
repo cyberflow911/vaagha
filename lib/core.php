@@ -1,7 +1,41 @@
 <?php
     session_start();
     require_once'PHPMailer/PHPMailerAutoload.php';
-    require_once'config.php';   
+    require_once'config.php';  
+    
+function prepareMessage($msg,$title)
+{
+    $msg = str_replace('[PROJECT TITLE]',$title,$msg);
+    $msg = str_replace('  ',"<br>",$msg);
+    return $msg;  
+}
+function prepareMessage2($msg,$fname, $lname, $salutation)
+{
+    if($salutation=="no")
+    {
+        $salutation="";
+    }
+    $msg = str_replace('[SALUTATION]',$salutation,$msg);
+    $msg = str_replace('[FIRST NAME]',$fname,$msg);
+    $msg = str_replace('[LAST NAME]',$lname,$msg);
+    $msg = str_replace('  ',"<br>",$msg);
+    return $msg;  
+}
+function prepareMessage3($msg,$title, $incentive,$id)
+{
+    $msg = str_replace('[PROJECT TITLE]',$title,$msg);
+    $msg = str_replace('[INCENTIVE]',$incentive,$msg);
+    $msg = str_replace('[LINK]',"<a href='localhost/vaagha/company/bankdetails?uid=$id'>Click Here</a>",$msg);
+    return $msg;  
+}
+function prepareMessage4($msg,$pmf_name, $pml_name, $pmm_num)
+{
+    $msg = str_replace('[PM FIRST Name]',$pmf_name,$msg);
+    $msg = str_replace('[PM LAST Name]',$pml_name,$msg);
+    $msg = str_replace('[PM CONTACT NUMBER]',$pmm_num,$msg);
+    $msg = str_replace(',',"<br>",$msg);
+    return $msg;
+}
 
 //check page setting
 function check_page($id,$conn)
@@ -799,6 +833,47 @@ function upload_images($files,$conn,$table,$id_col,$column,$id,$images,$url)
                 if(move_uploaded_file($file_tmp=$_FILES[$images]["tmp_name"][$key],"uploads/".$newFileName))
                 {
                     $sql="insert into $table($id_col, $column) values($id,'$url./$newFileName')";
+                    if($conn->query($sql)===true)
+                    {
+                        $status=true;
+                    }
+                    else
+                    {
+                        $status=false;
+                        break;
+                    }
+                }
+                else
+                {
+                    $status=false;
+                    break;
+                }
+            }
+            else 
+            {
+                array_push($error,"$file_name, ");
+            }
+        }
+        return $status;
+    }
+}
+function upload_tandc($files,$conn,$table,$id_col,$column,$id,$images,$url)
+{
+	if(isset($_FILES[$images]))
+    {
+        $extension=array("docx");
+        foreach($_FILES[$images]["tmp_name"] as $key=>$tmp_name) 
+        {
+            $file_name=$_FILES[$images]["name"][$key];
+            $file_tmp=$_FILES[$images]["tmp_name"][$key];
+            $ext=pathinfo($file_name,PATHINFO_EXTENSION); 
+            if(in_array(strtolower($ext),$extension)) 
+            {
+                $filename=basename($file_name,$ext);
+                $newFileName=$filename.time().".".$ext;
+                if(move_uploaded_file($file_tmp=$_FILES[$images]["tmp_name"][$key],"uploads/".$newFileName))
+                {
+                    $sql="update $table set $column='uploads/$newFileName' where $id_col=$id";
                     if($conn->query($sql)===true)
                     {
                         $status=true;

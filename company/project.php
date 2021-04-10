@@ -60,6 +60,105 @@
                 $errorMember=$conn->error;
             }
         }
+        if ( isset($_POST["submit"]) ) 
+        {
+
+            if ( isset($_FILES["file"])) 
+            {
+                //if there was an error uploading the file
+                if ($_FILES["file"]["error"] > 0) 
+                {
+                    echo "Return Code: " . $_FILES["file"]["error"] . "<br />";
+                }
+                else 
+                {
+                    
+                    //if file already exists
+                    if (file_exists("upload/" . $_FILES["file"]["name"])) {
+                    echo $_FILES["file"]["name"] . " already exists. ";
+                    }
+                    else 
+                    {
+                        //Store file in directory "upload" with the name of "uploaded_file.txt"
+                        $storagename = "uploaded_file.txt";
+                        move_uploaded_file($_FILES["file"]["tmp_name"], "uploads/" . $storagename);
+                    }
+                }
+            } 
+            else 
+            {
+                echo "No file selected <br />";
+            }
+            $row=1;
+            if ( isset($storagename) && (($handle = fopen("uploads/" . $storagename , r )) !== FALSE) ) 
+            {
+
+                $sql = "insert into projects(title,project_reference,description,pm_id, incentive,participants,group_num,start_date,termandcondition) values";
+                while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) 
+                {
+                    if($row==1)
+                    {
+                        $row++;
+                        continue;
+                        
+                    }
+                    $num = count($data);
+
+                    $row++;
+                    // $sql.="('".implode($data,"','")."'),";
+                    $sql.="(";
+                    if($data[10]=="yes"||$data[10]=="Yes"||$data[10]=="YES"||$data[10]=="YEs"||$data[10]=="YeS"||$data[10]=="yeS"||$data[10]=="yeS")
+                    {
+                        $data[10]=1;
+                    }
+                    else
+                    {
+                        $data[10]=2;
+                    }
+                    $sql2="SELECT id FROM com_admins WHERE email='$data[5]'";
+                    $res =  $conn->query($sql2);
+                    if($res->num_rows)
+                    {
+                        while($r = $res->fetch_assoc())
+                        {
+                            $pmid = $r['id'];
+                        }
+                    }
+                    $data[5]=$pmid;
+                    for ($c=0; $c < $num; $c++) 
+                    {
+                        if($c==3||$c==4)
+                        {
+                            continue;
+                        }
+                        $sql .=  "'$data[$c]'," ;
+                    }
+                    $sql = rtrim($sql,",");
+                    $sql .="),";
+                }
+                $sql = rtrim($sql,",");
+                if($conn->query($sql))
+                {
+                    $insert_id = $conn->insert_id;
+                    $pms = "'".implode($insert_id,"','")."'";
+                    $sql3="update projects set cm_id='$COMPANY_ID' where id in ($pms)" ;
+                    if($conn->query($sql3))
+                    {
+                        $resMember="true";
+                    }
+                    else
+                    {
+                        $errorMember=$conn->error;
+                    }
+                }
+                else
+                {
+                    $errorMember=$conn->error;
+                }
+
+                fclose($handle);
+            }
+        }
           
     }
     if(isset($_GET['token'])&&!empty($_GET['token']))
@@ -123,13 +222,19 @@
                         </ol>
                     </nav>
                 </div>
+                <button class="btn btn-primary" style="font-size: 14px; padding: 10px; margin-left: 150px;" data-toggle="modal" data-target="#modal-default"><i class="fa fa-user-plus"></i>Bulk Upload Projects</button><br>
+                <form method="get" action="uploads/project_template.xlsx">
+                <button class="btn btn-primary" style="font-size: 14px; padding: 10px; margin-left: 50px;" ><i class="fa fa-download"></i>Download Bulk Upload Template</button><br></form>
                 <div class="ml-auto">
                     <div class="btn-group">
                         <a href="projectdetails" class="btn btn-primary"><i class="fa fa-plus"></i></a>
                         <a href="" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Rebuild"><i class="fa fa-refresh"></i></a>
+                        
                     </div>
                 </div>
+                
             </div>
+            
         <?php
             if(isset($resMember))
             {
@@ -145,6 +250,9 @@
                 
             }
         ?>
+        <br>
+        
+        <br>
             <div class="box">
                 <div class="box-body">
                     <table id="example2" class="table table-bordered table-hover">
@@ -235,14 +343,44 @@
         </div>
     </div>
 </div>
-      
-<div class="control-sidebar-bg"></div>
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add CSV File</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            
+            <form method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-10"> 
+                            <div class="form-group">
+                                <label>Select File</label><br>   
+                                <input type="file" name="file" style="font-size: 16px;" id="file" class="form-control"  required>  
+                            </div> 
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal" style="margin-top:10; width: 90px; height: 30px; font-size: 16px;">Close</button>
+                    <button type="submit" name="submit" class="btn btn-primary" style="margin-top:10; width: 60px; height: 30px; font-size: 16px;">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
   
 
 <?php
     require_once 'js-links.php';
 ?>
+
 
 
 

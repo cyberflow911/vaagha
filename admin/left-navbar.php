@@ -102,6 +102,37 @@
                <li><a href="invitedusers"><i class="fa fa-circle-o"></i>Invited</a></li>
             </ul>
          </li>
+         <li class="treeview">
+            <a href="#">
+            <i class="fa fa-user"></i>
+            <span>Payment</span>
+            <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            
+            <ul class="treeview-menu">
+               <li><a href="adduserforpayment"><i class="fa fa-circle-o"></i>Initiate Payment</a></li>
+               <li><a href="pending_bank_details"><i class="fa fa-circle-o"></i>Pending Bank Details</a></li>
+               <li><a href="pending_tandc"><i class="fa fa-circle-o"></i>Pending T&Cs</a></li>
+               <li><a href="pending_payments"><i class="fa fa-circle-o"></i>Pending Payments</a></li>
+               <li><a href="paid_users"><i class="fa fa-circle-o"></i>Paid</a></li>
+            </ul>
+         </li>
+         <li class="treeview">
+            <a href="#">
+            <i class="fa fa-user"></i>
+            <span>Email Template</span>
+            <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            
+            <ul class="treeview-menu">
+               <li><a href="standardemail.php"><i class="fa fa-circle-o"></i>Standard</a></li>
+               <li><a href="customiseemail.php"><i class="fa fa-circle-o"></i>Customise</a></li>
+            </ul>
+         </li>
 
          <li>
            <a href="logout">

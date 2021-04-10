@@ -84,6 +84,14 @@
     .box-body{
 	overflow: auto!important;
 }
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
 </style>
 <div class="page-wrapper">
     <div class="page-content-wrapper">
@@ -122,40 +130,58 @@
                             <div class="row">
                                 <div class="col-md-5"> 
                                     <div class="form-group">
-                                        <label>Email</label><br>   
-                                        <input type="email" style="font-size: 16px;"  id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" class="form-control" value="<?=$user_details['email']?>" required>  
+                                        <label>Salutation</label>
+                                        <select name="salutation" id="salutation" style="font-size: 16px;" class="form-control" onchange="check()" required>
+                                            <option value=" ">Select</option>
+                                            <option value="Mr.">Mr</option>
+                                            <option value="Mrs.">Mrs</option>
+                                            <option value="Miss.">Miss</option>
+                                            <option value="Dr.">Dr</option>
+                                            <option value="0">Prefer not to say</option>
+                                        </select>  
                                     </div> 
                                 </div>
                                 <div class="col-md-5"> 
                                     <div class="form-group">
-                                        <label>Project Manager</label><br> 
-                                        <select name="pmanager" id="pmanager" style="color:black; font-size: 16px;"  class="form-control">
-                                        <?php
-                                            if(isset($pm_name))
-                                            {
-                                                foreach($pm_name as $data)
-                                                {          
-                                                    if($data['id']==$user_details['pmid'])
-                                                    {
-                                                        $select="selected";
-                                                    }
-                                                        
-                                        ?>
-                                                        <option value="<?=$data['id']?>" <?=$selected?>><?=$data['f_name']?> <?=$data['l_name']?></option>
-                                        <?php
-                                                }
-                                            }
-                                        ?>  
-                                        </select> 
+                                        <label>First Name</label><br>   
+                                        <input type="text" minlength="2" maxlength="50" style="font-size: 16px;"  id="f_name" name="f_name" class="form-control" value="<?=$user_details['f_name']?>" required>  
                                     </div> 
-                                </div> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Last Name</label><br>   
+                                        <input type="text" minlength="2" maxlength="50" style="font-size: 16px;"  id="l_name" name="l_name" class="form-control" value="<?=$user_details['l_name']?>" required>  
+                                    </div> 
+                                </div>
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Email</label><br>   
+                                        <input type="email" style="font-size: 16px;"  id="email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" name="email" class="form-control" value="<?=$user_details['email']?>" required>  
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Mobile Number</label><br>   
+                                        <input type="number" style="font-size: 16px;"  id="m_num"  name="m_num" class="form-control" value="<?=$user_details['m_num']?>" required>  
+                                    </div> 
+                                </div>
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Incentive</label><br>   
+                                        <input type="text" style="font-size: 16px;"  id="incentive" name="incentive" minlength='3' maxlength='5' class="form-control" value="<?=$user_details['incentive']?>" required>  
+                                    </div> 
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>Projects</label><br> 
-                                        <select name="project" id="project" style="font-size: 16px;"  class="form-control">
-                                        <option value="<?=$user_details['pid']?>"><?=$user_details['title']?></option>
+                                        <select name="project" oninput="projectRef()" id="project" style="font-size: 16px;"  class="form-control">
+                                        <option value=" ">Select</option>
                                         <?php
                                             if(isset($p_name))
                                             {
@@ -172,8 +198,20 @@
                                                     
                                                 }
                                             }
+                                            else
+                                            {
+                                        ?>
+                                                <a href="projectdetails.php" class="btn btn-primary">Add Project</a>
+                                        <?php
+                                            }
                                         ?>  
                                         </select> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Project Reference</label><br>   
+                                        <input type="text" style="font-size: 16px;"  id="pro_ref" name="pro_ref" class="form-control" value="<?=$user_details['project_reference']?>" readonly>  
                                     </div> 
                                 </div> 
                             </div>
@@ -183,27 +221,8 @@
                         if(isset($user_details))
                         {
                 ?>
-                            <div class="row">
-                                <div class="col-md-5"> 
-                                    <div class="form-group">
-                                        <label>Address</label><br>   
-                                        <input type="text" style="font-size: 16px;"  id="address" name="address" class="form-control" value="<?=$user_details['address']?>" required>  
-                                    </div> 
-                                </div> 
-                            </div>         
-                            <div class="row">
-                                <div class="col-md-5"> 
-                                    <div class="form-group">
-                                        <label>Name</label><br>   
-                                        <input type="text"  id="name" name="name" style="font-size: 16px;"  class="form-control" value="<?=$user_details['name']?>" required>  
-                                    </div> 
-                                </div>
-                                <div class="col-md-5"> 
-                                    <div class="form-group">
-                                        <label>Phone Number</label><br>   
-                                        <input type="text" style="font-size: 16px;"  id="m_num" name="m_num" class="form-control" value="<?=$user_details['m_num']?>" required>  
-                                    </div> 
-                                </div>
+                                    
+                            
                             </div>    
                             <button type="submit" name="edit" style="width: 60px; height: 30px; font-size: 16px;" class="btn btn-primary" value="">Edit</button>
                     <?php
@@ -229,15 +248,33 @@
 require_once 'js-links.php';
 ?>
 <script>
-    function ValidateEmail(mail) 
+    function projectRef(input)
     {
-    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(myForm.emailAddr.value))
+        var pid=$('#project').val();
+         getprojectdata(pid);
+    }
+    function getprojectdata(id)
     {
-        return (true)
+        $.ajax({
+            url:"managerdata.php",
+            type:"POST",
+            
+            data:{
+                projectdata:id
+            },
+            success:function(response){
+                var obj=JSON.parse(response);
+            var project_reference = obj.project_reference;
+            $("#pro_ref").val(project_reference);
+            },
+            error:function()
+            {
+
+            }
+        
+        })
     }
-        alert("You have entered an invalid email address!")
-        return (false)
-    }
+
 </script>
 
 
