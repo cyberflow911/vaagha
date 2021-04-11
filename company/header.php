@@ -90,6 +90,9 @@ $L_NAME=$COMPANY_DATA['l_name'];
     left: 7%;
     right: 0;
     }
+    .dropdown-toggle::after {
+        content: none !important;
+    }
     .autocomplete-items div {
     padding: 10px;
     cursor: pointer;

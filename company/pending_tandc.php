@@ -33,7 +33,7 @@
         } 
     }
     
-    $sql="select u.*, p.title, a.f_name as pmf_name, a.l_name as pml_name from users u, projects p, com_admins a where u.com_id='$COMPANY_ID' and u.pay_status='3' and u.p_id=p.id and u.pm_id=a.id and p.termandcondition=1 and p.signortick=1";    
+    $sql="select u.*, p.title, a.f_name as pmf_name, a.l_name as pml_name from users u, projects p, com_admins a where u.com_id='$COMPANY_ID' and u.pay_status='3' and u.p_id=p.id and u.pm_id=a.id and p.termandcondition=1 and p.signortick=1 order by u.email_date";    
     if($result =  $conn->query($sql))
     {
         if($result->num_rows)
@@ -151,11 +151,6 @@
                     <div class="form-group">
                         <label></label><br>
                         <button class="btn btn-primary" onclick="Search()" style="font-size: 12px; padding: 5px;">  <i class="fa fa-search"></i> Search</button> 
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label></label><br>
                         <button type="button" class="btn btn-danger" onClick="window.location.reload();" style="font-size: 12px; padding: 5px;"><i class="fa fa-trash"></i>&nbspClear</button> 
                     </div>
                 </div>
@@ -191,10 +186,9 @@
                                         $i = 1;
                                         foreach ($users as $detail) 
                                         {   
-                                            // $datetime1 = new DateTime(date($detail['email_date']));
-                                            // $datetime2 = new DateTime(date("d-m-Y"));
-                                            // $interval = $datetime1->diff($datetime2);
-                                            // $days= $interval->format('%a');  
+                                            $date1 = $detail['email_date'];
+                                            $date2 = date("Y-m-d");
+                                            $dateDiff = dateDiffInDays($date1, $date2); 
                             ?> 
                                             <tr> 
                                                 <td style="  text-align: center; " scope="row" id="serialNo<?=$i?>"><input type="checkbox" id="checkbox" value="<?=$detail['id']?>"></td> 
@@ -206,7 +200,7 @@
                                                 <td style="  text-align: center; " id="p_title<?=$i?>"><?=$detail['title'];?></td>
                                                 <td style="  text-align: center; " id="pm_name<?=$i?>"><?=$detail['pmf_name'];?> <?=$detail['pml_name'];?></td>
                                                 <td style="  text-align: center; " id="email_date<?=$i?>"><?=$detail['email_date'];?></td>
-                                                <td style="  text-align: center; " id="email_days<?=$i?>">0</td>
+                                                <td style="  text-align: center; " id="email_days<?=$i?>"><?=$dateDiff?></td>
                                             </tr>
                                         
                                     <?php
@@ -365,7 +359,7 @@
                 {
                     emails:JSON.stringify(mails),
                     sendMail:true,
-                    invite:true
+                    tandc:true
                 },
                 success:function(data)
                 {

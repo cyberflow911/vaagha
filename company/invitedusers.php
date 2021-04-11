@@ -37,12 +37,14 @@
         } 
         if(isset($_POST['edit']))
         {
-            $name=$_POST['ename'];
+            $f_name=$_POST['ef_name'];
+            $l_name=$_POST['el_name'];
             $password=md5($_POST['epassword']);
-            $address=$_POST['eaddress'];
+            $incentive=$_POST['eincentive'];
+            $salutation=$_POST['esalutation'];
             $m_num=$_POST['emobile'];
             $id=$_POST['eid'];
-            $sql="update users set password='$password', m_num='$m_num', name='$name', status='1', address='$address' where id='$id'";
+            echo $sql="update users set password='$password', salutation='$salutation', m_num='$m_num', f_name='$f_name', l_name='$l_name', status='1', incentive='$incentive' where id='$id'";
             if($conn->query($sql))
             {
                 $resMember = "true"; 
@@ -134,10 +136,10 @@
                             <thead style="background-color: #212529; color: white;">
                                 <tr>
                                     <th scope="col" style="text-align: center;">S.No.</th>
-                                    <th scope="col" style="text-align: center;">Name</th>
+                                    <th scope="col" style="text-align: center;">First Name</th>
+                                    <th scope="col" style="text-align: center;">Last Name</th>
                                     <th scope="col" style="text-align: center;">Email</th>
                                     <th scope="col" style="text-align: center;">Phone Number</th>
-                                    <th scope="col" style="text-align: center;">Address</th>
                                     <th scope="col" style="text-align: center;">Action</th>
                                 </tr>
                             </thead>
@@ -153,11 +155,13 @@
                             ?> 
                                             <tr> 
                                                 <td style="  text-align: center; " scope="row" id="serialNo<?=$i?>"><?=$i?></td> 
-                                                <td style="  text-align: center; " id="name<?=$i?>"><?=$detail['name'];?></td> 
+                                                <td style="  text-align: center; " id="f_name<?=$i?>"><?=$detail['f_name'];?></td> 
+                                                <td style="  text-align: center; " id="l_name<?=$i?>"><?=$detail['l_name'];?></td> 
                                                 <td style="  text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td> 
                                                 <td style="  text-align: center; " id="m_num<?=$i?>"><?=$detail['m_num'];?></td>
                                                 <td style="  text-align: center; display: none;"  id="password<?=$i?>"><?=$detail['password'];?></td>
-                                                <td style="  text-align: center; " id="address<?=$i?>"><?=$detail['address'];?></td>
+                                               
+                                                <td style="  text-align: center; display: none;"  id="incentive<?=$i?>"><?=$detail['incentive'];?></td>
                                                 <td>
                                                 <form method="post">
                                                 <center><button name="confirm" type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-edit" onclick="setEditValues(<?=$detail['id'] ?>,<?=$i?>)" value="<?=$detail['id'] ?>">
@@ -249,9 +253,30 @@
                                 <div class="row">
                                     <div class="col-md-6"> 
                                         <div class="form-group">
-                                            <label>Name</label><br>   
-                                            <input type="text" style="font-size: 16px;" id="ename" name="ename" class="form-control"  required>  
+                                            <label>Salutation</label>
+                                            <select name="salutation" id="salutation" style="font-size: 16px;" class="form-control" onchange="check()" required>
+                                                <option value=" ">Select</option>
+                                                <option value="Mr.">Mr</option>
+                                                <option value="Mrs.">Mrs</option>
+                                                <option value="Miss.">Miss</option>
+                                                <option value="Dr.">Dr</option>
+                                                <option value="no">Prefer not to say</option>
+                                            </select>  
+                                        </div> 
+                                    </div>
+                                    <div class="col-md-6"> 
+                                        <div class="form-group">
+                                            <label>First Name</label><br>   
+                                            <input type="text" style="font-size: 16px;" id="ef_name" name="ef_name" class="form-control"  required>  
                                             <input type="hidden" name="eid" id ="eid"/>
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"> 
+                                        <div class="form-group">
+                                            <label>Last Name</label><br>   
+                                            <input type="text" style="font-size: 16px;" id="el_name" name="el_name" class="form-control"  required>  
                                         </div> 
                                     </div>
                                     <div class="col-md-6"> 
@@ -268,15 +293,13 @@
                                             <input type="text"  id="emobile" style="font-size: 16px;" name="emobile" class="form-control"  required>  
                                         </div> 
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12"> 
+                                    <div class="col-md-6"> 
                                         <div class="form-group">
-                                            <label>Address</label><br>   
-                                            <textarea type="text"  id="eaddress" style="font-size: 16px;" name="eaddress" class="form-control" style="resize: vertical;height:150px" required></textarea>
+                                            <label>Incentive</label><br>   
+                                            <input type="number" style="font-size: 16px;" id="eincentive" name="eincentive" class="form-control"  required>  
                                         </div>  
                                     </div>
-                                </div> 
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal" style="margin-top:10; width: 60px; height: 30px; font-size: 16px;">Close</button>
@@ -303,9 +326,10 @@
     function setEditValues(id,count)
     {
         $("#eid").val(id); 
-        $("#ename").val($("#name"+count).html());
+        $("#ef_name").val($("#f_name"+count).html());
+        $("#el_name").val($("#l_name"+count).html());
         $("#emobile").val($("#m_num"+count).html());
-        $("#eaddress").val($("#address"+count).html());
+        $("#eincentive").val($("#incentive"+count).html());
         $("#epassword").val($("#password"+count).html());
     }  
 </script>

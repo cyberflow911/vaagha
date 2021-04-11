@@ -33,7 +33,7 @@
         } 
     }
     
-    $sql="select u.*, p.title, a.f_name as pmf_name, a.l_name as pml_name from users u, projects p, com_admins a where u.com_id='$COMPANY_ID' and u.pay_status='1' and u.p_id=p.id and u.pm_id=a.id";    
+    $sql="select u.*, p.title, a.f_name as pmf_name, a.l_name as pml_name from users u, projects p, com_admins a where u.com_id='$COMPANY_ID' and u.pay_status='1' and u.p_id=p.id and u.pm_id=a.id order by u.email_date";    
     if($result =  $conn->query($sql))
     {
         if($result->num_rows)
@@ -63,6 +63,7 @@
             $pm_name[] = $row;
         }
     }
+    $date = date("Y-m-d");
 ?>
 
 <style>
@@ -151,11 +152,6 @@
                     <div class="form-group">
                         <label></label><br>
                         <button class="btn btn-primary" onclick="Search()" style="font-size: 12px; padding: 5px;">  <i class="fa fa-search"></i> Search</button> 
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label></label><br>
                         <button type="button" class="btn btn-danger" onClick="window.location.reload();" style="font-size: 12px; padding: 5px;"><i class="fa fa-trash"></i>&nbspClear</button> 
                     </div>
                 </div>
@@ -191,10 +187,9 @@
                                         $i = 1;
                                         foreach ($users as $detail) 
                                         {   
-                                            // $datetime1 = new DateTime(date($detail['email_date']));
-                                            // $datetime2 = new DateTime(date("d-m-Y"));
-                                            // $interval = $datetime1->diff($datetime2);
-                                            // $days= $interval->format('%a');  
+                                            $date1 = $detail['email_date'];
+                                            
+                                            $dateDiff = dateDiffInDays($date1, $date);
                             ?> 
                                             <tr> 
                                                 <td style="  text-align: center; " scope="row" id="serialNo<?=$i?>"><input type="checkbox" id="checkbox" value="<?=$detail['id']?>"></td> 
@@ -206,7 +201,7 @@
                                                 <td style="  text-align: center; " id="p_title<?=$i?>"><?=$detail['title'];?></td>
                                                 <td style="  text-align: center; " id="pm_name<?=$i?>"><?=$detail['pmf_name'];?> <?=$detail['pml_name'];?></td>
                                                 <td style="  text-align: center; " id="email_date<?=$i?>"><?=$detail['email_date'];?></td>
-                                                <td style="  text-align: center; " id="email_days<?=$i?>">0</td>
+                                                <td style="  text-align: center; " id="email_days<?=$i?>"><?=$dateDiff?></td>
                                             </tr>
                                         
                                     <?php
@@ -235,8 +230,8 @@
 ?>
 
 <script>
-    var xhrRequest;
     var xhr;
+    var xhrRequest;
     function Search()
     {
         var manager = $("#pmanager").val();
@@ -281,7 +276,8 @@
     }
     function getuser2(manager, project)
     {
-        if(xhr && xhr.readyState != 4){
+        if(xhr && xhr.readyState != 4)
+        {
             xhr.abort();
         }
         xhr =  $.ajax({
@@ -329,12 +325,21 @@
             }
         })
     }
+    function datediff(first, second) 
+    {
+        // Take the difference between the dates and divide by milliseconds per day.
+        // Round to nearest whole number to deal with DST.
+        return Math.round((second-first)/(1000*60*60*24));
+    }
+
     function displayusers(obj)
     {
         var i=1;
+        
         $("#userdata").empty();
             $.each(obj,function(k, v)
             {
+                var days=datediff(<?=$date?>, v.email_date);
                 $("#userdata").append(`<tr> 
                 <td style="  text-align: center; " scope="row" id="serialNo${i}"><input type="checkbox" id="checkbox" value="${v.id}"></td> 
                 <td style="  text-align: center; " id="name${i}">${v.f_name}</td> 
@@ -344,8 +349,8 @@
                 <td style="  text-align: center; " id="incentive${i}">${v.incentive}</td>
                 <td style="  text-align: center; " id="p_title${i}">${v.p_title}</td>
                 <td style="  text-align: center; " id="pm_name${i}">${v.pmf_name} ${v.pml_name}</td>
-                <td style="  text-align: center; " id="pay_reference${i}">${v.pay_reference}</td>
-                <td style="  text-align: center; " id="tandc${i}">${v.tnc}</td> </tr>`)
+                <td style="  text-align: center; " id="email_date${i}">${v.email_date}</td>
+                <td style="  text-align: center; " id="days${i}">${days}</td> </tr>`)
                 i++;
             })
     }
@@ -365,7 +370,7 @@
                 {
                     emails:JSON.stringify(mails),
                     sendMail:true,
-                    invite:true
+                    bankdetails:true
                 },
                 success:function(data)
                 {

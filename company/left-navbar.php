@@ -17,21 +17,21 @@ $L_NAME=$COMPANY_DATA['l_name'];
 			<ul class="metismenu" id="menu">
 				<li>
 					<a href="dashboard">
-						<div class="parent-icon icon-color-1"><i class="bx bx-home-alt"></i>
+						<div class="parent-icon icon-color-1"><i class="lni lni-dashboard"></i>
 						</div>
 						<div class="menu-title">Dashboard</div>
 					</a>
 				</li>
 				<li>
 					<a href="companydetails">
-						<div class="parent-icon icon-color-1"><i class="bx bx-home-alt"></i>
+						<div class="parent-icon icon-color-3"><i class="lni lni-apartment"></i>
 						</div>
 						<div class="menu-title">Company Details</div>
 					</a>
 				</li>
 				<li>
 					<a class="has-arrow" href="#">
-						<div class="parent-icon icon-color-10"><i class="bx bx-spa"></i>
+						<div class="parent-icon icon-color-10"><i class="bx bx-user-pin"></i>
 						</div>
 						<div class="menu-title">Project Managers</div>
 					</a>
@@ -46,7 +46,7 @@ $L_NAME=$COMPANY_DATA['l_name'];
 				</li>
 				<li>
 					<a class="has-arrow" href="#">
-						<div class="parent-icon icon-color-11"><i class="bx bx-repeat"></i>
+						<div class="parent-icon icon-color-4"><i class="lni lni-list"></i>
 						</div>
 						<div class="menu-title">Projects</div>
 					</a>
@@ -63,7 +63,7 @@ $L_NAME=$COMPANY_DATA['l_name'];
 				</li>
 				<li>
 					<a class="has-arrow" href="#">
-						<div class="parent-icon icon-color-11"><i class="lni lni-500px"></i>
+						<div class="parent-icon icon-color-5"><i class="lni lni-users"></i>
 						</div>
 						<div class="menu-title">Users</div>
 					</a>
@@ -80,7 +80,7 @@ $L_NAME=$COMPANY_DATA['l_name'];
 				</li>
 				<li>
 					<a class="has-arrow" href="#">
-						<div class="parent-icon icon-color-11"><i class="bx bx-repeat"></i>
+						<div class="parent-icon icon-color-6"><i class="lni lni-credit-cards"></i>
 						</div>
 						<div class="menu-title">Payments</div>
 					</a>
@@ -98,7 +98,7 @@ $L_NAME=$COMPANY_DATA['l_name'];
 				</li>
             <li>
 					<a href="logout">
-						<div class="parent-icon icon-color-1"><i class="bx bx-home-alt"></i>
+						<div class="parent-icon icon-color-8"><i class="bx bx-home-alt"></i>
 						</div>
 						<div class="menu-title">Logout</div>
 					</a>

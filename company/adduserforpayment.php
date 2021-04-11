@@ -36,7 +36,7 @@
     }
     
  
-    $sql = "select u.*, p.title as p_title, c.f_name as pmf_name, c.l_name as pml_name , p.termandcondition as tnc from users u, projects p, com_admins c where u.com_id='$COMPANY_ID' and u.pm_id=p.pm_id and c.id=u.pm_id and u.p_id=p.id and p.pm_id=c.id and u.pay_status=6";  
+    $sql = "select u.*, p.title as p_title, c.f_name as pmf_name, c.l_name as pml_name , p.termandcondition as tnc from users u, projects p, com_admins c where u.com_id='$COMPANY_ID' and u.pm_id=p.pm_id and c.id=u.pm_id and u.p_id=p.id and p.pm_id=c.id and u.pay_status=6 order by u.email_date";  
     if($result =  $conn->query($sql))
     {
         if($result->num_rows)
@@ -84,7 +84,7 @@ input[type=number]::-webkit-outer-spin-button {
 	<div class="page-content-wrapper">
         <div class="page-content">
             <!--breadcrumb-->
-            <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+            <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3" >
                 <div class="breadcrumb-title pr-3">Users to Capture Bank Details</div>
                 <div class="pl-3">
                     <nav aria-label="breadcrumb">
@@ -94,9 +94,10 @@ input[type=number]::-webkit-outer-spin-button {
                         </ol>
                     </nav>
                 </div>
-                <button title="" class="btn btn-primary" style="font-size: 14px; padding: 5px; margin-left: 500px;"  data-toggle="modal" data-target="#modal-default"><i class="fa fa-user-plus"></i>Add User</button>
+                
                 <div class="ml-auto">
                     <div class="btn-group">
+                    <button title="" class="btn btn-primary" style="margin-right: 5px; font-size: 12px; padding: 5px;"  data-toggle="modal" data-target="#modal-default"><i class="fa fa-user-plus"></i>Add User</button>
                         <a href="" data-toggle="tooltip" class="btn btn-primary" data-original-title="Rebuild"><i class="fa fa-refresh"></i></a>  
                     </div>
                 </div>
@@ -117,7 +118,7 @@ input[type=number]::-webkit-outer-spin-button {
                 
             }
         ?>
-			<div class="row" style="margin-top: 40px;">
+			<div class="row" style="margin-top: 40px; padding: 30px;">
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Project Manager</label><br>
@@ -138,7 +139,7 @@ input[type=number]::-webkit-outer-spin-button {
                         </select>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" >
                     <div class="form-group">
                         <label>Projects</label><br>
                         <select class="form-control selectpicker" id="project" style="font-size: 16px;" id="pro"  multiple data-live-search="true">
@@ -162,12 +163,7 @@ input[type=number]::-webkit-outer-spin-button {
                     <div class="form-group">
                         <label></label><br>
                         <button class="btn btn-primary" onclick="pManager()" style="font-size: 12px; padding: 5px;">  <i class="fa fa-search"></i> Search</button> 
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label></label><br>
-                        <button type="button" class="btn btn-danger" onClick="window.location.reload();" style="font-size: 12px; padding: 5px;"><i class="fa fa-trash"></i>&nbspClear</button> 
+                        <button type="button" class="btn btn-danger" onClick="window.location.reload();" style="font-size: 12px; padding: 5px;"><i class="fa fa-trash"></i>&nbspClear</button>
                     </div>
                 </div>
             </div>
@@ -203,7 +199,12 @@ input[type=number]::-webkit-outer-spin-button {
                                     {
                                         $i = 1;
                                         foreach ($users as $detail) 
-                                        {     
+                                        {   
+                                            
+                                            $date1 = $detail['email_date'];
+                                            $date2 = date("Y-m-d");
+                                            $dateDiff = dateDiffInDays($date1, $date2);
+                                                
                             ?> 
                                             <tr> 
                                                 <td style="  text-align: center; " scope="row" id="serialNo<?=$i?>"><input type="checkbox" id="checkbox" value="<?=$detail['id']?>"></td> 
@@ -245,14 +246,10 @@ input[type=number]::-webkit-outer-spin-button {
                 </div> 
             </div>
             <div class="row">
-                <div class="col-md-4">
-                    <button class="btn btn-success" onclick="sendmail()" style="font-size: 14px; padding: 10px;">Initiate Email</button>
-                </div>
-                <div class="col-md-4">
+                <div class="col-md-12">
+                   <center> <button class="btn btn-success" onclick="sendmail()" style="font-size: 14px; padding: 10px;">Initiate Email</button>
                     <button class="btn btn-success"  style="font-size: 14px; padding: 10px;">Download Bulk Upload Template</button>
-                </div>
-                <div class="col-md-4">
-                    <button class="btn btn-success"  style="font-size: 14px; padding: 10px;">Bulk Upload Users</button>
+                    <button class="btn btn-success"  style="font-size: 14px; padding: 10px;">Bulk Upload Users</button></center>
                 </div>
             </div>
         </div>

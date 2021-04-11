@@ -8,9 +8,18 @@
         if(isset($_POST['add']))
         {
             $email=$_POST['email'];
-            $pmanager=$_POST['pmanager'];
             $project=$_POST['project'];
-            $sql="insert into users(pm_id, com_id, p_id, email, status) values('$pmanager', '$COMPANY_ID', '$project', '$email', '2')";
+            $sql="select pm_id from projects where id='$project'";
+            if($result = $conn->query($sql))
+            {
+                if($result->num_rows)
+                {
+                    $row  = $result->fetch_assoc();  
+                    $pmid=$row['pm_id'];
+                }
+                
+            }
+            $sql="insert into users(pm_id, com_id, p_id, email, status) values('$pmid', '$COMPANY_ID', '$project', '$email', '2')";
             if($conn->query($sql))
             {
                 $resMember = "true"; 
@@ -27,12 +36,23 @@
             if(isset($_POST['edit']))
             {  
                 $email=$_POST['email'];
-                $pmanager=$_POST['pmanager'];
                 $project=$_POST['project'];
-                $name=$_POST['name'];
-                $address=$_POST['address'];
+                $f_name=$_POST['f_name'];
+                $l_name=$_POST['l_name'];
+                $incentive=$_POST['incentive'];
                 $m_num=$_POST['m_num'];
-                $sql="update users set pm_id='$pmanager', name='$name', email='$email', p_id='$project', m_num='$m_num', address='$address'  where id='$token'";
+                $salutation=$_POST['salutation'];
+                $sql="select pm_id from projects where id='$project'";
+                if($result = $conn->query($sql))
+                {
+                    if($result->num_rows)
+                    {
+                        $row  = $result->fetch_assoc();  
+                        $pm_id=$row['pm_id'];
+                    }
+                    
+                }
+                $sql="update users set salutation='$salutation', pm_id='$pm_id', f_name='$f_name', l_name='$l_name', email='$email', p_id='$project', m_num='$m_num', incentive='$incentive'  where id='$token'";
                 if($conn->query($sql))
                 {
                     $resMember  = "true";
@@ -48,26 +68,16 @@
     if(isset($_GET['token'])&&!empty($_GET['token']))
     {
         $token=$_GET['token'];
-        $sql = "select u.*, pm.f_name as pmname, pm.id as pmid, p.title, p.id as pid from users u, projects p, com_admins pm where u.id='$token' and u.pm_id=pm.id and u.p_id=p.id and u.status!=2";
+        $sql = "select u.*, pm.f_name as pmf_name, pm.l_name as pml_name, p.project_reference as p_ref, pm.id as pmid, p.title, p.id as pid from users u, projects p, com_admins pm where u.id='$token' and u.pm_id=pm.id and u.p_id=p.id and u.status!=2";
         if($result = $conn->query($sql))
         {
             if($result->num_rows)
             {
                 $user_details  = $result->fetch_assoc();  
             }
-             
         }
     }
     
-    $sql="select * from com_admins where c_id='$COMPANY_ID' and type=2";
-    $result =  $conn->query($sql);
-    if($result->num_rows)
-    {
-        while($row = $result->fetch_assoc())
-        {
-            $pm_name[] = $row;
-        }
-    }
     $sql="select * from projects where cm_id='$COMPANY_ID'";
     $result =  $conn->query($sql);
     if($result->num_rows)
@@ -128,6 +138,52 @@ input[type=number]::-webkit-outer-spin-button {
                     <div class="card-body p-5">
                         <div class="form-body">
                             <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Projects</label><br> 
+                                        <select name="project" oninput="projectRef()" id="project" style="font-size: 16px;"  class="form-control">
+                                        <option value=" ">Select</option>
+                                        <?php
+                                            if(isset($p_name))
+                                            {
+                                                foreach($p_name as $data)
+                                                {          
+                                                    if($data['id']==$user_details['p_id'])
+                                                    {
+                                                        $select="selected";
+                                                    }
+                                                        
+                                        ?>
+                                                        <option value="<?=$data['id']?>" <?=$select?>><?=$data['title']?></option>
+                                        <?php
+                                                    
+                                                }
+                                            }
+                                            else
+                                            {
+                                        ?>
+                                                <a href="projectdetails.php" class="btn btn-primary">Add Project</a>
+                                        <?php
+                                            }
+                                        ?>  
+                                        </select> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-5"> 
+                                    <div class="form-group">
+                                        <label>Email</label><br>   
+                                        <input type="email" style="font-size: 16px;"  id="email" name="email" class="form-control" value="<?=$user_details['email']?>" required>  
+                                    </div> 
+                                </div>
+                            </div>
+                           
+                    
+        
+                <?php
+                        if(isset($user_details))
+                        {
+                ?>
+                              <div class="row">
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>Salutation</label>
@@ -137,7 +193,7 @@ input[type=number]::-webkit-outer-spin-button {
                                             <option value="Mrs.">Mrs</option>
                                             <option value="Miss.">Miss</option>
                                             <option value="Dr.">Dr</option>
-                                            <option value="0">Prefer not to say</option>
+                                            <option value="no">Prefer not to say</option>
                                         </select>  
                                     </div> 
                                 </div>
@@ -155,12 +211,7 @@ input[type=number]::-webkit-outer-spin-button {
                                         <input type="text" minlength="2" maxlength="50" style="font-size: 16px;"  id="l_name" name="l_name" class="form-control" value="<?=$user_details['l_name']?>" required>  
                                     </div> 
                                 </div>
-                                <div class="col-md-5"> 
-                                    <div class="form-group">
-                                        <label>Email</label><br>   
-                                        <input type="email" style="font-size: 16px;"  id="email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" name="email" class="form-control" value="<?=$user_details['email']?>" required>  
-                                    </div> 
-                                </div>
+                                
                             </div>
                             <div class="row">
                                 <div class="col-md-5"> 
@@ -176,54 +227,15 @@ input[type=number]::-webkit-outer-spin-button {
                                     </div> 
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-5"> 
-                                    <div class="form-group">
-                                        <label>Projects</label><br> 
-                                        <select name="project" oninput="projectRef()" id="project" style="font-size: 16px;"  class="form-control">
-                                        <option value=" ">Select</option>
-                                        <?php
-                                            if(isset($p_name))
-                                            {
-                                                foreach($p_name as $data)
-                                                {          
-                                                    if($data['title']==$user_details['title'])
-                                                    {
-                                                        $select="selected";
-                                                    }
-                                                        
-                                        ?>
-                                                        <option value="<?=$data['id']?>" <?=$selected?>><?=$data['title']?></option>
-                                        <?php
-                                                    
-                                                }
-                                            }
-                                            else
-                                            {
-                                        ?>
-                                                <a href="projectdetails.php" class="btn btn-primary">Add Project</a>
-                                        <?php
-                                            }
-                                        ?>  
-                                        </select> 
-                                    </div> 
-                                </div> 
+                            <div class="row"> 
                                 <div class="col-md-5"> 
                                     <div class="form-group">
                                         <label>Project Reference</label><br>   
-                                        <input type="text" style="font-size: 16px;"  id="pro_ref" name="pro_ref" class="form-control" value="<?=$user_details['project_reference']?>" readonly>  
+                                        <input type="text"  style="font-size: 16px;"  id="pro_ref" name="pro_ref" class="form-control" value="<?=$user_details['p_ref']?>" readonly>  
                                     </div> 
                                 </div> 
-                            </div>
-                    
-        
-                <?php
-                        if(isset($user_details))
-                        {
-                ?>
-                                    
-                            
-                            </div>    
+                            </div>       
+                              
                             <button type="submit" name="edit" style="width: 60px; height: 30px; font-size: 16px;" class="btn btn-primary" value="">Edit</button>
                     <?php
                         }

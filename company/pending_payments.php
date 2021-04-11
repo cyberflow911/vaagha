@@ -33,7 +33,7 @@
         } 
     }
     
-    $sql="select u.*, p.title, b.p_tandc_date as tncdate, a.f_name as pmf_name, a.l_name as pml_name from users u, bank_Details b, projects p, com_admins a where u.com_id='$COMPANY_ID' and u.pay_status='4' and u.p_id=p.id and u.pm_id=a.id and b.u_id=u.id";    
+    $sql="select u.*, p.title, b.p_tandc_date as tncdate, a.f_name as pmf_name, a.l_name as pml_name from users u, bank_details b, projects p, com_admins a where u.com_id='$COMPANY_ID' and u.pay_status='4' and u.p_id=p.id and u.pm_id=a.id and b.u_id=u.id";    
     if($result =  $conn->query($sql))
     {
         if($result->num_rows)
@@ -152,12 +152,7 @@
                     <div class="form-group">
                         <label></label><br>
                         <button class="btn btn-primary" onclick="Search()" style="font-size: 12px; padding: 5px;">  <i class="fa fa-search"></i> Search</button> 
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label></label><br>
-                        <button type="button" class="btn btn-danger" onClick="window.location.reload();" style="font-size: 12px; padding: 5px;"><i class="fa fa-trash"></i>&nbspClear</button>  
+                        <button type="button" class="btn btn-danger" onClick="window.location.reload();" style="font-size: 12px; padding: 5px;"><i class="fa fa-trash"></i>&nbspClear</button> 
                     </div>
                 </div>
             </div>
@@ -180,8 +175,6 @@
                                     <th scope="col" style="text-align: center;">Project Title</th>
                                     <th scope="col" style="text-align: center;">Project Manager</th>
                                     <th scope="col" style="text-align: center;">Payment Reference</th>
-                                    <th scope="col" style="text-align: center;">T&C Signed Date</th>
-                                    <th scope="col" style="text-align: center;">Days lapsed since T&Cs signed</th>
                                 </tr>
                             </thead>
                             <tbody id="userdata"> 
@@ -208,8 +201,6 @@
                                                 <td style="  text-align: center; " id="p_title<?=$i?>"><?=$detail['title'];?></td>
                                                 <td style="  text-align: center; " id="pm_name<?=$i?>"><?=$detail['pmf_name'];?> <?=$detail['pml_name'];?></td>
                                                 <td style="  text-align: center; " id="p_ref<?=$i?>"><?=$detail['pay_reference'];?></td>
-                                                <td style="  text-align: center; " id="tncdate<?=$i?>"><?=$detail['tncdate'];?></td>
-                                                <td style="  text-align: center; " id="tnc_days<?=$i?>">0</td>
                                             </tr>
                                         
                                     <?php
@@ -345,9 +336,7 @@
                 <td style="  text-align: center; " id="incentive${i}">${v.incentive}</td>
                 <td style="  text-align: center; " id="p_title${i}">${v.p_title}</td>
                 <td style="  text-align: center; " id="pm_name${i}">${v.pmf_name} ${v.pml_name}</td>
-                <td style="  text-align: center; " id="p_ref${i}">${v.pay_reference}</td>
-                <td style="  text-align: center; " id="tncdate${i}">${v.tncdate}</td>
-                <td style="  text-align: center; " id="tnc_days${i}">0</td> </tr>`)
+                <td style="  text-align: center; " id="p_ref${i}">${v.pay_reference}</td> </tr>`)
                 i++;
             })
     }

@@ -3,35 +3,6 @@
     require_once 'left-navbar.php';
  
     $id=$_SESSION['id'];
-    if($_SERVER["REQUEST_METHOD"] == "POST")
-    {
-        if(isset($_POST['useradd']))
-        {
-            $name=$_POST['username'];
-            $m_num=$_POST['userm_num'];
-            $address=$_POST['useraddress'];
-            $email=$_POST['useremail'];
-            $project=$_POST['userproject'];
-            $sql="select pm_id from projects where id='$project'";
-            if($result =  $conn->query($sql))
-            {
-                if($result->num_rows)
-                {
-                    $row = $result->fetch_assoc();
-                    $pmid=$row['pm_id'];
-                }
-            }
-            $sql="insert into users(pm_id, name,  m_num, address, com_id, p_id, email, status) values('$pmid', '$name',  '$m_num', '$address', '$COMPANY_ID', '$project', '$email', '1')";
-            if($conn->query($sql))
-            {
-                $resMember = "true"; 
-            }
-            else
-            {
-                $errorMember=$conn->error;
-            } 
-        } 
-    }
     
     $sql="select u.*, p.title, a.f_name as pmf_name, a.l_name as pml_name from users u, projects p, com_admins a where u.com_id='$COMPANY_ID' and u.pay_status='1' and u.p_id=p.id and u.pm_id=a.id";    
     if($result =  $conn->query($sql))
@@ -222,7 +193,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <center><button class="btn btn-success" onclick="sendmail()" style="font-size: 14px; padding: 10px;">Send Reminder Email</button> </center>
+                    <center><button class="btn btn-success" onclick="sendmailreminder()" style="font-size: 14px; padding: 10px;">Send Reminder Email</button> </center>
                 </div>
             </div>
         </div>
@@ -349,7 +320,8 @@
                 i++;
             })
     }
-    function sendmail()
+    
+    function sendmailreminder()
     {
         if($('input[type="checkbox"]:checked'))
         {
@@ -359,13 +331,13 @@
             })
 
             $.ajax({
-                url:"send_mail_ajax.php",
+                url:"send_pendbankmail_ajax.php",
                 type:'POST',
                 data:
                 {
-                    emails:JSON.stringify(mails),
-                    sendMail:true,
-                    invite:true
+                    emailss:JSON.stringify(mails),
+                    sendMail2:true,
+                    bankdetail:true
                 },
                 success:function(data)
                 {
@@ -375,6 +347,7 @@
             })
         }
     }
+
     function projectRef(input)
     {
         var pid=$('#userproject').val();

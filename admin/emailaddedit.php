@@ -135,6 +135,9 @@
                                 </button>  
                                 <button class="btn btn-secondary" type="button" id="insertProject" style="margin-left:5px" onclick='setTextToCurrentPos2("link")'>
                                         Link
+                                </button>
+                                <button class="btn btn-secondary" type="button" id="insertbreak" style="margin-left:5px" onclick='setTextToCurrentPos2("break")'>
+                                        Insert Line Break
                                 </button></label><br>   
                                 <textarea type="text"  id="body"  minlength="100" maxlength="500"  name="body" class="form-control" style="resize: vertical;height:150px"><?=$email['body']?></textarea> 
                             </div> 
@@ -149,6 +152,9 @@
                                 </button> 
                                 <button class="btn btn-secondary" type="button" id="insertPMLname" style="margin-left:5px" onclick='setTextToCurrentPos3("prol_name")'>
                                         Insert PM Last Name
+                                </button> 
+                                <button class="btn btn-secondary" type="button" id="insertbreak" style="margin-left:5px" onclick='setTextToCurrentPos3("break")'>
+                                        Insert Line Break
                                 </button> 
                                 <button class="btn btn-secondary" type="button" id="insertPMcontact" style="margin-left:5px" onclick='setTextToCurrentPos3("pro_contact")'>
                                     Insert PM Number
@@ -216,6 +222,10 @@
         {
             insert = "[LINK]";
         }
+        else if(mode=="break")
+        {
+            insert = "<br>";
+        }
         var curPos =  document.getElementById("body").selectionStart; 
         let x = $("#body").val(); 
         $("#body").val(x.slice(0, curPos) + insert + x.slice(curPos)); 
@@ -243,6 +253,10 @@
         else if(mode=="pro_contact")
         {
             insert = "[PM CONTACT NUMBER]";
+        }
+        else if(mode=="break")
+        {
+            insert = "<br>";
         }
         var curPos =  document.getElementById("endgreetings").selectionStart; 
         let x = $("#endgreetings").val(); 

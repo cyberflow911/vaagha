@@ -153,7 +153,8 @@
                         <thead style="background-color: #212529; color: white;">
                             <tr>
                                 <th>S.No.</th> 
-                                <th>Name</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
                                 <th>Email</th>
                                 <th>Phone Number</th>
                                 <th>Address</th>
@@ -174,7 +175,8 @@
                                      <tr> 
                                          
                                          <td style="  text-align: center; " id="serialNo<?=$i?>"><?=$i?></td> 
-                                         <td style="  text-align: center; " id="name<?=$i?>"><?=$detail['name'];?></td> 
+                                         <td style="  text-align: center; " id="f_name<?=$i?>"><?=$detail['f_name'];?></td> 
+                                         <td style="  text-align: center; " id="l_name<?=$i?>"><?=$detail['l_name'];?></td> 
                                          <td style="  text-align: center; " id="email<?=$i?>"><?=$detail['email'];?></td> 
                                          <td style="  text-align: center; " id="m_num<?=$i?>"><?=$detail['m_num'];?></td>
                                          <td style="  text-align: center; " id="address<?=$i?>"><?=$detail['address'];?></td>

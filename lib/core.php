@@ -28,6 +28,13 @@ function prepareMessage3($msg,$title, $incentive,$id)
     $msg = str_replace('[LINK]',"<a href='localhost/vaagha/company/bankdetails?uid=$id'>Click Here</a>",$msg);
     return $msg;  
 }
+function prepareMessage5($msg,$title, $incentive,$id)
+{
+    $msg = str_replace('[PROJECT TITLE]',$title,$msg);
+    $msg = str_replace('[INCENTIVE]',$incentive,$msg);
+    $msg = str_replace('[LINK]',"<a href='localhost/vaagha/company/success_screen?uid=$id'>Click Here</a>",$msg);
+    return $msg;  
+}
 function prepareMessage4($msg,$pmf_name, $pml_name, $pmm_num)
 {
     $msg = str_replace('[PM FIRST Name]',$pmf_name,$msg);
@@ -52,6 +59,11 @@ function check_page($id,$conn)
 }
  
 
+function dateDiffInDays($date1, $date2) 
+{
+    $diff = strtotime($date2) - strtotime($date1);
+    return abs(round($diff / 86400));
+}
  
 //check user authpage
 function user_auth($page,$type)
@@ -141,7 +153,7 @@ function master_admin_login($email,$password,$conn,$path)
 //user login
    function user_login($email,$password,$conn,$user,$path)
     {
-         $sql="select email from users where email='$email' and password='$password' and type=$user";
+        $sql="select email from users where email='$email' and password='$password' and type=$user";
         $res=$conn->query($sql);
         if($res->num_rows > 0)
         {

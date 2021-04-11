@@ -67,7 +67,7 @@
                 
             }
         ?>
-			<div class="row" style="margin-top: 40px; background-color: white;">
+			<div class="row" style="margin-top: 40px;">
                 
                 <div class="col-md-4">
                     <div class="form-group">
