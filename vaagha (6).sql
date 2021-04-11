@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2021 at 12:23 PM
+-- Generation Time: Apr 11, 2021 at 08:42 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.2.30
 
@@ -41,6 +41,13 @@ CREATE TABLE `bank_details` (
   `p_tandc_date` text NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `bank_details`
+--
+
+INSERT INTO `bank_details` (`id`, `u_id`, `p_id`, `user_name`, `bank_name`, `sort_code`, `account_num`, `com_tandc`, `tandc_date`, `p_tandc`, `p_tandc_date`, `status`) VALUES
+(5, 22, 9, 'abc', 'AGSHA', '123456', '12345678', '1', '2021-03-24\r\n', '1', '2021-03-24', 1);
 
 -- --------------------------------------------------------
 
@@ -102,7 +109,7 @@ INSERT INTO `com_admins` (`id`, `c_id`, `f_name`, `l_name`, `email`, `m_num`, `p
 (6, 6, 'asd', 'ewrdfs', 'email@gmail.com', '', '827ccb0eea8a706c4c34a16891f84e7b', '2021-04-08 14:48:14', 2, 1),
 (12, 10, 'ds', 'dscvsdcv', 'a@gmail.com', '', '202cb962ac59075b964b07152d234b70', '2021-02-23 14:08:48', 0, 1),
 (19, 16, 'com', 'last', 'c1@gmail.com', '', '827ccb0eea8a706c4c34a16891f84e7b', '2021-03-02 15:34:42', 1, 1),
-(20, 6, 'pmananager', 'mannager ', 'r@gmail.com', '', '827ccb0eea8a706c4c34a16891f84e7b', '2021-04-10 04:21:26', 2, 1),
+(20, 6, 'pmananager', 'mannager ', 'r@gmail.com', '', '827ccb0eea8a706c4c34a16891f84e7b', '2021-04-11 01:52:33', 2, 1),
 (21, 6, 'pmm', 'last', 'pm@gmail.comm', '12345', '', '2021-04-08 14:48:00', 2, 1),
 (22, 6, 'pne', 'hjj', 'mail@gmail.com', '5567', '', '2021-04-08 14:47:46', 2, 1);
 
@@ -126,7 +133,9 @@ CREATE TABLE `email` (
 --
 
 INSERT INTO `email` (`id`, `name`, `greetings`, `subject`, `body`, `endgreetings`) VALUES
-(3, 'Provide Bank Details', 'Dear [SALUTATION] [FIRST NAME] [LAST NAME]', 'Bank details for payment of research project [PROJECT TITLE]', 'Many thanks for taking part in our research about [PROJECT TITLE].\r\n\r\nYou are now eligible for a payment of £[INCENTIVE].  To pay you the incentive amount we need your bank details. Kindly click on the link below to provide your bank details.\r\n\r\nEnter bank details [LINK].\r\n', 'Sincerely, [PM FIRST Name] [PM LAST Name], [PM CONTACT NUMBER]');
+(3, 'Provide Bank Details', 'Dear [SALUTATION] [FIRST NAME] [LAST NAME]', 'Bank details for payment of research project [PROJECT TITLE]', 'Many thanks for taking part in our research about [PROJECT TITLE].\r\n\r\nYou are now eligible for a payment of £[INCENTIVE].  To pay you the incentive amount we need your bank details. Kindly click on the link below to provide your bank details.\r\n\r\nEnter bank details [LINK].\r\n', 'Sincerely, [PM FIRST Name] [PM LAST Name], [PM CONTACT NUMBER]'),
+(4, '1st reminder – Pending bank details', 'Dear [SALUTATION] [FIRST NAME] [LAST NAME]', 'Gentle Reminder - Pending bank details for research project [PROJECT TITLE]', 'Many thanks for taking part in our research about [PROJECT TITLE].\r\n\r\nYou are now eligible for a payment of £[INCENTIVE]. To pay you the incentive amount we need your bank details. Kindly click on the link below to provide your bank details.\r\nThis is a gentle reminder to provide your bank details. \r\nEnter bank details [LINK]\r\n\r\n', 'Sincerely , [PM FIRST Name] [PM LAST Name], [PM CONTACT NUMBER]'),
+(5, '1st reminder - Pending T&Cs', 'Dear [SALUTATION] [FIRST NAME] [LAST NAME]', 'Pending T&Cs signature for research project [PROJECT TITLE]', '<br>Many thanks for taking part in our research about [PROJECT TITLE] and providing your bank details.<br><br>To enable us to pay you the incentive amount we need you need to digitally sign the project terms & conditions.<br><br>Kindly click on the link below to digitally sign the project terms & conditions.<br>Sign T&Cs now [LINK]<br>\r\n', 'Sincerely,<br>[PM FIRST Name] [PM LAST Name]<br>[PM CONTACT NUMBER]');
 
 -- --------------------------------------------------------
 
@@ -284,7 +293,7 @@ INSERT INTO `projects` (`id`, `pm_id`, `cm_id`, `title`, `description`, `incenti
 (12, 5, 9, 'ijklmnopq', 'djasjcvv efjnd wejfnws ejhesjwnd', '12345', '29-01-2020', '', '', '', NULL, NULL, '', 1),
 (13, 3, 9, 'raaaa', 'nvjfhyr teiwopdej fdhcnxm', '23452', '12-09-2021', '', '', '', NULL, NULL, '', 1),
 (14, 5, 9, 'p112', 'hello hello', '15000', '11-11-2020', '', '', '', NULL, NULL, '', 1),
-(15, 2, 6, 'p221', '   heeeeeeeee hiiiiii', '10000', '07-09-2021', '', '', '', NULL, NULL, '', 1),
+(15, 2, 6, 'p221', '   heeeeeeeee hiiiiii', '10000', '07-09-2021', '', '', 'pp', NULL, NULL, '', 1),
 (16, 6, 6, 'hjkl', '     gfcfc rtyuhj nbvc ', '2111', '2021-01-24', '', '', '', 1, 2, '', 1),
 (18, 3, 9, 'jhhjhj', '   xcvbnm', '33333', '09-04-2021', '', '', '', NULL, NULL, '', 1),
 (19, 2, 6, 'qwer', '   gbb', '76453', '26-10-2021', '', '', '', NULL, NULL, '', 1),
@@ -309,7 +318,10 @@ INSERT INTO `projects` (`id`, `pm_id`, `cm_id`, `title`, `description`, `incenti
 (99, 6, 0, 'chck 3', 'test2', '1000', '', '10', '100', 'p3', 2, NULL, '', 0),
 (100, 20, 0, 'csv check', 'csv check test', '20000', '', '10', '100', 'rashi', 1, NULL, '', 0),
 (101, 6, 0, 'check2', 'test', '1000', '', '11', '121', 'p2', 2, NULL, '', 0),
-(102, 6, 0, 'chck 3', 'test2', '1000', '', '10', '100', 'p3', 2, NULL, '', 0);
+(102, 6, 0, 'chck 3', 'test2', '1000', '', '10', '100', 'p3', 2, NULL, '', 0),
+(103, 0, 0, 'csv check', 'csv check test', '20000', '', '10', '100', 'rashi', 1, NULL, '', 0),
+(104, 6, 0, 'check2', 'test', '1000', '', '11', '121', 'p2', 2, NULL, '', 0),
+(105, 6, 0, 'chck 3', 'test2', '1000', '', '10', '100', 'p3', 2, NULL, '', 0);
 
 -- --------------------------------------------------------
 
@@ -356,7 +368,7 @@ CREATE TABLE `users` (
   `p_tandc` text NOT NULL,
   `incentive` text NOT NULL,
   `pay_status` text NOT NULL COMMENT '1-email\r\n2-bank_details\r\n3-bank_detailsconfirm\r\n4-tandc\r\n5-paid\r\n6-nothing',
-  `email_date` text NOT NULL,
+  `email_date` date NOT NULL,
   `paid_date` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -365,22 +377,21 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `com_id`, `pm_id`, `p_id`, `salutation`, `f_name`, `l_name`, `email`, `password`, `m_num`, `timestamp`, `address`, `status`, `user_pic`, `pay_reference`, `p_tandc`, `incentive`, `pay_status`, `email_date`, `paid_date`) VALUES
-(1, 6, 10, 21, '', 'tgh', 'user1.1', 'user1.1@gmail.com', '24c9e15e52afc47c225b757e7bee1f9d', '2567837467', '2021-04-08 12:00:18', 'dehradun2', 0, '', '', '', '', '', '0', ''),
-(2, 6, 13, 31, '', '', 'user2', 'user2@gmail.com', '7e58d63b60197ceb55a1c487989a3720', '1234567890', '2021-04-04 06:45:11', 'Gayatri puram ', 1, '', '', '', '', '', '0', ''),
-(3, 6, 9, 10, '', '', 'user3', 'user3@gmail.com', '92877af70a45fd6a2ed7fe81e1236b78', '456789', '2021-03-26 16:11:44', 'rajasthanui', 1, '', '', '', '', '', '0', ''),
-(5, 6, 16, 5, '', '', 'user5', 'user5@gmail.com', 'd41d8cd98f00b204e9800998ecf8427e', '8726453289', '2021-04-04 06:44:49', 'isbt', 1, '', '', '', '', '', '0', ''),
-(9, 6, 6, 16, 'Miss', 'Raashi', 'Khatri', 'rashikhatri0013@gmail.com', '', '7654345890', '2021-04-10 09:31:15', 'Gayatri puram miyanwala dehradun', 2, '', '', '', '1234', '1', '0', ''),
-(10, 6, 9, 10, '', '', '', 'user9@gmail.com', '', '', '2021-02-18 07:17:16', '', 2, '', '', '', '', '', '0', ''),
-(11, 6, 15, 25, '', '', '', 'user10@gmail.com', '', '', '2021-04-04 06:44:40', '', 2, '', '', '', '', '', '0', ''),
-(13, 6, 6, 16, 'Mr.', 'Pancham', 'Sheoran', 'panchamsheoran@gmail.com', '', '', '2021-04-10 05:55:51', '', 2, '', '', '', '34', '6', '0', ''),
-(14, 6, 20, 84, '', '', '', 'unew@gmail.com', '', '', '2021-04-08 12:20:09', '', 2, '', '', '', '', '6', '0', ''),
-(15, 6, 20, 85, '', '', 'p11', 'user11@gmail.com', '1234', '74389', '2021-04-08 12:47:42', 'Gayatri puram miyanwala dehradun', 1, '', 'payref', '', '', '6', '0', ''),
-(16, 6, 9, 27, '', '', 'anzs', 'user12@gmail.com', '', '7654345890', '2021-03-26 16:13:20', 'Gayatri puram miyanwala dehradun', 1, '', '', '', '', '', '0', ''),
-(17, 6, 20, 9, '', '', 'raashi', 'ppppp@gmail.com', '', '2345', '2021-04-10 05:18:13', 'Gayatri puram miyanwala dehradun', 1, '', '', '', '1234', '5', '25-03-2021', ''),
-(22, 6, 20, 9, '', '', 'raa', 'pay@gmail.com', '12345', '81268285', '2021-04-10 05:13:56', 'harrawala', 1, '', '', '', '11233', '4', '25-03-2021', ''),
-(28, 6, 20, 9, '', 'f', 'l', 'u@gmail.com', '', '7302248', '2021-04-10 04:42:35', '', 1, '', 'pay_ref', '', '2345', '1', '25-03-2021', ''),
-(29, 6, 20, 92, '', '', 'check2', 'u2@gmail.com', '', '2345432', '2021-04-10 04:59:58', 'Gayatri puram miyanwala dehradun', 1, '', 'pay\'-ref', '', '123456', '3', '25-03-2021', ''),
-(30, 6, 6, 9, 'Miss.', 'ras', 'last', 'ugvh2@gmail.com', '', '76789', '2021-04-08 14:51:37', '', 1, '', '', '', '', '', '', '');
+(1, 6, 10, 21, '', 'tgh', 'user1.1', 'user1.1@gmail.com', '24c9e15e52afc47c225b757e7bee1f9d', '2567837467', '2021-04-08 12:00:18', 'dehradun2', 0, '', '', '', '', '', '0000-00-00', ''),
+(2, 6, 13, 31, '', '', 'user2', 'user2@gmail.com', '7e58d63b60197ceb55a1c487989a3720', '1234567890', '2021-04-04 06:45:11', 'Gayatri puram ', 1, '', '', '', '', '', '0000-00-00', ''),
+(5, 6, 16, 5, '', '', 'user5', 'user5@gmail.com', 'd41d8cd98f00b204e9800998ecf8427e', '8726453289', '2021-04-04 06:44:49', 'isbt', 1, '', '', '', '', '', '0000-00-00', ''),
+(9, 6, 6, 16, 'Miss', 'Raashi', 'Khatri', 'rashikhatri0013@gmail.com', '', '7654345890', '2021-04-11 02:19:54', 'Gayatri puram miyanwala dehradun', 2, '', '', '', '1234', '1', '2021-04-11', ''),
+(10, 6, 9, 10, '', '', '', 'user9@gmail.com', '', '', '2021-02-18 07:17:16', '', 2, '', '', '', '', '', '0000-00-00', ''),
+(11, 6, 15, 25, '', '', '', 'user10@gmail.com', '', '', '2021-04-04 06:44:40', '', 2, '', '', '', '', '', '0000-00-00', ''),
+(13, 6, 6, 16, 'Mr.', 'Pancham', 'Sheoran', 'panchamsheoran@gmail.com', '', '', '2021-04-11 05:34:13', '', 2, '', '', '', '34', '6', '2021-03-25', ''),
+(14, 6, 20, 84, '', '', '', 'unew@gmail.com', '', '', '2021-04-11 05:34:28', '', 2, '', '', '', '', '6', '2021-01-12', ''),
+(15, 6, 20, 94, ' ', 'FIRST', 'p11', 'user11@gmail.com', '1234', '74389', '2021-04-11 06:21:54', 'Gayatri puram miyanwala dehradun', 1, '', 'payref', '', '432', '6', '2020-05-12', ''),
+(16, 6, 9, 27, '', '', 'anzs', 'user12@gmail.com', '', '7654345890', '2021-03-26 16:13:20', 'Gayatri puram miyanwala dehradun', 1, '', '', '', '', '', '0000-00-00', ''),
+(17, 6, 20, 9, '', '', 'raashi', 'ppppp@gmail.com', '', '2345', '2021-04-11 05:34:54', 'Gayatri puram miyanwala dehradun', 1, '', '', '', '1234', '5', '2020-12-17', ''),
+(22, 6, 20, 9, '', '', 'raa', 'pay@gmail.com', '12345', '81268285', '2021-04-11 05:35:08', 'harrawala', 1, '', '', '', '11233', '4', '2021-01-17', ''),
+(28, 6, 20, 9, '', 'f', 'l', 'u@gmail.com', '', '7302248', '2021-04-11 05:35:42', '', 1, '', 'pay_ref', '', '2345', '1', '2021-02-22', ''),
+(29, 6, 20, 92, '', '', 'check2', 'raashikhatri3473@gmail.com', '', '2345432', '2021-04-11 03:56:04', 'Gayatri puram miyanwala dehradun', 1, '', 'pay\'-ref', '', '123456', '3', '2021-04-11', ''),
+(30, 6, 20, 94, 'Miss.', 'ras', 'last', 'ugvh2@gmail.com', '', '76789', '2021-04-11 01:53:48', '', 1, '', '', '', '432', '', '0000-00-00', '');
 
 --
 -- Indexes for dumped tables
@@ -456,7 +467,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bank_details`
 --
 ALTER TABLE `bank_details`
-  MODIFY `id` bigint(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `companies`
@@ -474,7 +485,7 @@ ALTER TABLE `com_admins`
 -- AUTO_INCREMENT for table `email`
 --
 ALTER TABLE `email`
-  MODIFY `id` bigint(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `group_details`
@@ -498,7 +509,7 @@ ALTER TABLE `master_admin`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` bigint(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `id` bigint(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `project_files`
@@ -510,7 +521,7 @@ ALTER TABLE `project_files`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
