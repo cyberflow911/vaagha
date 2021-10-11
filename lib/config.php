@@ -13,10 +13,11 @@ date_default_timezone_set('Asia/Kolkata');
 // $password = "";
 // $dbname = "vaagha";
 
+ 
 $servername = "localhost";
-$username = "root_dubuddy";
-$password = "tnske1z}U6zR";
-$dbname = "vaagha";
+$username = "pancham";
+$password = "VCLPan$321$";
+$dbname = "project_wize";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
