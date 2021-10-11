@@ -417,7 +417,7 @@
                                     <div class="alert alert-danger" role="alert">
 
                                         Unable To Register Company! Try again later
-
+                                                <?=$register_error?>
                                     </div>
 
                                     <?php
