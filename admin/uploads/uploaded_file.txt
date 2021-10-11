@@ -1,0 +1,2 @@
+name,recipientEmail,paymentReference,receiverType,amountCurrency,amount,sourceCurrency,targetCurrency,sortCode,accountNumber,paymentDate
+Surya Kumar,surya@kumar.com,#DUBUDDY,PERSON,SOURCE,888,GBP,GBP,121212,21212121,13/07/2019
