@@ -1,4 +1,0 @@
-Project Title* (mandatory),Project Reference * (Mandatory),Project Description,Project Manager(PM)* (Mandatory),PM Contact Number* (Mandatory),PM Email* (Mandatory),Incentive,Number of participants,number of groups,Project Start Date,Project Specific T&Cs ? * (yes/No)
-csv check,rashi,csv check test,r@gmail.comm,123456,r@gmail.comm,20000,100,10,,yes
-check2,p2,test,wqd,34567,email@gmail.com,1000,121,11,,no
-chck 3,p3,test2,wdxz,34567,email@gmail.com,1000,100,10,,no
